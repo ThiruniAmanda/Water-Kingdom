@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+           <a href="#" id="image_uploader" name="image_uploader"><img src="assets/img/image_upload.png" class="card-img-top" alt="Image" title="upload-image"></a> <input type="file" id="imgInp" style="display:none" accept="image/*">   
+        </div>
+        <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="form" #form1 action="fish_det" method="POST" name="form">
+                            <div class="form-group">
+                                <label for="name"><b>Name</b></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Fish Name" formControlName="name"
+                                 [ngClass]="{'is-invalid':form.get('name').invalid && form.get('name').touched,'is-valid':form.get('name').touched && form.get('name').valid}">
+                                <div class='invalid-feedback'>
+                                    <div>Name is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category"><b>Category</b></label>
+                                <input type="text" class="form-control" id="category" name="category" placeholder="Koi" formControlName="category"
+                                 [ngClass]="{'is-invalid':form.get('category').invalid && form.get('category').touched,'is-valid':form.get('category').touched && form.get('category').valid}" >
+                                <div class='invalid-feedback'>
+                                   <div>Category is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="age"><b>Age</b></label>
+                                <input type="number" class="form-control" id="age" name="age" placeholder="1" formControlName="age"
+                                [ngClass]="{'is-invalid':form.get('age').invalid && form.get('age').touched,'is-valid':form.get('age').touched && form.get('age').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Age is Required</div>
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label for="size"><b>Size</b></label>
+                                <input type="number" class="form-control" id="size" step="0.1" name="size" placeholder="34.0" formControlName="size"
+                                [ngClass]="{'is-invalid':form.get('size').touched && form.get('size').invalid,'is-valid':form.get('size').touched && form.get('size').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Size is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender"><b>Gender</b></label><br>
+                                <select id="gender" name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="price"><b>Price</b></label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="$100" formControlName="price"
+                                [ngClass]="{'is-invalid':form.get('price').touched && form.get('price').invalid,'is-valid':form.get('price').touched && form.get('price').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Price is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code"><b>Code</b></label>
+                                <input type="text" class="form-control" id="code" name="code" placeholder="1001B" formControlName="code"
+                                [ngClass]="{'is-invalid':form.get('code').touched && form.get('code').invalid,'is-valid':form.get('code').touched && form.get('code').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Code is Required</div>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label for="description"><b>Description</b></label>
+                                <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form1.submit()">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Add Video</h4>
+            <br><br>
+            <a href="#" id="video_uploader"><img src="assets/img/upload_video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" style="display: none" accept="video/*">
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6" style="margin-top: 140px">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Youtube Video</h5>
+                    <form>
+                        <div class="form-group">
+                            <label for="link"><b>Enter the Youtube Link</b></label>
+                            <input type="text" class="form-control" id="link" placeholder="www.youtube.com/embed">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
