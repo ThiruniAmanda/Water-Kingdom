@@ -14,6 +14,9 @@ import { AppRoutes } from './app.routing';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
+import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
+import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
+import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     AdminLayoutComponent,
     CustomerLayoutComponent,
     CustomerNavbarComponent,
+    CustomerOurkoiComponent,
+    CustomerAboutusComponent,
+    CustomerContactComponent,
     
   ],
   imports: [
