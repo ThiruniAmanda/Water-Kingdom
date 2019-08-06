@@ -1,13 +1,11 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
-           <a href="#" id="image_uploader" name="image_uploader"><img src="assets/img/image_upload.png" class="card-img-top" alt="Image" title="upload-image"></a> <input type="file" id="imgInp" style="display:none" accept="image/*">   
-        </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <form [formGroup]="form" #form1 action="fish_det" method="POST" name="form">
+                        <form [formGroup]="form" #form1 action="fish_det" id="form" method="POST" name="form" enctype="multipart/form-data">
+                           
                             <div class="form-group">
                                 <label for="name"><b>Name</b></label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Fish Name" formControlName="name"
@@ -67,35 +65,37 @@
                                 <label for="description"><b>Description</b></label>
                                 <textarea class="form-control" id="description" rows="4" name="description"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="link"><b>Enter the Youtube Link</b></label>
+                                <input type="text" class="form-control" id="link" placeholder="www.youtube.com/embed">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*">   
+                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" style="display: none" accept="video/*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div style="width:60px;height:60px" name="imageUploaded" id="imageUploaded">
+                                            <img src="" name="image" id="image">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div name="videoUploaded" id="videoUploaded"></div>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form1.submit()">Submit</button>
                         </form>
                     </div>
                 </div>
 
             </div>
+        <div> 
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <h4>Add Video</h4>
-            <br><br>
-            <a href="#" id="video_uploader"><img src="assets/img/upload_video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" style="display: none" accept="video/*">
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-6" style="margin-top: 140px">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Youtube Video</h5>
-                    <form>
-                        <div class="form-group">
-                            <label for="link"><b>Enter the Youtube Link</b></label>
-                            <input type="text" class="form-control" id="link" placeholder="www.youtube.com/embed">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="col-md-3"></div>
 </div>
 
 

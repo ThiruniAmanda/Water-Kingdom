@@ -1,39 +1,64 @@
 <div class="container">
         <div class="row">
-            <div class="col-md-4">
-               <a href="#" id="image_item_uploader" name="image_item__uploader"><img src="assets/img/image_upload.png" class="card-img-top" alt="Image" title="upload-image"></a> <input type="file" id="imgInp_item" style="display:none" accept="image/*" multiple>   
-            </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <form>
+                            <form [formGroup]="form" #form1 action="item_det" id="item_form" method="POST" name="form" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="item_name"><b>Item Name</b></label>
-                                    <input type="text" class="form-control" id="product_name" placeholder="Item Name">
+                                    <input type="text" class="form-control" id="item_name" name="item_name" placeholder="Item Name" formControlName="item_name"
+                                    [ngClass]="{'is-invalid':form.get('item_name').invalid && form.get('item_name').touched,'is-valid':form.get('item_name').touched && form.get('item_name').valid}">
+                                   <div class='invalid-feedback'>
+                                       <div>Name is Required</div>
+                                   </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="item_quantity"><b>Quantity</b></label>
-                                    <input type="number" class="form-control" id="quantity" placeholder="2">
+                                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="2" formControlName="quantity"
+                                    [ngClass]="{'is-invalid':form.get('quantity').invalid && form.get('quantity').touched,'is-valid':form.get('quantity').touched && form.get('quantity').valid}">
+                                   <div class='invalid-feedback'>
+                                       <div>Quantity is Required</div>
+                                   </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="item_price"><b>Price</b></label>
-                                    <input type="number" class="form-control" id="price" placeholder="$100">
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="$100" formControlName="price"
+                                    [ngClass]="{'is-invalid':form.get('price').invalid && form.get('price').touched,'is-valid':form.get('price').touched && form.get('price').valid}">
+                                   <div class='invalid-feedback'>
+                                       <div>Price is Required</div>
+                                   </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="item_code"><b>Item Code</b></label>
-                                    <input type="text" class="form-control" id="code" placeholder="1001">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="1001" formControlName="code"
+                                    [ngClass]="{'is-invalid':form.get('code').invalid && form.get('code').touched,'is-valid':form.get('code').touched && form.get('code').valid}">
+                                   <div class='invalid-feedback'>
+                                       <div>Name is Required</div>
+                                   </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="item_description"><b>Description</b></label>
-                                    <textarea class="form-control" id="item_description" rows="4"></textarea>
+                                    <textarea class="form-control" id="item_description" name="item_description" rows="4"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <a href="#" id="item_image_uploader" name="item_image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="item_imgInp" name="item_imgInp" style="display:none" accept="image/*">                                      
+                                        </div>
+                                        <div class="col">
+                                            <div style="width:100px;height:80px" name="item_imageUploaded" id="item_imageUploaded">
+                                                <img src="" name="item_image" id="item_image">
+                                            </div>
+                                        </div>
+                                    </div>                                 
+                                </div>
+                                <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form1.submit()">Submit</button>
                             </form>
                         </div>
                     </div>
-    
                 </div>
+                <div class="col-md-3"></div>
         </div>
     </div>
     
