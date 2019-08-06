@@ -1,0 +1,15 @@
+{
+    "/fish_det": {
+      "target": "http://[::1]:4600",
+      "secure": false
+    },
+    "/item_det":{
+      "target":"http://[::1]:4600",
+      "secure":false
+    },
+    "/user_info":{
+      "target":"http://[::1]:4600",
+      "secure":false
+    }
+    
+}

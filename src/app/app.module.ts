@@ -13,16 +13,15 @@ import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
-import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-
+import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    CustomerNavbarComponent,
-    
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,9 +30,12 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     }),
     SidebarModule,
     NavbarModule,
+    CustomerNavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
+    FixedPluginModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
