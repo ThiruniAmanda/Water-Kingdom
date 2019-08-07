@@ -17,6 +17,10 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
 import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
 import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
 import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
+import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
+import { FoodComponent } from './pages/food/food.component';
+import { FiltersComponent } from './pages/filters/filters.component';
+import { MedicineComponent } from './pages/medicine/medicine.component';
 
 
 @NgModule({
@@ -24,10 +28,8 @@ import { CustomerContactComponent } from './pages/customer-contact/customer-cont
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    CustomerNavbarComponent,
-    CustomerOurkoiComponent,
-    CustomerAboutusComponent,
-    CustomerContactComponent,
+    
+    
     
   ],
   imports: [
@@ -37,6 +39,7 @@ import { CustomerContactComponent } from './pages/customer-contact/customer-cont
     }),
     SidebarModule,
     NavbarModule,
+    CustomerNavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
     FixedPluginModule

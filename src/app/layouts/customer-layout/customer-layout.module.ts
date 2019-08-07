@@ -5,6 +5,12 @@ import { CustomerHomeComponent } from 'app/pages/customer-home/customer-home.com
 import { RouterModule } from '@angular/router';
 import { CustomerLayoutRoutes } from './customer-layout.routing';
 import { FormsModule } from '@angular/forms';
+import { CustomerContactComponent } from 'app/pages/customer-contact/customer-contact.component';
+import { CustomerAboutusComponent } from 'app/pages/customer-aboutus/customer-aboutus.component';
+import { CustomerOurkoiComponent } from 'app/pages/customer-ourkoi/customer-ourkoi.component';
+import { FoodComponent } from 'app/pages/food/food.component';
+import { FiltersComponent } from 'app/pages/filters/filters.component';
+import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 
 @NgModule({
   imports: [
@@ -14,7 +20,14 @@ import { FormsModule } from '@angular/forms';
     NgbModule
   ],
   declarations: [
-   CustomerHomeComponent
+   CustomerHomeComponent,
+   CustomerContactComponent,
+   CustomerAboutusComponent,
+   CustomerOurkoiComponent,
+   FoodComponent,
+   FiltersComponent,
+   MedicineComponent
+
   ]
 })
 export class CustomerLayoutModule { }

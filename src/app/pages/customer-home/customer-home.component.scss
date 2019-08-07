@@ -10,7 +10,7 @@ header {
     min-width: 100%;
     left: 0;
     top: 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4);
     }
     .description {
     left: 50%;
@@ -22,11 +22,13 @@ header {
     }
     h1 {
     color: #ffffff;
+    font-weight: 500;
     }
     p {
     color: #fff;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     line-height: 1.5;
+    font-weight: 500;
     }
 
     a {

@@ -1,0 +1,31 @@
+header {
+    position: relative;
+    height: 100px;
+    //background-size: 10%;
+    //background-image: linear-gradient(#51535762, #51535762);
+    background-color: rgb(59, 69, 82);
+  }
+  .description {
+    left: 50%;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%, -55%);
+    text-align: center;
+  }
+  
+  header h1 {
+    color: white;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2rem;
+    
+  }
+
+  .features {
+    margin: 4em auto;
+    padding: 1em;
+    position: relative;
+    
+   }
+  
+  
