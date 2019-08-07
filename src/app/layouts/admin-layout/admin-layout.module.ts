@@ -17,6 +17,7 @@ import { UpgradeComponent }         from '../../pages/upgrade/upgrade.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddDetailsComponent } from 'app/pages/add-details/add-details.component';
 import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-details.component';
+import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validator.directive';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-det
     AddDetailsComponent,
     // MapsComponent,
     NotificationsComponent,
+   
   ]
 })
 

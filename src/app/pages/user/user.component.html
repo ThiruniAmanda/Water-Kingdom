@@ -149,3 +149,44 @@
     </div>
   </div>    
 </div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-8">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" style="color:red">Password Reset</h5>
+          <form  #reset action="password_reset" [formGroup]="form2" method="POST">
+            <div class="form-group">
+              <label for="old_password">Old Password</label>
+              <input type="password" class="form-control" id="old_password" name="old_password" formControlName="old_password"
+              [ngClass]="{'is-invalid':form2.get('old_password').invalid && form2.get('old_password').touched,'is-valid':form2.get('old_password').touched && form2.get('old_password').valid}">
+              <div *ngIf="form2.get('old_password').invalid && form2.get('old_password').touched" class='invalid-feedback'>
+                <div *ngIf="form2.get('old_password').errors.required">Password is Required</div>
+                <div *ngIf="form2.get('old_password').errors.minlength">Password must contain at least 6 characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="new_password">New Password</label>
+              <input type="password" class="form-control" id="new_password" name="new_password"  formControlName="new_password"
+              [ngClass]="{'is-invalid':form2.get('new_password').invalid && form2.get('new_password').touched,'is-valid':form2.get('new_password').touched && form2.get('new_password').valid}">
+              <div *ngIf="form2.get('new_password').invalid && form2.get('new_password').touched" class='invalid-feedback'>
+                <div *ngIf="form2.get('new_password').errors.required">Password is Required</div>
+                <div *ngIf="form2.get('new_password').errors.minlength">Password must contain at least 6 characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="new_password">Re-Enter Password</label>
+              <input type="password" class="form-control" id="reEnter_password" name="reEnter_password" appConfirmEqualValidator="new_password" formControlName="reEnter_password"
+              [ngClass]="{'is-invalid':form2.get('reEnter_password').invalid && form2.get('reEnter_password').touched,'is-valid':form2.get('reEnter_password').touched && form2.get('reEnter_password').valid}">
+              <div *ngIf="form2.get('reEnter_password').invalid && form2.get('reEnter_password').touched" class='invalid-feedback'>
+                <div *ngIf="form2.get('reEnter_password').errors.required">Password is Required</div>
+                <div *ngIf="form2.get('reEnter_password').errors.notequal">Password does not not match</div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary"  [disabled]="!form2.valid" (click)="reset.submit()">Submit</button>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

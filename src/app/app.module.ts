@@ -16,12 +16,14 @@ import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layo
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TestingComponent } from './testing/testing.component';
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
+    ConfirmEqualValidatorDirective
   ],
   imports: [
     BrowserAnimationsModule,

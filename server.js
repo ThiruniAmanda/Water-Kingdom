@@ -7,6 +7,8 @@ const multer=require('multer');
 var urlencodedParser = bodyparser.urlencoded({ extended: false });
 const session = require('express-session');
 const path=require('path');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 const storage=multer.diskStorage({destination:function(req,res,cb){
@@ -113,14 +115,49 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
   mongodb.mongo.connect(mongodb.url,function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    dbo.collection("item_details").insert(data_obj, function(err, res) {
+    dbo.collection("user_details").update({'user_name':'Nilaksha Deemantha'},data_obj, function(err, res) {
       if (err) throw err;
-      console.log("Document inserted");
+      console.log("Document updated");
     });
     db.close();
 });
  res.redirect('/user')
-})
+});
+
+app.post('/password_reset',urlencodedParser,function(req,res){
+  console.log("received")
+  var password=req.body.new_password;
+  var old_password=req.body.old_password;
+  mongodb.mongo.connect(mongodb.url,function(err,db){
+    if (err) throw err;
+    var dbo = db.db("aquakingdom");
+    var old_pass=dbo.collection("user_details").find({},{"password":old_password});
+    console.log(old_pass)
+    if(old_pass==null)
+    res.render('/user',{'error':'Invalid Password'})
+    else{
+      bcrypt.hash(password, saltRounds, function(err, hash) {
+        mongodb.mongo.connect(mongodb.url,function(err,db){
+          if (err) throw err;
+          var dbo = db.db("aquakingdom");
+          dbo.collection("user_details").update({"user_name":"Nilaksha Deemantha"},{$set:{'password':hash}},function(err, res) {
+            if (err) throw err;
+            console.log("Document Updated");
+          });
+          db.close();
+      });
+      res.redirect('/user')
+        
+      });
+      
+    }
+
+    db.close();
+});
+
+ 
+});
+
 
 console.log('Listening to 4600');
 
