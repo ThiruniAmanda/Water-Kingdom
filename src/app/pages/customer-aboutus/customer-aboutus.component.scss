@@ -1,8 +1,6 @@
 header {
     position: relative;
     height: 100px;
-    //background-size: 10%;
-    //background-image: linear-gradient(#51535762, #51535762);
     background-color: rgb(59, 69, 82);
   }
   .description {
@@ -38,4 +36,23 @@ header {
    .row{
        margin-bottom: 60px;
    }
+   .wave {
+    position: absolute;
+    width: 1830px;
+    height: 30px;
+    margin-left: -150px;
+    margin-top: 0;
+    border-radius: 40%;
+  }
   
+  .wave.-one {
+    opacity: .2;
+    background: black;
+    height: 20px;
+  }
+  
+  .wave.-two {
+    opacity: .3;
+    background-color: #98c9db;
+    height: 30px;
+  }

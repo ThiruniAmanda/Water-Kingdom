@@ -7,10 +7,11 @@ import { CustomerLayoutRoutes } from './customer-layout.routing';
 import { FormsModule } from '@angular/forms';
 import { CustomerContactComponent } from 'app/pages/customer-contact/customer-contact.component';
 import { CustomerAboutusComponent } from 'app/pages/customer-aboutus/customer-aboutus.component';
-import { CustomerOurkoiComponent } from 'app/pages/customer-ourkoi/customer-ourkoi.component';
+import { CustomerImportedkoiComponent } from 'app/pages/customer-importedkoi/customer-importedkoi.component';
 import { FoodComponent } from 'app/pages/food/food.component';
 import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
+import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
 
 @NgModule({
   imports: [
@@ -23,10 +24,11 @@ import { MedicineComponent } from 'app/pages/medicine/medicine.component';
    CustomerHomeComponent,
    CustomerContactComponent,
    CustomerAboutusComponent,
-   CustomerOurkoiComponent,
+   CustomerImportedkoiComponent,
    FoodComponent,
    FiltersComponent,
-   MedicineComponent
+   MedicineComponent,
+   CustomerLocalkoiComponent,
 
   ]
 })

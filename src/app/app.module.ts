@@ -14,13 +14,14 @@ import { AppRoutes } from './app.routing';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
 import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
 import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 import { FoodComponent } from './pages/food/food.component';
 import { FiltersComponent } from './pages/filters/filters.component';
 import { MedicineComponent } from './pages/medicine/medicine.component';
+import { CustomerLocalkoiComponent } from './pages/customer-localkoi/customer-localkoi.component';
+import { CustomerImportedkoiComponent } from './pages/customer-importedkoi/customer-importedkoi.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MedicineComponent } from './pages/medicine/medicine.component';
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
+   
     
     
     
