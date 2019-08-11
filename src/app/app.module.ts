@@ -20,13 +20,22 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { HttpClient } from 'selenium-webdriver/http';
 import {HttpClientModule} from '@angular/common/http'
 import { ItemDetailsService } from './services/item_details.service';
+import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
+import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
+import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
+import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
     ConfirmEqualValidatorDirective,
-  
+    CustomerNavbarComponent,
+    CustomerOurkoiComponent,
+    CustomerAboutusComponent,
+    CustomerContactComponent,
+    
   ],
   imports: [
     BrowserAnimationsModule,
