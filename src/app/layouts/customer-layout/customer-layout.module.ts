@@ -5,6 +5,13 @@ import { CustomerHomeComponent } from 'app/pages/customer-home/customer-home.com
 import { RouterModule } from '@angular/router';
 import { CustomerLayoutRoutes } from './customer-layout.routing';
 import { FormsModule } from '@angular/forms';
+import { CustomerContactComponent } from 'app/pages/customer-contact/customer-contact.component';
+import { CustomerAboutusComponent } from 'app/pages/customer-aboutus/customer-aboutus.component';
+import { CustomerImportedkoiComponent } from 'app/pages/customer-importedkoi/customer-importedkoi.component';
+import { FoodComponent } from 'app/pages/food/food.component';
+import { FiltersComponent } from 'app/pages/filters/filters.component';
+import { MedicineComponent } from 'app/pages/medicine/medicine.component';
+import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemDetailsService } from 'app/services/item_details.service';
 
@@ -17,6 +24,16 @@ import { ItemDetailsService } from 'app/services/item_details.service';
     HttpClientModule
   ],
   declarations: [
+   CustomerHomeComponent,
+   CustomerContactComponent,
+   CustomerAboutusComponent,
+   CustomerImportedkoiComponent,
+   FoodComponent,
+   FiltersComponent,
+   MedicineComponent,
+   CustomerLocalkoiComponent,
+
+  ]
    CustomerHomeComponent
   ],
   providers: [ItemDetailsService],
