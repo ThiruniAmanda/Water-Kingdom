@@ -1,0 +1,23 @@
+{
+    "/fish_det": {
+      "target": "http://[::1]:4600",
+      "secure": false
+    },
+    "/item_det":{
+      "target":"http://[::1]:4600",
+      "secure":false
+    },
+    "/user_info":{
+      "target":"http://[::1]:4600",
+      "secure":false
+    },
+    "/password_reset":{
+      "target":"http://[::1]:4600",
+      "secure":false
+    },
+    "password_validation":{
+      "target":"http://[::1]:4600",
+      "secure":false
+    }
+   
+}

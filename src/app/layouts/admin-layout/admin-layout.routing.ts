@@ -8,14 +8,17 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
+import { AddDetailsComponent } from 'app/pages/add-details/add-details.component';
+import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-details.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TableComponent },
+    { path: 'data',          component: TableComponent },
     { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
+    { path: 'add-fish-details',    component: AddDetailsComponent },
+    { path: 'add-item-details',    component: AddItemDetailsComponent },
+    //  { path: 'icons',          component: IconsComponent },
+    // { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent }
 ];

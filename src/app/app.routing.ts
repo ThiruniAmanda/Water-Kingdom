@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-
+import {TestingComponent} from './testing/testing.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { NgModule } from '@angular/core';
@@ -31,7 +31,8 @@ export const AppRoutes: Routes = [
   {
     path: '**',
     redirectTo: 'home'
-  }
+  },
+ 
 ]
 
 @NgModule({
