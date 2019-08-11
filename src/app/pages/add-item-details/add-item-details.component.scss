@@ -1,0 +1,42 @@
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    padding: 6px 0px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+.container1 {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .container1 img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .container1 .btn1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color:transparent;
+    color: white;
+    font-size: 12px;
+    padding: 5px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    // width: 10px!important;
+    // height: 5px!important;
+  }
+  
+  .container1 .btn1:hover {
+    background-color: black;
+  }

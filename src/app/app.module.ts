@@ -13,6 +13,13 @@ import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
+import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TestingComponent } from './testing/testing.component';
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
+import { HttpClient } from 'selenium-webdriver/http';
+import {HttpClientModule} from '@angular/common/http'
+import { ItemDetailsService } from './services/item_details.service';
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
 import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
 import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
@@ -23,19 +30,21 @@ import { MedicineComponent } from './pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from './pages/customer-localkoi/customer-localkoi.component';
 import { CustomerImportedkoiComponent } from './pages/customer-importedkoi/customer-importedkoi.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-   
-    
-    
+    ConfirmEqualValidatorDirective,
+    CustomerNavbarComponent,
+    CustomerOurkoiComponent,
+    CustomerAboutusComponent,
+    CustomerContactComponent,
     
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),
@@ -44,7 +53,9 @@ import { CustomerImportedkoiComponent } from './pages/customer-importedkoi/custo
     CustomerNavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
+    FixedPluginModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
