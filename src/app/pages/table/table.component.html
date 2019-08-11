@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title" style="color:red"><b>Fish Details</b></h4>
+        <h4 class="card-title" style="color:black"><b>Fish Details</b></h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -26,7 +26,7 @@
   <div class="col-md-12">
     <div class="card card-plain">
       <div class="card-header">
-        <h4 class="card-title" style="color:red"><b>Item Details</b></h4>
+        <h4 class="card-title" style="color:black"><b>Item Details</b></h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -37,10 +37,19 @@
               <th>Item Code</th>
               <th>Quantity</th>
               <th>Description</th>
-              <th class="text-right">Price</th>
+              <th >Price</th>
+              <th></th>
             </thead>
             <tbody>
-             
+              <tr *ngFor="let item_details of item_details; let i = index">
+                <td><img src="{{item_details.path}}" height="35px" width="35px" ></td>
+                <td>{{item_details.item_name}}</td>
+                <td>{{item_details.code}}</td>
+                <td>{{item_details.quantity}}</td>
+                <td>{{item_details.description}}</td>
+                <td>{{item_details.price}}</td> 
+                <td><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
+              </tr>
             </tbody>
           </table>
         </div>

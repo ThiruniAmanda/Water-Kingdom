@@ -17,16 +17,20 @@ import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.m
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TestingComponent } from './testing/testing.component';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
-
+import { HttpClient } from 'selenium-webdriver/http';
+import {HttpClientModule} from '@angular/common/http'
+import { ItemDetailsService } from './services/item_details.service';
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    ConfirmEqualValidatorDirective
+    ConfirmEqualValidatorDirective,
+  
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),

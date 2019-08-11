@@ -156,16 +156,7 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title" style="color:red">Password Reset</h5>
-          <form  #reset action="password_reset" [formGroup]="form2" method="POST">
-            <div class="form-group">
-              <label for="old_password">Old Password</label>
-              <input type="password" class="form-control" id="old_password" name="old_password" formControlName="old_password"
-              [ngClass]="{'is-invalid':form2.get('old_password').invalid && form2.get('old_password').touched,'is-valid':form2.get('old_password').touched && form2.get('old_password').valid}">
-              <div *ngIf="form2.get('old_password').invalid && form2.get('old_password').touched" class='invalid-feedback'>
-                <div *ngIf="form2.get('old_password').errors.required">Password is Required</div>
-                <div *ngIf="form2.get('old_password').errors.minlength">Password must contain at least 6 characters</div>
-              </div>
-            </div>
+          <form  #reset action="password_reset" [formGroup]="form2" method="POST"> 
             <div class="form-group">
               <label for="new_password">New Password</label>
               <input type="password" class="form-control" id="new_password" name="new_password"  formControlName="new_password"

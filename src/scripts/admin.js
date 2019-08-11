@@ -25,7 +25,8 @@ $(document).on("click","#image_uploader",function(e){
     $("#imgInp").change(function(){
         readURL(this);
     });
-})
+});
+
 
 $(document).on("click","#video_uploader",function(e){
     e.preventDefault();
@@ -118,6 +119,8 @@ $(document).on("click","#remove",function(){
     $('#profile_img').val("");
     $('#profile_pic').attr('src','assets/img/pro_img.png')
 });
+
+
 
 
 

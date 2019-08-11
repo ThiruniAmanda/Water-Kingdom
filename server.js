@@ -1,14 +1,20 @@
 const mongodb=require('./src/scripts/mongodb_setup.js')
+// require('./src/scripts/get_item_data')
 const express=require('express');
 const app=express();
 const ExpressValidator = require('express-validator');
 const bodyparser=require('body-parser');
 const multer=require('multer');
+const cors = require('cors');
 var urlencodedParser = bodyparser.urlencoded({ extended: false });
 const session = require('express-session');
 const path=require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const server = require('http').Server(app);
+const io=require('socket.io')(server);
+var error=false;
+var router = express.Router()
 
 
 const storage=multer.diskStorage({destination:function(req,res,cb){
@@ -25,7 +31,7 @@ const storage_admin=multer.diskStorage({destination:function(req,res,cb){
 },
 filename:function(req,file,cb){
    cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));
-   console.log(req.files);
+   console.log("REQ"+req.files);
 }
 });
 
@@ -36,12 +42,21 @@ const upload=multer({storage:storage});
 app.use(bodyparser.json());
 // app.use(ExpressValidator());
 app.use(session({secret: 'krunal', saveUninitialized: false, resave: false}));
-app.use(express.static('src'));
 
-app.get('/',function(req,res){
+// app.use(function(req,res,next){
+//   //res.header('Access-Control-Allow-Origin', 'GET');
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+// })
+app.use(express.static('src'));
+app.set('views', path.join(__dirname, '/src/app/pages/user'));
+app.engine('html',require('ejs').renderFile);
+app.use(cors())
+
+app.get('/home',function(req,res){
+    console.log('hello')
     res.send('Hello');
 });
-
 
 //upload fish details
 app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
@@ -112,6 +127,7 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
   var img_path="../../../assets/storage/admin/"+file.filename;
   console.log(img_path)
   var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:img_path};
+ 
   mongodb.mongo.connect(mongodb.url,function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
@@ -121,8 +137,72 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
     });
     db.close();
 });
+
  res.redirect('/user')
 });
+
+
+app.get('/fetch_items',urlencodedParser,function(req,res){
+
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('item_details');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    // assert.equal(null, err);
+    console.log("Connected correctly to server");
+    var dbo = db.db("aquakingdom");
+    findDocuments(dbo, function(docs) {
+      console.log(docs);
+      res.json(docs);
+      db.close();
+    });
+   
+
+  });
+  // console.log('Hello')
+
+  // mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+  //   if(err) throw err;
+  //   var dbo = db.db("aquakingdom");
+  //   var obj=dbo.collection("item_details").find();
+  //   obj.forEach(function(doc,err){
+  //     console.log(doc)
+  //   });
+  //   res.json()
+  // });
+ 
+});
+
+
+app.get('/delete_data/:id',urlencodedParser,function(req,res){
+  var del_id=req.params.id;
+  console.log(del_id)
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+    console.log(del_id)
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+
+    // dbo.collection("item_details").findOneAndDelete({code:del_id}, function(err, obj) {
+    //   if (err) throw err;
+    //   console.log("1 document deleted");
+    //   res.json({error:'success'})
+    // });
+
+    db.close();
+    res.json({error:'Success'})
+  
+  });
+  
+
+})
+
 
 app.post('/password_reset',urlencodedParser,function(req,res){
   console.log("received")
@@ -131,26 +211,46 @@ app.post('/password_reset',urlencodedParser,function(req,res){
   mongodb.mongo.connect(mongodb.url,function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var old_pass=dbo.collection("user_details").find({},{"password":old_password});
-    console.log(old_pass)
-    if(old_pass==null)
-    res.render('/user',{'error':'Invalid Password'})
-    else{
-      bcrypt.hash(password, saltRounds, function(err, hash) {
-        mongodb.mongo.connect(mongodb.url,function(err,db){
-          if (err) throw err;
-          var dbo = db.db("aquakingdom");
-          dbo.collection("user_details").update({"user_name":"Nilaksha Deemantha"},{$set:{'password':hash}},function(err, res) {
-            if (err) throw err;
-            console.log("Document Updated");
+    var old_pass=dbo.collection("user_details").find({},{"user_name":'Nilaksha Deemantha'});
+    old_pass.forEach(function(doc,err){
+      console.log(doc);
+      var password_admin=doc.password;
+      bcrypt.compare(old_password,password_admin, function(err,res1) {
+        console.log(res1)
+
+        if(res1){
+          bcrypt.hash(password, saltRounds, function(err, hash) {
+              if (err) throw err;
+              var dbo = db.db("aquakingdom");
+              dbo.collection("user_details").update({"user_name":"Nilaksha Deemantha"},{$set:{'password':hash}},function(err, res) {
+                if (err) throw err;
+                console.log("Document Updated");
+              });
+              db.close();
+
+          res.redirect('/user')
           });
-          db.close();
+        }
+
+        else{
+          console.log('error')
+          // var io = require('socket.io')(server, { path: '/validate_admin' }).listen(server);
+          // io.of('validate_admin').on('connection', socket=> {
+          //   console.log('connected:', socket.client.id);
+          //   socket.emit('error_validate',true);
+          //   socket.emit('redirect',res.redirect('/user'))
+          // }); 
+
+          module.exports=function(router){
+            console.log('hello')
+            router.get('/user',function(res,req){
+              res.render('user.component.html',"hello")
+            })
+           
+          }
+        }
       });
-      res.redirect('/user')
-        
-      });
-      
-    }
+    });
 
     db.close();
 });
@@ -162,8 +262,9 @@ app.post('/password_reset',urlencodedParser,function(req,res){
 console.log('Listening to 4600');
 
 
-app.listen(4600);
+server.listen(4600);
 
+module.exports=router
 
  
  
