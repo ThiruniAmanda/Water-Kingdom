@@ -14,6 +14,7 @@ import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemDetailsService } from 'app/services/item_details.service';
+import { UserProfileService } from 'app/services/user-profile.service';
 
 @NgModule({
   imports: [
@@ -36,6 +37,6 @@ import { ItemDetailsService } from 'app/services/item_details.service';
   ]
    CustomerHomeComponent
   ],
-  providers: [ItemDetailsService],
+  providers: [ItemDetailsService,UserProfileService],
 })
 export class CustomerLayoutModule { }

@@ -41,8 +41,8 @@
               <th></th>
             </thead>
             <tbody>
-              <tr *ngFor="let item_details of item_details; let i = index">
-                <td><img src="{{item_details.path}}" height="35px" width="35px" ></td>
+              <tr *ngFor="let item_details of item_details">
+                <td><img [src]="item_details.path" height="35px" width="35px" id="item_pic" ></td>
                 <td>{{item_details.item_name}}</td>
                 <td>{{item_details.code}}</td>
                 <td>{{item_details.quantity}}</td>
