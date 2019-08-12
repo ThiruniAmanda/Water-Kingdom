@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CustomerLayoutRoutes } from './customer-layout.routing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ItemDetailsService } from 'app/services/item_details.service';
+import { FishDetailsService } from "app/services/fish_details.service";
 import { UserProfileService } from 'app/services/user-profile.service';
 
 @NgModule({
@@ -20,6 +20,6 @@ import { UserProfileService } from 'app/services/user-profile.service';
   declarations: [
    CustomerHomeComponent
   ],
-  providers: [ItemDetailsService,UserProfileService],
+  providers: [FishDetailsService,UserProfileService],
 })
 export class CustomerLayoutModule { }

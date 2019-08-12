@@ -8,7 +8,7 @@
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
-              <th></th>
+              <th>Image</th>
               <th>Name</th>
               <th>Category</th>
               <th>Age</th>
@@ -17,13 +17,136 @@
               <th>Price</th>
               <th>Code</th>
               <th>Description</th>
+             
             </thead>
+              <tr *ngFor="let item_details of item_details">
+                <td><img [src]="item_details.img_path" height="35px" width="35px" id="item_pic" ></td>
+                <td>{{item_details.name}}</td>
+                <td>{{item_details.category}}</td>
+                <td>{{item_details.age}}</td>
+                <td>{{item_details.size}}</td>
+                <td>{{item_details.gender}}</td> 
+                <td>{{item_details.price}}</td> 
+                <td>{{item_details.code}}</td> 
+                <td>{{item_details.description}}</td> 
+                <td><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
+
+                <td><a href="#" data-target="#edit_data" data-toggle="modal" id="edit_item" name="edit_item" style="color:black;margin-left:-100px" title="edit" class="edit_item" [attr.data-name]="item_details.name" [attr.data-category]="item_details.category" [attr.data-age]="item_details.age" [attr.data-size]="item_details.size" [attr.data-gender]="item_details.gender"
+                      [attr.data-price]="item_details.price" [attr.data-code]="item_details.code" [attr.data-des]="item_details.description" [attr.data-link]="item_details.link" [attr.data-imgsrc]="item_details.img_path" [attr.data-videosrc]="item_details.video_path"><i class="material-icons">file_list</i></a></td>
+              </tr>
           </table>
         </div>
+        <div class="modal fade" id="edit_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Data</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="form" #form1 action="update_fish_det" id="form" method="POST" name="form" enctype="multipart/form-data">
+                      <div class="form-group">
+                          <label for="name"><b>Name</b></label>
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Fish Name" formControlName="name"
+                           [ngClass]="{'is-invalid':form.get('name').invalid && form.get('name').touched,'is-valid':form.get('name').touched && form.get('name').valid}">
+                          <div class='invalid-feedback'>
+                              <div>Name is Required</div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="category"><b>Category</b></label>
+                          <input type="text" class="form-control" id="category" name="category" placeholder="Koi" formControlName="category"
+                           [ngClass]="{'is-invalid':form.get('category').invalid && form.get('category').touched,'is-valid':form.get('category').touched && form.get('category').valid}" >
+                          <div class='invalid-feedback'>
+                             <div>Category is Required</div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="age"><b>Age</b></label>
+                          <input type="number" class="form-control" id="age" name="age" placeholder="1" formControlName="age"
+                          [ngClass]="{'is-invalid':form.get('age').invalid && form.get('age').touched,'is-valid':form.get('age').touched && form.get('age').valid}">
+                          <div class='invalid-feedback'>
+                             <div>Age is Required</div>
+                          </div>
+                      </div>
+                     <div class="form-group">
+                          <label for="size"><b>Size</b></label>
+                          <input type="number" class="form-control" id="size" step="0.1" name="size" placeholder="34.0" formControlName="size"
+                          [ngClass]="{'is-invalid':form.get('size').touched && form.get('size').invalid,'is-valid':form.get('size').touched && form.get('size').valid}">
+                          <div class='invalid-feedback'>
+                             <div>Size is Required</div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="gender"><b>Gender</b></label><br>
+                          <select id="gender" name="gender">
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="price"><b>Price</b></label>
+                          <input type="number" class="form-control" id="price" name="price" placeholder="$100" formControlName="price"
+                          [ngClass]="{'is-invalid':form.get('price').touched && form.get('price').invalid,'is-valid':form.get('price').touched && form.get('price').valid}">
+                          <div class='invalid-feedback'>
+                             <div>Price is Required</div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="code"><b>Code</b></label>
+                          <input type="text" class="form-control" id="code" name="code" placeholder="1001B" formControlName="code"
+                          [ngClass]="{'is-invalid':form.get('code').touched && form.get('code').invalid,'is-valid':form.get('code').touched && form.get('code').valid}">
+                          <div class='invalid-feedback'>
+                             <div>Code is Required</div>
+                          </div>
+                      </div> 
+                      <div class="form-group">
+                          <label for="description"><b>Description</b></label>
+                          <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="link"><b>Enter the Youtube Link</b></label>
+                          <input type="text" class="form-control" id="link" name="link" placeholder="www.youtube.com/embed">
+                      </div>
+                      <div class="form-group">
+                          <div class="input-group">
+                              <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*">   
+                              <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="form-row">
+                              <div class="col">
+                                  <div style="width:60px;height:60px;outline-color: black;outline-style:solid" name="imageUploaded" id="imageUploaded">
+                                      <div id="container">
+                                          <img src="" name="image" id="image" style="width:60px;height:60px">
+                                          <button class="btn1" id="del" style="display: none" ><i class="material-icons">delete_forever</i></button>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col">
+                                  <div name="videoUploaded" id="videoUploaded" style="outline-color: black;outline-style:solid">
+                                      <video src="" id="myVideo" controls style="display: none" height="200px" width="100px" ></video>
+                                      <button class="btn1" id="del_video" style="display: none" ><i class="material-icons">delete_forever</i></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form1.submit()">Submit</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
-  <div class="col-md-12">
+  <!-- <div class="col-md-12">
     <div class="card card-plain">
       <div class="card-header">
         <h4 class="card-title" style="color:black"><b>Item Details</b></h4>
@@ -55,5 +178,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
+
+       <!-- Modal -->
+
+

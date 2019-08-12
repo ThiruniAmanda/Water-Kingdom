@@ -19,7 +19,7 @@ import { TestingComponent } from './testing/testing.component';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { HttpClient } from 'selenium-webdriver/http';
 import {HttpClientModule} from '@angular/common/http'
-import { ItemDetailsService } from './services/item_details.service';
+import { FishDetailsService } from "./services/fish_details.service";
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
 import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
 import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
@@ -30,12 +30,7 @@ import { CustomerContactComponent } from './pages/customer-contact/customer-cont
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    ConfirmEqualValidatorDirective,
-    CustomerNavbarComponent,
-    CustomerOurkoiComponent,
-    CustomerAboutusComponent,
-    CustomerContactComponent,
-    
+  
   ],
   imports: [
     BrowserAnimationsModule,

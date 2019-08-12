@@ -18,12 +18,16 @@ var error=false;
 var router = express.Router()
 
 
-const storage=multer.diskStorage({destination:function(req,res,cb){
-    cb(null,'./src/assets/storage/items')
+const storage=multer.diskStorage({destination:function(req,file,cb){
+    if(file.mimetype=="image/png")
+    cb(null,'./src/assets/storage/fish/images')
+    else
+    cb(null,'./src/assets/storage/fish/videos')
+   
   },
   filename:function(req,file,cb){
      cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));
-     console.log(req.files);
+    //  console.log(req.files);
   }
 });
 
@@ -37,8 +41,9 @@ filename:function(req,file,cb){
 });
 
 const upload_admin=multer({storage:storage_admin});
-
+console.log('Hello')
 const upload=multer({storage:storage});
+console.log('Mello')
 // const file_uploads=upload.fields([{name:'imgInp',maxCount:1},{name:'videoInp',maxCount:1}])
 app.use(bodyparser.json());
 // app.use(ExpressValidator());
@@ -67,16 +72,17 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
  var des=req.body.description;
  var age=req.body.age;
  var gender=req.body.gender;
- const img_file = req.files['imgInp'];
- const video_file=req.files['videoInp'];
-//   var img_path_file="../../../assets/storage/"+img_file.filename;
-//  var video_path_file="../../../assets/storage/"+video_file.filename;
- console.log(req.files);
- mongodb.mongo.connect(mongodb.url,function(err,db){
+ var price=req.body.price;
+ var code=req.body.code;
+ var link=req.body.link;
+ console.log(req.files[0])
+ var image_path="assets/storage/fish/images/"+req.files[0].filename;
+ var video_path="assets/storage/fish/videos/"+req.files[1].filename;
+ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,img_path:img_path_file,video_path:video_path_file};
-    dbo.collection("fish_details").insert(myobj, function(err, res) {
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link};
+    dbo.collection("fish_details").insertOne(myobj, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
     });
@@ -143,10 +149,10 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
 });
 
 
-app.get('/fetch_items',urlencodedParser,function(req,res){
+app.get('/fetch_details',urlencodedParser,function(req,res){
 
   var findDocuments = function(db, callback) {
-    var collection = db.collection('item_details');
+    var collection = db.collection('fish_details');
     collection.find().toArray(function(err, docs) {
       if(err) throw err;
       // assert.equal(err, null);

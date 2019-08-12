@@ -67,23 +67,29 @@
                             </div>
                             <div class="form-group">
                                 <label for="link"><b>Enter the Youtube Link</b></label>
-                                <input type="text" class="form-control" id="link" placeholder="www.youtube.com/embed">
+                                <input type="text" class="form-control" id="link" name="link" placeholder="www.youtube.com/embed">
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*">   
-                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" style="display: none" accept="video/*">
+                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
                                         <div style="width:60px;height:60px" name="imageUploaded" id="imageUploaded">
-                                            <img src="" name="image" id="image">
+                                            <div id="container">
+                                                <img src="" name="image" id="image">
+                                                <button class="btn1" id="del" style="display: none" ><i class="material-icons">delete_forever</i></button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div name="videoUploaded" id="videoUploaded"></div>
+                                        <div name="videoUploaded" id="videoUploaded">
+                                            <video src="" id="myVideo" controls style="display: none"></video>
+                                            <button class="btn1" id="del_video" style="display: none" ><i class="material-icons">delete_forever</i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -97,5 +103,4 @@
     </div>
     <div class="col-md-3"></div>
 </div>
-
 

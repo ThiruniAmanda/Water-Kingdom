@@ -18,6 +18,10 @@
     "password_validation":{
       "target":"http://[::1]:4600",
       "secure":false
+    },
+    "update_fish_det":{
+      "target":"http://[::1]:4600",
+      "secure":false
     }
    
 }

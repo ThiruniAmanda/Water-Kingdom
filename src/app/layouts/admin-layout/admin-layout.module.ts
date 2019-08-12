@@ -33,7 +33,7 @@ import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validat
     TableComponent,
     UpgradeComponent,
     TypographyComponent,
-    AddItemDetailsComponent,
+    // AddItemDetailsComponent,
     // IconsComponent,
     AddDetailsComponent,
     // MapsComponent,

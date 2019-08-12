@@ -13,4 +13,5 @@ export class UserProfileService {
   loadProfilePic(){
     return this.http.get(`${this._url}/load_profile`);
   }
+  
 }
