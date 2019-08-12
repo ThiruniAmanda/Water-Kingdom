@@ -10,6 +10,7 @@ var urlencodedParser = bodyparser.urlencoded({ extended: false });
 const session = require('express-session');
 const path=require('path');
 const bcrypt = require('bcrypt');
+const file_system=require('fs');
 const saltRounds = 10;
 const server = require('http').Server(app);
 const io=require('socket.io')(server);
@@ -95,12 +96,12 @@ app.post('/item_det',upload.single('item_imgInp'),urlencodedParser,function(req,
   var price=req.body.price;
   var code=req.body.code;
   var file=req.file;
-  var img_path="../../../assets/storage/items/"+file.filename;
-  mongodb.mongo.connect(mongodb.url,function(err,db){
+  var img_path="assets/storage/items/"+file.filename;
+  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { item_name:item_name,quantity:quantity,description:description,price:price,code:code,path:img_path};
-    dbo.collection("item_details").insert(myobj, function(err, res) {
+    var myobj = { item_name:item_name,quantity:quantity,description:description,price:price,code:code,path:img_path,file_name:file.filename};
+    dbo.collection("item_details").insertOne(myobj, function(err, res) {
       if (err) throw err;
       console.log("Document inserted");
     });
@@ -124,9 +125,9 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
   var country=req.body.country;
   var about=req.body.about_me;
   var file=req.file;
-  var img_path="../../../assets/storage/admin/"+file.filename;
+  var img_path="assets/storage/admin/"+file.filename;
   console.log(img_path)
-  var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:img_path};
+  var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:img_path,file_name:file.filename};
  
   mongodb.mongo.connect(mongodb.url,function(err,db){
     if (err) throw err;
@@ -166,41 +167,82 @@ app.get('/fetch_items',urlencodedParser,function(req,res){
    
 
   });
-  // console.log('Hello')
-
-  // mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
-  //   if(err) throw err;
-  //   var dbo = db.db("aquakingdom");
-  //   var obj=dbo.collection("item_details").find();
-  //   obj.forEach(function(doc,err){
-  //     console.log(doc)
-  //   });
-  //   res.json()
-  // });
  
 });
 
 
 app.get('/delete_data/:id',urlencodedParser,function(req,res){
-  var del_id=req.params.id;
-  console.log(del_id)
-  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
-    console.log(del_id)
+  console.log(req.params)
+
+  var removeproducts = function(db, callback) {
+    db.collection('item_details').deleteOne({code:req.params.id},
+       function(err, results) {
+          console.log('product deleted');
+          if(err) throw err;
+          callback(results);
+       }
+    );
+ };
+
+ var findDocuments = function(db, callback) {
+  var collection = db.collection('item_details');
+  collection.find({code:req.params.id}).toArray(function(err, docs) {
     if(err) throw err;
-    var dbo = db.db("aquakingdom");
-
-    // dbo.collection("item_details").findOneAndDelete({code:del_id}, function(err, obj) {
-    //   if (err) throw err;
-    //   console.log("1 document deleted");
-    //   res.json({error:'success'})
-    // });
-
-    db.close();
-    res.json({error:'Success'})
-  
+    // assert.equal(err, null);
+    callback(docs);
   });
-  
+};
 
+mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+  //  assert.equal(null, err);
+  if(err) throw err;
+  var dbo = db.db("aquakingdom");
+  
+ findDocuments(dbo, function(docs) {
+  console.log(docs[0].path);
+  var path_to_delete="./src/assets/storage/items/"+docs[0].file_name
+    file_system.unlink(path_to_delete,(err)=>{
+      if(err) throw err
+    })
+  
+ 
+ });
+
+ removeproducts(dbo, function(results) {
+   console.log('jioo')
+  res.json(results)
+
+ });   
+
+ db.close();
+    
+});
+
+});
+
+
+app.get('/load_profile',urlencodedParser,function(req,res){
+
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('user_details');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    // assert.equal(null, err);
+    console.log("Connected correctly to server");
+    var dbo = db.db("aquakingdom");
+    findDocuments(dbo, function(docs) {
+      console.log(docs[0]);
+      res.json(docs);
+      db.close();
+    });
+  });
 })
 
 

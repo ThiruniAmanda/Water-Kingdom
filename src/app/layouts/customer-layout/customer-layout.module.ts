@@ -7,6 +7,7 @@ import { CustomerLayoutRoutes } from './customer-layout.routing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemDetailsService } from 'app/services/item_details.service';
+import { UserProfileService } from 'app/services/user-profile.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ItemDetailsService } from 'app/services/item_details.service';
   declarations: [
    CustomerHomeComponent
   ],
-  providers: [ItemDetailsService],
+  providers: [ItemDetailsService,UserProfileService],
 })
 export class CustomerLayoutModule { }
