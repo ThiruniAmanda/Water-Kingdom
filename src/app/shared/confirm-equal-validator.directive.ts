@@ -31,12 +31,20 @@ export function comparePassword(controlNameToCompare:string):ValidatorFn{
 
 
 export class ConfirmEqualValidatorDirective implements Validator{
+   
     @Input('appConfirmEqualValidator') appConfirmEqualValidator:string 
-    validate(control:AbstractControl):{[key:string]:any}|null{
-        const controlToCompare=control.root.get(this.appConfirmEqualValidator);
-        // alert(controlToCompare)
-        if(controlToCompare&&controlToCompare.value!=control.value)
-         return {'notequal':true}
-        return null;
+    validate(c:AbstractControl):{[key:string]:any}|null{
+        if(c.value==null||c.value.length==0){
+            return null;
+        }
+
+        const controlToCompare=c.root.get(this.appConfirmEqualValidator);
+        if(controlToCompare){
+            const subscription:Subscription=controlToCompare.valueChanges.subscribe(()=>{
+                c.updateValueAndValidity();
+                subscription.unsubscribe();
+            });
+        }
+        return controlToCompare && controlToCompare.value!==c.value?{'notequal':true}:null;
     }
 }

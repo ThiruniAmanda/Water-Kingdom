@@ -31,9 +31,11 @@
                 <td>{{item_details.description}}</td> 
                 <td><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
 
-                <td><a href="#" data-target="#edit_data" data-toggle="modal" id="edit_item" name="edit_item" style="color:black;margin-left:-100px" title="edit" class="edit_item" [attr.data-name]="item_details.name" [attr.data-category]="item_details.category" [attr.data-age]="item_details.age" [attr.data-size]="item_details.size" [attr.data-gender]="item_details.gender"
+                <td><a href="#" data-target="#edit_data" data-toggle="modal" id="edit_item" name="edit_item" style="color:black" title="edit"  [attr.data-name]="item_details.name" [attr.data-category]="item_details.category" [attr.data-age]="item_details.age" [attr.data-size]="item_details.size" [attr.data-gender]="item_details.gender"
                       [attr.data-price]="item_details.price" [attr.data-code]="item_details.code" [attr.data-des]="item_details.description" [attr.data-link]="item_details.link" [attr.data-imgsrc]="item_details.img_path" [attr.data-videosrc]="item_details.video_path"><i class="material-icons">file_list</i></a></td>
-              </tr>
+              
+               <!-- <td><a href="#" title="edit" data-toggle="modal"><i class="material-icons">file_list</i></a></td> -->
+                    </tr>
           </table>
         </div>
         <div class="modal fade" id="edit_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -50,7 +52,7 @@
                       <div class="form-group">
                           <label for="name"><b>Name</b></label>
                           <input type="text" class="form-control" id="name" name="name" placeholder="Fish Name" formControlName="name"
-                           [ngClass]="{'is-invalid':form.get('name').invalid && form.get('name').touched,'is-valid':form.get('name').touched && form.get('name').valid}">
+                           [ngClass]="{'is-invalid':form.get('name').invalid,'is-valid':form.get('name').valid}">
                           <div class='invalid-feedback'>
                               <div>Name is Required</div>
                           </div>
@@ -180,7 +182,8 @@
     </div>
   </div> -->
 </div>
+  <input id="fish_id" name="fish_id" value="{{input_value}}" style="display: none">
+  <button type="submit" (click)="display()" id="search_item_nav" style="display: none"></button>
 
-       <!-- Modal -->
 
 

@@ -16,6 +16,7 @@ const server = require('http').Server(app);
 const io=require('socket.io')(server);
 var error=false;
 var router = express.Router()
+require('events').EventEmitter.prototype._maxListeners = 100;
 
 
 const storage=multer.diskStorage({destination:function(req,file,cb){
@@ -41,9 +42,7 @@ filename:function(req,file,cb){
 });
 
 const upload_admin=multer({storage:storage_admin});
-console.log('Hello')
 const upload=multer({storage:storage});
-console.log('Mello')
 // const file_uploads=upload.fields([{name:'imgInp',maxCount:1},{name:'videoInp',maxCount:1}])
 app.use(bodyparser.json());
 // app.use(ExpressValidator());
@@ -249,7 +248,99 @@ app.get('/load_profile',urlencodedParser,function(req,res){
       db.close();
     });
   });
-})
+});
+
+
+app.get('/search_data/:id',urlencodedParser,function(req,res){
+  var id=req.params.id;
+
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('fish_details');
+    collection.find({code:id}).toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    // assert.equal(null, err);
+    console.log("Connected correctly to server");
+    var dbo = db.db("aquakingdom");
+    findDocuments(dbo, function(docs) {
+      console.log('searched data /n');
+      console.log(docs);
+      res.json(docs);
+      db.close();
+    });
+   
+
+  });
+
+});
+
+
+app.get('/visibility_change_false/:field',urlencodedParser,function(req,res){
+  
+  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+    var field=req.params.field;
+    var update_key={}
+    update_key[field]=true;
+    var updated={}
+    updated[field]=false
+    console.log(field)
+    if (err) throw err;
+    var dbo = db.db("aquakingdom");
+    dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated}, function(err, res) {
+      if (err) throw err;
+      console.log("Document updated");
+      // res.json({message:'Success'})
+    });
+    db.close();
+});
+});
+
+app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
+  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+    var field=req.params.field;
+    var update_key={}
+    update_key[field]=true;
+    var updated={}
+    updated[field]=false
+    if (err) throw err;
+    var dbo = db.db("aquakingdom");
+    dbo.collection("visible_of_fields").updateOne(update_key,updated,function(err, res) {
+      if (err) throw err;
+      console.log("Document updated");
+      res.json({message:'Success'})
+    });
+    db.close();
+});
+});
+
+
+app.get('/load_visibility',urlencodedParser,function(req,res){
+
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('visible_of_fields');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+    findDocuments(dbo, function(docs) {
+      console.log(docs);
+      res.json(docs);
+      db.close();
+    });
+  });
+});
 
 
 app.post('/password_reset',urlencodedParser,function(req,res){

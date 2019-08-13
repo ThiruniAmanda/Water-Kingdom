@@ -24,6 +24,8 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
 import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
 import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
 import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
+import { TableModule } from './pages/table/table.module';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { CustomerContactComponent } from './pages/customer-contact/customer-cont
     FooterModule,
     FixedPluginModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

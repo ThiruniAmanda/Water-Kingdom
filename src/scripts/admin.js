@@ -41,15 +41,7 @@ $(document).on("click","#video_uploader",function(e){
                  $('#myVideo').attr('src',e.target.result);
                  $('#myVideo').attr('width','100px');
                  $('#myVideo').attr('height','200px');
-                // var div_tag=document.getElementById('videoUploaded');
-                // var video=document.createElement('video')
-                // video.setAttribute('src',e.target.result)
-                // video.setAttribute('id','myVideo')
-                // video.setAttribute('width',300)
-                // video.setAttribute('height',100)
-                // video.setAttribute('controls','')
-                // div_tag.appendChild(video);
-                $('#del_video').removeAttr('style');
+                 $('#del_video').removeAttr('style');
             }
             
             reader.readAsDataURL(input.files[0]);
@@ -154,8 +146,28 @@ $(document).on('click','#edit_item',function(e){
     $('#container').attr('class','container1');
     $('#del_video').removeAttr('style');
     $('#del').removeAttr('style');
-  
-})
+});
+
+
+$(document).on('click','#nav-search',function(e){
+    e.preventDefault();
+    var search_code=$('#nav-search-item').val();
+    // alert(search_code);
+    $('#fish_id').val(search_code);
+    // alert( $('#fish_id').val())
+    $('#search_item_nav').click();
+});
+
+function enable_search_bar(){
+    $('#nav-search-item').removeAttr('disabled');
+}
+
+function disable_search_bar(){
+    $('#nav-search-item').attr('disabled','disabled');
+}
+
+
+
 
 
 

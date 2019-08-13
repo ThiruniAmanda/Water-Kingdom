@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { comparePassword } from 'app/shared/confirm-equal-validator.directive';
 import { UserProfileService } from 'app/services/user-profile.service';
-
-
+declare function  disable_search_bar():any;
 
 @Component({
     selector: 'user-cmp',
@@ -23,6 +22,7 @@ export class UserComponent implements OnInit{
     constructor(private profile_image:UserProfileService){}
 
     ngOnInit(){
+        disable_search_bar();
         this.form=new FormGroup({
             user_name:new FormControl('',Validators.required),
             email:new FormControl('',[Validators.required,Validators.email]),
@@ -31,12 +31,12 @@ export class UserComponent implements OnInit{
             address:new FormControl('',Validators.required),
             // password:new FormControl('',[Validators.required,Validators.minLength(6)]),
           });
-
-        this.form2=new FormGroup({
-            old_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
-            new_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
-            reEnter_password:new FormControl('',[Validators.required,comparePassword('new_password')])
-        });
+        
+        //   this.form2=new FormGroup({
+        //     old_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
+        //     new_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
+        //     reEnter_password:new FormControl('',[Validators.required,comparePassword('new_password')])
+        // });
 
         this.profile_image.loadProfilePic().subscribe((items)=>{
             this.profile_data=items;

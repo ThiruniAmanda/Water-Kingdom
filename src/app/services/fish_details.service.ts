@@ -18,4 +18,20 @@ export class FishDetailsService {
         return this.http.get(`${this._url}/delete_data/${id}`);
     }
 
+    filterData(id:string){
+        return this.http.get(`${this._url}/search_data/${id}`);
+    }
+
+    changeVisibilityFalse(field:string){
+        return this.http.get(`${this._url}/visibility_change_false/${field}`)
+    }
+
+    changeVisibilityTrue(field:string){
+        return this.http.get(`${this._url}/visibility_change_true/${field}`)
+    }
+
+    loadVisibility(){
+        return this.http.get(`${this._url}/load_visibility`)
+    }
+
 }

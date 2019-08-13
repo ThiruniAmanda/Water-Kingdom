@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/add-item-details',   title: 'Add Item Details',       icon:'nc-basket',    class: '' },
     //  { path: '/icons',         title: 'Icons',             icon:'nc-diamond',    class: '' },
     // { path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' },
-    { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
+    // { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' },
     { path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
     { path: '/data',         title: 'Items and Fish List',   icon:'nc-tile-56',    class: '' },
 ];
