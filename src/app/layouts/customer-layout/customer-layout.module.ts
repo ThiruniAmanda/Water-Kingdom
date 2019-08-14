@@ -12,6 +12,7 @@ import { FoodComponent } from 'app/pages/food/food.component';
 import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
+import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-
    FiltersComponent,
    MedicineComponent,
    CustomerLocalkoiComponent,
+   FishdetailsComponent,
 
   ]
 })
