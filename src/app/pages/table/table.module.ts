@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [TableComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports:[TableComponent]
 })

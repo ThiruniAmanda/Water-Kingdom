@@ -11,6 +11,7 @@ const session = require('express-session');
 const path=require('path');
 const bcrypt = require('bcrypt');
 const file_system=require('fs');
+const base64=require('image-to-base64')
 const saltRounds = 10;
 const server = require('http').Server(app);
 const io=require('socket.io')(server);
@@ -21,9 +22,9 @@ const maxSize=50;
 
 const storage=multer.diskStorage({destination:function(req,file,cb){
     if(file.mimetype=="image/png")
-    cb(null,'./src/assets/storage/fish/images')
+    cb(null,'./src/storage/fish/images')
     else
-    cb(null,'./src/assets/storage/fish/videos')
+    cb(null,'./src/storage/fish/videos')
    
   },
   filename:function(req,file,cb){
@@ -33,7 +34,7 @@ const storage=multer.diskStorage({destination:function(req,file,cb){
 });
 
 const storage_admin=multer.diskStorage({destination:function(req,res,cb){
-  cb(null,'./src/assets/storage/admin')
+  cb(null,'./src/storage/admin')
 },
 filename:function(req,file,cb){
    cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));
@@ -47,29 +48,19 @@ const upload=multer({storage:storage});
 app.use(bodyparser.json());
 // app.use(ExpressValidator());
 app.use(session({secret: 'krunal', saveUninitialized: false, resave: false}));
-
-// app.use(function(req,res,next){
-//   //res.header('Access-Control-Allow-Origin', 'GET');
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-// })
 app.use(express.static('src'));
 app.set('views', path.join(__dirname, '/src/app/pages/user'));
 app.engine('html',require('ejs').renderFile);
 app.use(cors())
 
-app.get('/home',function(req,res){
-    console.log('hello')
-    res.send('Hello');
-});
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('Access-Control-Allow-Methods', 'POST');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+//   res.setHeader('Access-Control-Allow-Methods', 'POST');
+//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 
 //upload fish details
 app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
@@ -86,9 +77,10 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
  var price=req.body.price;
  var code=req.body.code;
  var link=req.body.link;
- console.log(req.files[0])
- var image_path="assets/storage/fish/images/"+req.files[0].filename;
- var video_path="assets/storage/fish/videos/"+req.files[1].filename;
+// console.log(req.files[0])
+ var image_path="storage/fish/images/"+req.files[0].filename;
+ var video_path="storage/fish/videos/"+req.files[1].filename;
+
  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
@@ -103,10 +95,12 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
 }
 });
 
+
+
 //update-fish-details
 app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,next){
-  console.log('hello ')
-  console.log(req.files[0].path)
+ // console.log('hello ')
+ // console.log(req.files[0].path)
   if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
     res.send('Error 413->File is too large. Maximum size:40MB')
   }
@@ -120,7 +114,7 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
  var price=req.body.price;
  var code=req.body.code;
  var link=req.body.link;
- console.log(req.files[0])
+// console.log(req.files[0])
  var image_path="assets/storage/fish/images/"+req.files[0].filename;
  var video_path="assets/storage/fish/videos/"+req.files[1].filename;
  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
@@ -150,7 +144,7 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
   var about=req.body.about_me;
   var file=req.file;
   var img_path="assets/storage/admin/"+file.filename;
-  console.log(img_path)
+ // console.log(img_path)
   var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:img_path,file_name:file.filename};
  
   mongodb.mongo.connect(mongodb.url,function(err,db){
@@ -167,6 +161,7 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
 });
 
 
+//fetch_data
 app.get('/fetch_details',urlencodedParser,function(req,res){
 
   var findDocuments = function(db, callback) {
@@ -188,13 +183,12 @@ app.get('/fetch_details',urlencodedParser,function(req,res){
       res.json(docs);
       db.close();
     });
-   
-
   });
  
 });
 
 
+//delete data
 app.get('/delete_data/:id',urlencodedParser,function(req,res){
   console.log(req.params)
 
@@ -228,8 +222,7 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
     file_system.unlink(path_to_delete,(err)=>{
       if(err) throw err
     })
-  
- 
+
  });
 
  removeproducts(dbo, function(results) {
@@ -244,7 +237,7 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
 });
 
 
-
+//load_profile data
 app.get('/load_profile',urlencodedParser,function(req,res){
 
   var findDocuments = function(db, callback) {
@@ -270,6 +263,7 @@ app.get('/load_profile',urlencodedParser,function(req,res){
 });
 
 
+//search_data
 app.get('/search_data/:id',urlencodedParser,function(req,res){
   var id=req.params.id;
 
@@ -293,13 +287,12 @@ app.get('/search_data/:id',urlencodedParser,function(req,res){
       res.json(docs);
       db.close();
     });
-   
-
   });
 
 });
 
 
+//update_fish_data
 app.get('/to_update_data/:code',urlencodedParser,function(req,res){
   var code=req.params.code;
 
@@ -330,6 +323,7 @@ app.get('/to_update_data/:code',urlencodedParser,function(req,res){
 });
 
 
+//change_visibility_to_false
 app.get('/visibility_change_false/:field',urlencodedParser,function(req,res){
   
   mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
@@ -350,6 +344,8 @@ app.get('/visibility_change_false/:field',urlencodedParser,function(req,res){
 });
 });
 
+
+//change_visibility_to_true
 app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
   mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
     var field=req.params.field;
@@ -369,6 +365,7 @@ app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
 });
 
 
+//load_visibility_updated
 app.get('/load_visibility',urlencodedParser,function(req,res){
 
   var findDocuments = function(db, callback) {
@@ -392,6 +389,7 @@ app.get('/load_visibility',urlencodedParser,function(req,res){
 });
 
 
+//reset passwords
 app.post('/password_reset',urlencodedParser,function(req,res){
   console.log("received")
   var password=req.body.new_password;
@@ -422,20 +420,7 @@ app.post('/password_reset',urlencodedParser,function(req,res){
 
         else{
           console.log('error')
-          // var io = require('socket.io')(server, { path: '/validate_admin' }).listen(server);
-          // io.of('validate_admin').on('connection', socket=> {
-          //   console.log('connected:', socket.client.id);
-          //   socket.emit('error_validate',true);
-          //   socket.emit('redirect',res.redirect('/user'))
-          // }); 
-
-          module.exports=function(router){
-            console.log('hello')
-            router.get('/user',function(res,req){
-              res.render('user.component.html',"hello")
-            })
-           
-          }
+  
         }
       });
     });
@@ -448,11 +433,8 @@ app.post('/password_reset',urlencodedParser,function(req,res){
 
 
 console.log('Listening to 4600');
-
-
 server.listen(4600);
 
-module.exports=router
 
  
  

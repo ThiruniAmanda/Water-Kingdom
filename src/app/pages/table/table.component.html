@@ -22,7 +22,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item_details of item_details">
-                <td width="10%"><img [src]="item_details.img_path" height="35px" width="35px" id="item_pic" ></td>
+                <td width="10%"><img src="{{item_details.img_path}}" height="35px" width="35px" id="item_pic" ></td>
                 <td width="10%">{{item_details.name}}</td>
                 <td width="10%">{{item_details.category}}</td>
                 <td width="10%">{{item_details.age}}</td>
