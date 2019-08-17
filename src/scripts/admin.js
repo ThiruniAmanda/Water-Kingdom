@@ -128,25 +128,25 @@ $(document).on("click","#remove",function(){
     $('#profile_pic').attr('src','assets/img/pro_img.png')
 });
 
-$(document).on('click','#edit_item',function(e){
-    e.preventDefault()
-    document.getElementById('name').value=$(this).data('name');
-    document.getElementById('category').value=$(this).data('category');
-    document.getElementById('age').value=$(this).data('age');
-    document.getElementById('size').value=$(this).data('size');
-    document.getElementById('gender').value=$(this).data('gender');
-    document.getElementById('price').value=$(this).data('price');
-    document.getElementById('code').value=$(this).data('code');
-    document.getElementById('description').value=$(this).data('des');
-    document.getElementById('link').value=$(this).data('link');
-    document.getElementById('image').src=$(this).data('imgsrc');
-    $('#myVideo').removeAttr('style');
-    document.getElementById('myVideo').src=$(this).data('videosrc');
-    $('#videoUploaded').attr('class','container1');
-    $('#container').attr('class','container1');
-    $('#del_video').removeAttr('style');
-    $('#del').removeAttr('style');
-});
+// $(document).on('click','#edit_item',function(e){
+//     e.preventDefault()
+//     document.getElementById('name').value=$(this).data('name');
+//     document.getElementById('category').value=$(this).data('category');
+//     document.getElementById('age').value=$(this).data('age');
+//     document.getElementById('size').value=$(this).data('size');
+//     document.getElementById('gender').value=$(this).data('gender');
+//     document.getElementById('price').value=$(this).data('price');
+//     document.getElementById('code').value=$(this).data('code');
+//     document.getElementById('description').value=$(this).data('des');
+//     document.getElementById('link').value=$(this).data('link');
+//     document.getElementById('image').src=$(this).data('imgsrc');
+//     $('#myVideo').removeAttr('style');
+//     document.getElementById('myVideo').src=$(this).data('videosrc');
+//     $('#videoUploaded').attr('class','container1');
+//     $('#container').attr('class','container1');
+//     $('#del_video').removeAttr('style');
+//     $('#del').removeAttr('style');
+// });
 
 
 $(document).on('click','#nav-search',function(e){
@@ -165,7 +165,6 @@ function enable_search_bar(){
 function disable_search_bar(){
     $('#nav-search-item').attr('disabled','disabled');
 }
-
 
 
 

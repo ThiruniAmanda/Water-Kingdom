@@ -19,7 +19,7 @@
       "target":"http://[::1]:4600",
       "secure":false
     },
-    "update_fish_det":{
+    "/update_fish_details":{
       "target":"http://[::1]:4600",
       "secure":false
     }

@@ -22,7 +22,6 @@ export class SettingsComponent implements OnInit {
     });
 
     this.form=new FormGroup({
-      old_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
       new_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
       reEnter_password:new FormControl('',[Validators.required,comparePassword('new_password')])
   });

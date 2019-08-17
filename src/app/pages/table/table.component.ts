@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FishDetailsService } from "../../services/fish_details.service";
 import { SyncRequestClient } from 'ts-sync-request/dist'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { checkEmpty } from 'app/shared/checkEmpty';
 declare function  enable_search_bar():any;
 @Component({
     selector: 'table-cmp',
@@ -11,26 +12,28 @@ declare function  enable_search_bar():any;
 })
 
 export class TableComponent implements OnInit{
-
-    @Input() filter:any;
     
     item_details:any;
     image:any;
     form: any;
     input_value:string=null;
- 
+    code:string;
+    htmlCode;any;
     constructor(private fish_details_service:FishDetailsService){}
 
     ngOnInit(){
+
          this.item_details=this.fish_details_service.getItemData();
-         this.form=new FormGroup({
-            name:new FormControl('',Validators.required),
-            category:new FormControl('',Validators.required),
-            age:new FormControl('',Validators.required),
-            size:new FormControl('',Validators.required),
-            price:new FormControl('',[Validators.required]),
-            code:new FormControl('',Validators.required),
-          });
+         
+        //  this.form=new FormGroup({
+        //     name:new FormControl('',[checkEmpty]),
+        //     category:new FormControl('',[checkEmpty]),
+        //     age:new FormControl('',[checkEmpty]),
+        //     size:new FormControl('',checkEmpty),
+        //     price:new FormControl('',checkEmpty),
+        //     code:new FormControl('',checkEmpty),
+        //   });
+         // this.form.get('name').valueChanges.subscribe(x=>this.form.get('name').updateValueAndValidity());
           enable_search_bar();
     }
 
@@ -53,16 +56,5 @@ export class TableComponent implements OnInit{
       });
 
     }
-
-    callValidations(){
-        alert('hello')
-        this.form=new FormGroup({
-            name:new FormControl('',Validators.required),
-            category:new FormControl('',Validators.required),
-            age:new FormControl('',Validators.required),
-            size:new FormControl('',Validators.required),
-            price:new FormControl('',[Validators.required]),
-            code:new FormControl('',Validators.required),
-          })
-    }
+ 
 }

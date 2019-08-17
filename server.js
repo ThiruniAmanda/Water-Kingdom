@@ -17,7 +17,7 @@ const io=require('socket.io')(server);
 var error=false;
 var router = express.Router()
 require('events').EventEmitter.prototype._maxListeners = 100;
-
+const maxSize=50;
 
 const storage=multer.diskStorage({destination:function(req,file,cb){
     if(file.mimetype=="image/png")
@@ -63,8 +63,20 @@ app.get('/home',function(req,res){
     res.send('Hello');
 });
 
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 //upload fish details
 app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
+  if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
+    res.send('Error 413->File is too large. Maximum size:40MB')
+  }
+  else{
  var name=req.body.name;
  var category=req.body.category;
  var size=req.body.size;
@@ -88,35 +100,42 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
     db.close();
 })
  res.redirect('/add-fish-details')
+}
 });
 
-
-
-//upload items
-app.post('/item_det',upload.single('item_imgInp'),urlencodedParser,function(req,res,next){
-
-  var item_name=req.body.item_name;
-  var quantity=req.body.quantity;
-  var description=req.body.item_description;
-  var price=req.body.price;
-  var code=req.body.code;
-  var file=req.file;
-  var img_path="assets/storage/items/"+file.filename;
-  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+//update-fish-details
+app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,next){
+  console.log('hello ')
+  console.log(req.files[0].path)
+  if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
+    res.send('Error 413->File is too large. Maximum size:40MB')
+  }
+  else{
+ var name=req.body.name;
+ var category=req.body.category;
+ var size=req.body.size;
+ var des=req.body.description;
+ var age=req.body.age;
+ var gender=req.body.gender;
+ var price=req.body.price;
+ var code=req.body.code;
+ var link=req.body.link;
+ console.log(req.files[0])
+ var image_path="assets/storage/fish/images/"+req.files[0].filename;
+ var video_path="assets/storage/fish/videos/"+req.files[1].filename;
+ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { item_name:item_name,quantity:quantity,description:description,price:price,code:code,path:img_path,file_name:file.filename};
-    dbo.collection("item_details").insertOne(myobj, function(err, res) {
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link};
+    dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
       if (err) throw err;
-      console.log("Document inserted");
+      console.log("1 document inserted");
     });
     db.close();
+})
+ res.redirect('/data')
+}
 });
-
- res.redirect('/add-item-details')
-
-});
-
 
 
 //upload user profile picture and data
@@ -222,8 +241,8 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
  db.close();
     
 });
-
 });
+
 
 
 app.get('/load_profile',urlencodedParser,function(req,res){
@@ -257,6 +276,36 @@ app.get('/search_data/:id',urlencodedParser,function(req,res){
   var findDocuments = function(db, callback) {
     var collection = db.collection('fish_details');
     collection.find({code:id}).toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    // assert.equal(null, err);
+    console.log("Connected correctly to server");
+    var dbo = db.db("aquakingdom");
+    findDocuments(dbo, function(docs) {
+      console.log('searched data /n');
+      console.log(docs);
+      res.json(docs);
+      db.close();
+    });
+   
+
+  });
+
+});
+
+
+app.get('/to_update_data/:code',urlencodedParser,function(req,res){
+  var code=req.params.code;
+
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('fish_details');
+    collection.find({code:code}).toArray(function(err, docs) {
       if(err) throw err;
       // assert.equal(err, null);
       callback(docs);

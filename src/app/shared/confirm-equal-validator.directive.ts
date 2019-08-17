@@ -8,9 +8,12 @@ export function comparePassword(controlNameToCompare:string):ValidatorFn{
             return null;
         }
 
+        console.log(c.value)
+
         const controlToCompare=c.root.get(controlNameToCompare);
         if(controlToCompare){
-            const subscription:Subscription=controlToCompare.valueChanges.subscribe(()=>{
+            const subscription:Subscription=controlToCompare.valueChanges.subscribe((x)=>{
+                // console.log(x)
                 c.updateValueAndValidity();
                 subscription.unsubscribe();
             });
@@ -18,6 +21,7 @@ export function comparePassword(controlNameToCompare:string):ValidatorFn{
         return controlToCompare && controlToCompare.value!==c.value?{'notequal':true}:null;
     }
 }
+
 
 @Directive({
     selector:'[appConfirmEqualValidator]',

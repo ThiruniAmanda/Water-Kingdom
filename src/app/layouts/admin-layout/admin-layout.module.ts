@@ -20,6 +20,7 @@ import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-det
 import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validator.directive';
 import { TableModule } from 'app/pages/table/table.module';
 import { SettingsComponent } from 'app/pages/settings/settings.component';
+import { UpdateDataComponent } from 'app/pages/update-data/update-data.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { SettingsComponent } from 'app/pages/settings/settings.component';
     AddDetailsComponent,
     // MapsComponent,
     NotificationsComponent,
-    SettingsComponent
+    SettingsComponent,
+    UpdateDataComponent
    
   ]
 })

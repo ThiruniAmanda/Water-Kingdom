@@ -11,6 +11,7 @@ import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 import { AddDetailsComponent } from 'app/pages/add-details/add-details.component';
 import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-details.component';
 import { SettingsComponent } from 'app/pages/settings/settings.component';
+import { UpdateDataComponent } from 'app/pages/update-data/update-data.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -18,7 +19,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'data',          component: TableComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'add-fish-details',    component: AddDetailsComponent },
-    {path:'settings' , component:SettingsComponent}
+    { path:'settings' , component:SettingsComponent},
+    { path:'update/:code' , component:UpdateDataComponent}
     // { path: 'add-item-details',    component: AddItemDetailsComponent },
     //  { path: 'icons',          component: IconsComponent },
     // { path: 'maps',           component: MapsComponent },

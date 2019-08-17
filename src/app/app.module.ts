@@ -26,13 +26,13 @@ import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-abou
 import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
 import { TableModule } from './pages/table/table.module';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { UpdateDataComponent } from './pages/update-data/update-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-  
   ],
   imports: [
     BrowserAnimationsModule,

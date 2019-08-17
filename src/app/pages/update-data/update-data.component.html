@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="form" #form3 action="update_fish_details" id="form" method="POST" name="form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name"><b>Name </b></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Fish Name" formControlName="name"
+                                 [ngClass]="{'is-invalid':form.get('name').invalid,'is-valid':form.get('name').valid}">
+                                <div class='invalid-feedback'>
+                                    <div>Name is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category"><b>Category</b></label>
+                                <input type="text" class="form-control" id="category" name="category" placeholder="Koi" formControlName="category" value="{{data[0].category}}"
+                                 [ngClass]="{'is-invalid':form.get('category').invalid,'is-valid':form.get('category').valid}" >
+                                <div class='invalid-feedback'>
+                                   <div>Category is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="age"><b>Age</b></label>
+                                <input type="number" class="form-control" id="age" name="age" placeholder="1" formControlName="age" value="{{data[0].age}}"
+                                [ngClass]="{'is-invalid':form.get('age').invalid ,'is-valid':form.get('age').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Age is Required</div>
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label for="size"><b>Size</b></label>
+                                <input type="number" class="form-control" id="size" step="0.1" name="size" placeholder="34.0" formControlName="size" value="{{data[0].size}}"
+                                [ngClass]="{'is-invalid':form.get('size').invalid ,'is-valid':form.get('size').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Size is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender"><b>Gender</b></label><br>
+                                <select id="gender" name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="price"><b>Price</b></label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="$100" formControlName="price" value="{{data[0].price}}"
+                                [ngClass]="{'is-invalid':form.get('price').invalid,'is-valid':form.get('price').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Price is Required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code"><b>Code</b></label>
+                                <input type="text" class="form-control" id="code" name="code" placeholder="1001B" formControlName="code" value="{{data[0].code}}"
+                                [ngClass]="{'is-invalid':form.get('code').invalid,'is-valid':form.get('code').valid}">
+                                <div class='invalid-feedback'>
+                                   <div>Code is Required</div>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label for="description"><b>Description</b></label>
+                                <textarea class="form-control" id="description" rows="4" name="description" value="{{data[0].description}}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="link"><b>Enter the Youtube Link</b></label>
+                                <input type="text" class="form-control" id="link" name="link" placeholder="www.youtube.com/embed" value="{{data[0].link}}">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*" value="abc">   
+                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*" value="abc">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div style="width:60px;height:60px;outline-color: black;outline-style:solid" name="imageUploaded" id="imageUploaded">
+                                            <div id="container" class="container1">
+                                                <img src="{{data[0].img_path}}" name="image" id="image" style="width:60px;height:60px">
+                                                <button class="btn1" id="del" ><i class="material-icons">delete_forever</i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div name="videoUploaded" id="videoUploaded" class="container1" style="outline-color: black;outline-style:solid">
+                                            <video src="{{data[0].video_path}}" id="myVideo" controls  height="200px" width="100px" ></video>
+                                            <button class="btn1" id="del_video" ><i class="material-icons">delete_forever</i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form3.submit()">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <div> 
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
