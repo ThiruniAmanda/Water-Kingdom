@@ -13,13 +13,20 @@ import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
 import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ItemDetailsService } from 'app/services/item_details.service';
+import { CustomerNavbarComponent } from 'app/shared/customer-navbar/customer-navbar.component';
+import { CustomerNavbarModule } from 'app/shared/customer-navbar/customer-navbar.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(CustomerLayoutRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    CustomerNavbarModule,
   ],
   declarations: [
    CustomerHomeComponent,
@@ -31,7 +38,12 @@ import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.componen
    MedicineComponent,
    CustomerLocalkoiComponent,
    FishdetailsComponent,
+   CustomerAboutusComponent,
+   CustomerContactComponent,
 
-  ]
+  
+   CustomerHomeComponent
+  ],
+  providers: [ItemDetailsService],
 })
 export class CustomerLayoutModule { }

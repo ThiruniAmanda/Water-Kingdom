@@ -14,7 +14,15 @@ import { AppRoutes } from './app.routing';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TestingComponent } from './testing/testing.component';
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
+import { HttpClient } from 'selenium-webdriver/http';
+import {HttpClientModule} from '@angular/common/http'
+import { ItemDetailsService } from './services/item_details.service';
+import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
+import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
+import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
 
 
 @NgModule({
@@ -22,12 +30,12 @@ import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.m
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    
-    
-    
+    ConfirmEqualValidatorDirective,
+     
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),
@@ -36,7 +44,9 @@ import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.m
     CustomerNavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
+    FixedPluginModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

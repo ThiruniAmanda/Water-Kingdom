@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -15,13 +15,17 @@ import { NotificationsComponent }   from '../../pages/notifications/notification
 import { UpgradeComponent }         from '../../pages/upgrade/upgrade.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddDetailsComponent } from 'app/pages/add-details/add-details.component';
+import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-details.component';
+import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validator.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
@@ -29,9 +33,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TableComponent,
     UpgradeComponent,
     TypographyComponent,
-    IconsComponent,
-    MapsComponent,
+    AddItemDetailsComponent,
+    // IconsComponent,
+    AddDetailsComponent,
+    // MapsComponent,
     NotificationsComponent,
+   
   ]
 })
 
