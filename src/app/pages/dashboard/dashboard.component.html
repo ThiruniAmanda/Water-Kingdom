@@ -10,8 +10,10 @@
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Capacity</p>
-              <p class="card-title">150GB
+              <p class="card-category">Memory Used</p>
+              <p class="card-title" style="margin-left:-10px" *ngIf="space_data.byte>1024 && space_data.byte<1024*1024" >{{space_data.kb}}KB
+              <p class="card-title" style="margin-left:-10px" *ngIf="space_data.byte>=1024*1024 && space_data.byte<1024*1024*1024" >{{space_data.mb}}MB
+              <p class="card-title" style="margin-left:-10px" *ngIf="space_data.byte>=1024*1024*1024" >{{space_data.gb}}GB
                 <p>
             </div>
           </div>
@@ -20,7 +22,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Update Now
+          <a href="#" title="update now" id="update" (click)="update()"><i class="fa fa-refresh"></i></a>Update Now
         </div>
       </div>
     </div>

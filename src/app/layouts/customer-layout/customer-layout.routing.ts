@@ -4,5 +4,5 @@ import { CustomerHomeComponent } from 'app/pages/customer-home/customer-home.com
 
 export const CustomerLayoutRoutes: Routes = [
     { path: 'home', component: CustomerHomeComponent }
-   
+
 ];

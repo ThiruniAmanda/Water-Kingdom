@@ -166,8 +166,12 @@ function disable_search_bar(){
     $('#nav-search-item').attr('disabled','disabled');
 }
 
+$(document).on('click','#delete_item',function(e){
+    e.preventDefault();
+})
 
-
-
+$(document).on('click','#update',function(e){
+    e.preventDefault()
+})
 
 

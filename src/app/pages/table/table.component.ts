@@ -24,26 +24,19 @@ export class TableComponent implements OnInit{
     ngOnInit(){
 
          this.item_details=this.fish_details_service.getItemData();
-         
-        //  this.form=new FormGroup({
-        //     name:new FormControl('',[checkEmpty]),
-        //     category:new FormControl('',[checkEmpty]),
-        //     age:new FormControl('',[checkEmpty]),
-        //     size:new FormControl('',checkEmpty),
-        //     price:new FormControl('',checkEmpty),
-        //     code:new FormControl('',checkEmpty),
-        //   });
-         // this.form.get('name').valueChanges.subscribe(x=>this.form.get('name').updateValueAndValidity());
+         console.log(this.item_details)
           enable_search_bar();
     }
 
-    deleteItem(id: number){
-        console.log(id+"id")
+    deleteItem(id:string){
+        console.log(id+"id");
+        // alert(id)
         this.fish_details_service.deleteItemData(id).subscribe((error)=>{
+
             this.item_details=this.fish_details_service.getItemData();
-            console.log(error)
         })
     }
+
 
     display(){
     //   alert((<HTMLInputElement>document.getElementById('fish_id')).value)
