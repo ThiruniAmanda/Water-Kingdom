@@ -19,14 +19,8 @@ import { TestingComponent } from './testing/testing.component';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { HttpClient } from 'selenium-webdriver/http';
 import {HttpClientModule} from '@angular/common/http'
-import { FishDetailsService } from "./services/fish_details.service";
-import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-import { CustomerOurkoiComponent } from './pages/customer-ourkoi/customer-ourkoi.component';
-import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
-import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
-import { TableModule } from './pages/table/table.module';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { UpdateDataComponent } from './pages/update-data/update-data.component';
+import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
+
 
 @NgModule({
   declarations: [
