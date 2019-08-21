@@ -19,28 +19,14 @@ import { TestingComponent } from './testing/testing.component';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { HttpClient } from 'selenium-webdriver/http';
 import {HttpClientModule} from '@angular/common/http'
-import { ItemDetailsService } from './services/item_details.service';
-import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
-import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
-import { FoodComponent } from './pages/food/food.component';
-import { FiltersComponent } from './pages/filters/filters.component';
-import { MedicineComponent } from './pages/medicine/medicine.component';
-import { CustomerLocalkoiComponent } from './pages/customer-localkoi/customer-localkoi.component';
-import { CustomerImportedkoiComponent } from './pages/customer-importedkoi/customer-importedkoi.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    ConfirmEqualValidatorDirective,
-    CustomerNavbarComponent,
-    CustomerOurkoiComponent,
-    CustomerAboutusComponent,
-    CustomerContactComponent,
-    
   ],
   imports: [
     BrowserAnimationsModule,
@@ -55,7 +41,9 @@ import { CustomerImportedkoiComponent } from './pages/customer-importedkoi/custo
     FooterModule,
     FixedPluginModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

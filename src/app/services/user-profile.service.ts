@@ -10,7 +10,8 @@ export class UserProfileService {
 
   constructor(private http:HttpClient) { }
 
-  loadProfilePic(){
-    return this.http.get(`${this._url}/load_profile`);
-  }
+  loadUserProfileData(){
+    return this.http.get(`${this._url}/user_profile_details`)
+}
+  
 }

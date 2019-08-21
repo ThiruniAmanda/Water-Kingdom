@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { comparePassword } from 'app/shared/confirm-equal-validator.directive';
 import { UserProfileService } from 'app/services/user-profile.service';
-
-
+declare function  disable_search_bar():any;
 
 @Component({
     selector: 'user-cmp',
@@ -14,34 +13,29 @@ import { UserProfileService } from 'app/services/user-profile.service';
 
 export class UserComponent implements OnInit{
 
-    form:FormGroup;
-    form2:FormGroup;
-    socket: any;
+    form:any;
     error_message:any=false;
     profile_data:any;
-
     constructor(private profile_image:UserProfileService){}
 
     ngOnInit(){
+       
         this.form=new FormGroup({
-            user_name:new FormControl('',Validators.required),
-            email:new FormControl('',[Validators.required,Validators.email]),
-            last_name:new FormControl('',Validators.required),
-            first_name:new FormControl('',Validators.required),
-            address:new FormControl('',Validators.required),
-            // password:new FormControl('',[Validators.required,Validators.minLength(6)]),
+            user_names:new FormControl('',Validators.required),
+            emails:new FormControl('',[Validators.required,Validators.email]),
+            last_names:new FormControl('',Validators.required),
+            first_names:new FormControl('',Validators.required),
+            address1:new FormControl('',Validators.required),
+          
           });
 
-        this.form2=new FormGroup({
-            old_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
-            new_password:new FormControl('',[Validators.required,Validators.minLength(6)]),
-            reEnter_password:new FormControl('',[Validators.required,comparePassword('new_password')])
-        });
-
-        this.profile_image.loadProfilePic().subscribe((items)=>{
-            this.profile_data=items;
-            console.log(items)
-        });
+          disable_search_bar();
+        
+        this.profile_image.loadUserProfileData().subscribe((data)=>{
+            this.profile_data=data;
+            console.log(data);
+            console.log(this.profile_data.img_path)
+        })
 
     }
 }

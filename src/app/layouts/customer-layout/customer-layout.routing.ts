@@ -19,6 +19,4 @@ export const CustomerLayoutRoutes: Routes = [
     { path: 'filters', component: FiltersComponent },
     { path: 'medicine', component: MedicineComponent },
     { path: 'localkoi', component: CustomerLocalkoiComponent }
-
-   
 ];

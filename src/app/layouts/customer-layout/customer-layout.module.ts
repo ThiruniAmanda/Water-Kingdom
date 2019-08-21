@@ -13,7 +13,7 @@ import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ItemDetailsService } from 'app/services/item_details.service';
+import { FishDetailsService } from "app/services/fish_details.service";
 import { UserProfileService } from 'app/services/user-profile.service';
 
 @NgModule({
@@ -37,6 +37,6 @@ import { UserProfileService } from 'app/services/user-profile.service';
   ]
    CustomerHomeComponent
   ],
-  providers: [ItemDetailsService,UserProfileService],
+  providers: [FishDetailsService,UserProfileService],
 })
 export class CustomerLayoutModule { }
