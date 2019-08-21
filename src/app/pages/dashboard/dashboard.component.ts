@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { MemoryUsageService } from 'app/services/memory-usage.service';
 
 
 @Component({
@@ -9,14 +10,27 @@ import Chart from 'chart.js';
 })
 
 export class DashboardComponent implements OnInit{
-
+  space_data:any;
   public canvas : any;
   public ctx;
   public chartColor;
   public chartEmail;
   public chartHours;
+  constructor(private memory_usage:MemoryUsageService){}
+
+  update(){
+    this.memory_usage.loadMemoryUsed().subscribe((data)=>{
+      this.space_data=data;
+      console.log(data)
+    })
+  }
 
     ngOnInit(){
+      this.memory_usage.loadMemoryUsed().subscribe((data)=>{
+        this.space_data=data;
+        console.log(data)
+  
+      })
       this.chartColor = "#FFFFFF";
 
       this.canvas = document.getElementById("chartHours");

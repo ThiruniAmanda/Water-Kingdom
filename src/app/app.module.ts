@@ -15,14 +15,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { TestingComponent } from './testing/testing.component';
-import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
-import { HttpClient } from 'selenium-webdriver/http';
-import {HttpClientModule} from '@angular/common/http'
 import { ItemDetailsService } from './services/item_details.service';
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-import { CustomerAboutusComponent } from './pages/customer-aboutus/customer-aboutus.component';
-import { CustomerContactComponent } from './pages/customer-contact/customer-contact.component';
+import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 
 
 @NgModule({
@@ -30,8 +25,6 @@ import { CustomerContactComponent } from './pages/customer-contact/customer-cont
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    ConfirmEqualValidatorDirective,
-     
   ],
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +39,9 @@ import { CustomerContactComponent } from './pages/customer-contact/customer-cont
     FooterModule,
     FixedPluginModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
