@@ -46,12 +46,152 @@ app.engine('html',require('ejs').renderFile);
 app.use(cors())
 
 
+
+
+
 //upload fish details
 app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
-  if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
+
+if(req.files[0]==null && req.files[1]==null){
+ 
+    var name=req.body.name;
+    var category=req.body.category;
+    var size=req.body.size;
+    var des=req.body.description;
+    var age=req.body.age;
+    var gender=req.body.gender;
+    var price=req.body.price;
+    var code=req.body.code;
+    var link=req.body.link;
+    
+    var findDocuments = function(db, callback) {
+     var collection = db.collection('space_usage');
+     collection.find().toArray(function(err, docs) {
+       if(err) throw err;
+       callback(docs);
+     });
+   }
+   
+    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+       if (err) throw err;
+       var dbo = db.db("aquakingdom");
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null};
+       dbo.collection("fish_details").insertOne(myobj, function(err, res) {
+         if (err) throw err;
+         console.log("1 document inserted");
+       });
+       
+       var size_used=0;
+       findDocuments(dbo, function(docs) {
+         console.log(docs);
+         size_used+=docs[0].space;
+         console.log('size_used'+size_used)
+       
+         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+           if (err) throw err;
+           console.log("size updated");
+           db.close();
+         });
+       });
+     });
+      res.redirect('/add-fish-details');
+     }
+   
+
+ else if(req.files[0]==null){
+ var name=req.body.name;
+ var category=req.body.category;
+ var size=req.body.size;
+ var des=req.body.description;
+ var age=req.body.age;
+ var gender=req.body.gender;
+ var price=req.body.price;
+ var code=req.body.code;
+ var link=req.body.link;
+ var video_path="storage/fish/videos/"+req.files[1].filename;
+ var findDocuments = function(db, callback) {
+  var collection = db.collection('space_usage');
+  collection.find().toArray(function(err, docs) {
+    if(err) throw err;
+    callback(docs);
+  });
+}
+
+ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+    if (err) throw err;
+    var dbo = db.db("aquakingdom");
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size};
+    dbo.collection("fish_details").insertOne(myobj, function(err, res) {
+      if (err) throw err;
+      console.log("1 document inserted");
+    });
+    
+    var size_used=req.files[1].size
+    findDocuments(dbo, function(docs) {
+      console.log(docs);
+      size_used+=docs[0].space;
+      console.log('size_used'+size_used)
+    
+      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+        if (err) throw err;
+        console.log("size updated");
+        db.close();
+      });
+    });
+  });
+   res.redirect('/add-fish-details');
+  }
+
+  else if(req.files[1]==null){
+    var name=req.body.name;
+    var category=req.body.category;
+    var size=req.body.size;
+    var des=req.body.description;
+    var age=req.body.age;
+    var gender=req.body.gender;
+    var price=req.body.price;
+    var code=req.body.code;
+    var link=req.body.link;
+    var image_path="storage/fish/images/"+req.files[0].filename;
+    var findDocuments = function(db, callback) {
+     var collection = db.collection('space_usage');
+     collection.find().toArray(function(err, docs) {
+       if(err) throw err;
+       callback(docs);
+     });
+   }
+   
+    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+       if (err) throw err;
+       var dbo = db.db("aquakingdom");
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:null};
+       dbo.collection("fish_details").insertOne(myobj, function(err, res) {
+         if (err) throw err;
+         console.log("1 document inserted");
+       });
+       
+       var size_used=req.files[0].size
+       findDocuments(dbo, function(docs) {
+         console.log(docs);
+         size_used+=docs[0].space;
+         console.log('size_used'+size_used)
+       
+         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+           if (err) throw err;
+           console.log("size updated");
+           db.close();
+         });
+       });
+   });
+   res.redirect('/add-fish-details');
+  }
+
+  else if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
     res.send('Error 413->File is too large. Maximum size:40MB')
   }
-  else{
+  
+else{
+console.log(req.files[0].filename)
  var name=req.body.name;
  var category=req.body.category;
  var size=req.body.size;
@@ -63,7 +203,7 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
  var link=req.body.link;
  var image_path="storage/fish/images/"+req.files[0].filename;
  var video_path="storage/fish/videos/"+req.files[1].filename;
-
+ 
  var findDocuments = function(db, callback) {
   var collection = db.collection('space_usage');
   collection.find().toArray(function(err, docs) {
@@ -102,16 +242,14 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
 
 
 
+
+
+
+
 //update-fish-details
 app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,next){
- 
-  if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
-    res.send('Error 413->File is too large. Maximum size:40MB')
-  }
 
-  else{
-
-    var findDocuments = function(db, callback) {
+  var findDocuments = function(db, callback) {
     var collection = db.collection('fish_details');
     collection.find({code:req.params.id}).toArray(function(err, docs) {
       if(err) throw err;
@@ -128,6 +266,170 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
       callback(doc);
     });
   };
+
+  if(req.files[0]==null && req.files[1]==null){
+    var name=req.body.name;
+    var category=req.body.category;
+    var size=req.body.size;
+    var des=req.body.description;
+    var age=req.body.age;
+    var gender=req.body.gender;
+    var price=req.body.price;
+    var code=req.body.code;
+    var link=req.body.link;
+    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+       if (err) throw err;
+       var dbo = db.db("aquakingdom");
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null};
+       dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+         if (err) throw err;
+         console.log("1 document inserted");
+       });
+   
+       var size_used=0;
+   
+         findDocuments(dbo, function(docs) {
+         var path_to_delete;
+         findStorage(dbo,function(doc){
+           console.log(size_used)
+           console.log(doc[0].space+'space')
+           dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
+             if (err) throw err;
+             console.log("size updated");
+             db.close();
+           });
+         });
+       
+       if(req.files[1].originalname==docs[0].video_file){
+         path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+         file_system.unlink(path_to_delete,(err)=>{
+           if(err) throw err
+           console.log('deleted files')
+         });
+       }
+        });
+     });
+     res.redirect('/data')
+   }
+
+  else if(req.files[0]==null){
+   var name=req.body.name;
+   var category=req.body.category;
+   var size=req.body.size;
+   var des=req.body.description;
+   var age=req.body.age;
+   var gender=req.body.gender;
+   var price=req.body.price;
+   var code=req.body.code;
+   var link=req.body.link;
+   var video_path="storage/fish/videos/"+req.files[1].filename;
+   mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+      if (err) throw err;
+      var dbo = db.db("aquakingdom");
+      var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size};
+      dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+      });
+  
+      var size_used=(req.files[1].size);
+  
+        findDocuments(dbo, function(docs) {
+        var path_to_delete;
+        findStorage(dbo,function(doc){
+          console.log(size_used)
+          console.log(doc[0].space+'space')
+          dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
+            if (err) throw err;
+            console.log("size updated");
+            db.close();
+          });
+        });
+      
+      if(req.files[1].originalname==docs[0].video_file){
+        path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+        file_system.unlink(path_to_delete,(err)=>{
+          if(err) throw err
+          console.log('deleted files')
+        });
+      }
+
+       });
+    });
+
+    res.redirect('/data')
+
+  }
+
+  else if(req.files[1]==null){
+    var name=req.body.name;
+    var category=req.body.category;
+    var size=req.body.size;
+    var des=req.body.description;
+    var age=req.body.age;
+    var gender=req.body.gender;
+    var price=req.body.price;
+    var code=req.body.code;
+    var link=req.body.link;
+    var img_path="storage/fish/images/"+req.files[0].filename;
+    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+       if (err) throw err;
+       var dbo = db.db("aquakingdom");
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:img_path,video_path:null,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:req.files[1].size};
+       dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+         if (err) throw err;
+         console.log("1 document inserted");
+       });
+   
+       var size_used=(req.files[0].size);
+   
+         findDocuments(dbo, function(docs) {
+         var path_to_delete;
+         findStorage(dbo,function(doc){
+           console.log(size_used)
+           console.log(doc[0].space+'space')
+           dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
+             if (err) throw err;
+             console.log("size updated");
+             db.close();
+           });
+         });
+       
+       if(req.files[0].originalname==docs[0].img_file){
+         path_to_delete="src/storage/fish/images/"+docs[0].img_file;
+         file_system.unlink(path_to_delete,(err)=>{
+           if(err) throw err
+           console.log('deleted files')
+         });
+       }
+ 
+        });
+     });
+     res.redirect('/data')
+   }
+ 
+  else if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
+    res.send('Error 413->File is too large. Maximum size:40MB')
+  }
+
+  else{
+  //   var findDocuments = function(db, callback) {
+  //   var collection = db.collection('fish_details');
+  //   collection.find({code:req.params.id}).toArray(function(err, docs) {
+  //     if(err) throw err;
+  //     // assert.equal(err, null);
+  //     callback(docs);
+  //   });
+  // };
+  
+  //   var findStorage = function(db, callback) {
+  //   var collection = db.collection('space_usage');
+  //   collection.find({name:'Nilaksha Deemantha'}).toArray(function(err, doc) {
+  //     if(err) throw err;
+  //     // assert.equal(err, null);
+  //     callback(doc);
+  //   });
+  // };
 
  var name=req.body.name;
  var category=req.body.category;
@@ -198,15 +500,64 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
     }
 
      });
-     
-});
+  });
+ res.redirect('/data')
 }
-res.redirect('data')
+
 });
+
+
+
 
 
 //upload user profile picture and data
 app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,function(req,res,next){
+
+  if(req.file==null){
+  var user_name=req.body.user_name;
+  var email=req.body.email;
+  var f_name=req.body.first_name;
+  var l_name=req.body.last_name;
+  var address=req.body.address;
+  var city=req.body.city;
+  var country=req.body.country;
+  var about=req.body.about_me;
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('space_usage');
+    collection.find({name:'Nilaksha Deemantha'}).toArray(function(err, docs) {
+      if(err) throw err;
+      callback(docs);
+    });
+  };
+  var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:null,file_name:null,file_originalname:null,img_size:null};
+ 
+  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+    if (err) throw err;
+    var dbo = db.db("aquakingdom");
+    dbo.collection("user_details").updatetOne({first_name:'Nilaksha'},{$set:data_obj}, function(err, res) {
+      if (err) throw err;
+      console.log("Document updated");
+    });
+    var size_used=0;
+
+    findDocuments(dbo, function(docs) {
+      size_used+=docs[0].space;
+      console.log(size_used)
+      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+        if (err) throw err;
+        console.log("size updated");
+        db.close();
+      });
+    });
+  });
+ res.redirect('/user')
+  }
+
+  else if(req.file.size>maxSize*1024*1024){
+    res.send('Error 413->File is too large. Maximum size:40MB')
+  }
+  
+  else{
   var user_name=req.body.user_name;
   var email=req.body.email;
   var f_name=req.body.first_name;
@@ -224,7 +575,7 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
       callback(docs);
     });
   };
- // console.log(img_path)
+  console.log(img_path)
   var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:img_path,file_name:file.filename,file_originalname:file.originalname,img_size:file.size};
  
   mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
@@ -246,9 +597,13 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
       });
     });
 });
-
  res.redirect('/user')
+}
 });
+
+
+
+
 
 
 //fetch_data
@@ -276,6 +631,10 @@ app.get('/fetch_details',urlencodedParser,function(req,res){
   });
  
 });
+
+
+
+
 
 
 //delete data
@@ -333,12 +692,9 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
 
  });
 
- var space;
-
  findStorage(dbo,function(doc){
   console.log(size_updated)
   console.log(doc[0].space+'space');
-  space=doc[0].space;
   dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_updated-doc[0].space}}, function(err, res1) {
     if (err) throw err;
     console.log("size updated");
@@ -353,23 +709,9 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
  });   
 
 });
-
-res.send('Done')
-
 });
 
-app.get('delete_datas/:id',urlencodedParser,function(req,res){
-  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
-    db.collection('fish_details').deleteOne({code:req.params.id},
-      function(err, results) {
-         console.log('product deleted');
-         if(err) throw err;
-         callback(results);
-      }
-   );
-  });
-  res.json({done:'done'})
-})
+
 
 
 
@@ -400,6 +742,10 @@ app.get('/search_data/:id',urlencodedParser,function(req,res){
   });
 
 });
+
+
+
+
 
 
 //load update_fish_data
@@ -433,6 +779,11 @@ app.get('/to_update_data/:code',urlencodedParser,function(req,res){
 });
 
 
+
+
+
+
+
 //change_visibility_to_false
 app.get('/visibility_change_false/:field',urlencodedParser,function(req,res){
   
@@ -455,6 +806,11 @@ app.get('/visibility_change_false/:field',urlencodedParser,function(req,res){
 });
 
 
+
+
+
+
+
 //change_visibility_to_true
 app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
   mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
@@ -473,6 +829,10 @@ app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
     db.close();
 });
 });
+
+
+
+
 
 
 //load_visibility_updated
@@ -497,6 +857,12 @@ app.get('/load_visibility',urlencodedParser,function(req,res){
     });
   });
 });
+
+
+
+
+
+
 
 //load user-details
 app.get('/user_profile_details',urlencodedParser,function(req,res){
@@ -532,6 +898,10 @@ app.get('/user_profile_details',urlencodedParser,function(req,res){
 });
 
 
+
+
+
+
 //load memory usage
 app.get('/memory_used',urlencodedParser,function(req,res){
   
@@ -565,6 +935,10 @@ app.get('/memory_used',urlencodedParser,function(req,res){
   });
 
 });
+
+
+
+
 
 
 
