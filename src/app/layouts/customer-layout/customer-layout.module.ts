@@ -12,7 +12,9 @@ import { FoodComponent } from 'app/pages/food/food.component';
 import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
+import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
 import { HttpClientModule } from '@angular/common/http';
+
 import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
 
 @NgModule({
@@ -21,7 +23,8 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
     RouterModule.forChild(CustomerLayoutRoutes),
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomerNavbarModule,
   ],
   declarations: [
    CustomerHomeComponent,
@@ -33,6 +36,10 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
    MedicineComponent,
    CustomerLocalkoiComponent,
    CustomerLocalKoiViewComponent
+   FishdetailsComponent,
+   CustomerAboutusComponent,
+   CustomerContactComponent,
+   CustomerHomeComponent
   ],
   providers: [],
 })
