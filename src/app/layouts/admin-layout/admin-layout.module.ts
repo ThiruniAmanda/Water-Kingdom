@@ -18,6 +18,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddDetailsComponent } from 'app/pages/add-details/add-details.component';
 import { AddItemDetailsComponent } from 'app/pages/add-item-details/add-item-details.component';
 import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validator.directive';
+import { TableModule } from 'app/pages/table/table.module';
+import { SettingsComponent } from 'app/pages/settings/settings.component';
+import { UpdateDataComponent } from 'app/pages/update-data/update-data.component';
 
 @NgModule({
   imports: [
@@ -25,7 +28,7 @@ import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validat
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     DashboardComponent,
@@ -33,11 +36,13 @@ import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validat
     TableComponent,
     UpgradeComponent,
     TypographyComponent,
-    AddItemDetailsComponent,
+    // AddItemDetailsComponent,
     // IconsComponent,
     AddDetailsComponent,
     // MapsComponent,
     NotificationsComponent,
+    SettingsComponent,
+    UpdateDataComponent
    
   ]
 })

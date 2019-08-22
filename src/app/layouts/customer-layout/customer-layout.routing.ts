@@ -19,6 +19,6 @@ export const CustomerLayoutRoutes: Routes = [
     { path: 'filters', component: FiltersComponent },
     { path: 'medicine', component: MedicineComponent },
     { path: 'localkoi', component: CustomerLocalkoiComponent },
-    { path: 'fishdetails', component: FishdetailsComponent }
-   
+    { path: 'fishdetails', component: FishdetailsComponent },
+    { path: 'localkoi', component: CustomerLocalkoiComponent }
 ];

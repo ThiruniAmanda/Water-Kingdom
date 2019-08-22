@@ -26,9 +26,9 @@ header {
    }
 
    .features img {
-    // -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    // -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     //margin-bottom: 30px;
     //margin-right: 10px;
     
@@ -36,7 +36,4 @@ header {
    .row{
        margin-bottom: 60px;
    }
-   p{
-    
   
-  }
