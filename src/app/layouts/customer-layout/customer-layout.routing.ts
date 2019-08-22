@@ -7,8 +7,10 @@ import { FoodComponent } from 'app/pages/food/food.component';
 import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
+
 import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
 
+import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
 
 
 export const CustomerLayoutRoutes: Routes = [
@@ -20,5 +22,8 @@ export const CustomerLayoutRoutes: Routes = [
     { path: 'filters', component: FiltersComponent },
     { path: 'medicine', component: MedicineComponent },
     { path: 'localkoi', component: CustomerLocalkoiComponent },
-    { path:'localkoi-view/:code', component:CustomerLocalKoiViewComponent}
+    { path:'localkoi-view/:code', component:CustomerLocalKoiViewComponent},
+    { path: 'fishdetails', component: FishdetailsComponent },
+    { path: 'localkoi', component: CustomerLocalkoiComponent }
+
 ];
