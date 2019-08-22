@@ -15,12 +15,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="category"><b>Category</b></label>
+                                <label for="gender"><b>Category</b></label><br>
+                                <select id="gender" name="category">
+                                    <option value="local-koi">Local-Koi</option>
+                                    <option value="imported-koi">Imported-Koi</option>
+                                </select>
+                                <!-- <label for="category"><b>Category</b></label>
                                 <input type="text" class="form-control" id="category" name="category" placeholder="Koi" formControlName="category"
                                  [ngClass]="{'is-invalid':form.get('category').invalid && form.get('category').touched,'is-valid':form.get('category').touched && form.get('category').valid}" >
                                 <div class='invalid-feedback'>
                                    <div>Category is Required</div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="form-group">
                                 <label for="age"><b>Age</b></label>

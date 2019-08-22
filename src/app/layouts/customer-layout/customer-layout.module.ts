@@ -15,6 +15,8 @@ import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-
 import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,11 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
    FiltersComponent,
    MedicineComponent,
    CustomerLocalkoiComponent,
+   CustomerLocalKoiViewComponent
    FishdetailsComponent,
    CustomerAboutusComponent,
    CustomerContactComponent,
-
-  
    CustomerHomeComponent
   ],
   providers: [],
