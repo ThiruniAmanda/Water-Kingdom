@@ -510,6 +510,8 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
 
 
 
+
+
 //upload user profile picture and data
 app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,function(req,res,next){
 
@@ -606,6 +608,8 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
 
 
 
+
+
 //fetch_data
 app.get('/fetch_details',urlencodedParser,function(req,res){
 
@@ -631,6 +635,7 @@ app.get('/fetch_details',urlencodedParser,function(req,res){
   });
  
 });
+
 
 
 
@@ -678,6 +683,7 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
   var path_to_delete;
   console.log(docs[0])
   size_updated=docs[0].img_size+docs[0].video_size;
+  if(docs[0].img_file!=null){
   for(var i=0;i<2;i++){
     if(i==0)
       path_to_delete="src/storage/fish/images/"+docs[0].img_file;
@@ -689,6 +695,7 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
       console.log('deleted files')
     });
   }
+}
 
  });
 
@@ -699,6 +706,7 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
     if (err) throw err;
     console.log("size updated");
     db.close();
+    res.send({done:'done'})
   });
   console.log('Hello')
 });
@@ -707,7 +715,6 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
    console.log(results+'res')
 
  });   
-
 });
 });
 
@@ -941,6 +948,67 @@ app.get('/memory_used',urlencodedParser,function(req,res){
 
 
 
+//fetch_local_koi_details
+app.get('/local_koi_details/:code',urlencodedParser,function(req,res){
+  var code=req.params.code;
+  var koiDetails= function(db, callback) {
+    var collection = db.collection('fish_details');
+    collection.find({code:code}).toArray(function(err, docs) {
+      if(err) throw err;
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+
+    koiDetails(dbo, function(docs) {
+      console.log(docs);
+      res.json(docs);
+    });
+
+  });
+});
+
+
+
+
+
+
+
+
+//load-all-localKoi-details
+app.get('/all_localKoi_details',urlencodedParser,function(req,res){
+  var code=req.params.code;
+  var koiDetails= function(db, callback) {
+    var collection = db.collection('fish_details');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+
+    koiDetails(dbo, function(docs) {
+      console.log(docs);
+      res.json(docs);
+    });
+
+  });
+});
+
+
+
+
+
+
+
+
+
 
 //reset passwords
 app.post('/password_reset',urlencodedParser,function(req,res){
@@ -980,8 +1048,6 @@ app.post('/password_reset',urlencodedParser,function(req,res){
 
     db.close();
 });
-
- 
 });
 
 

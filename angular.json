@@ -27,7 +27,8 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "src/scripts/admin.js"
+              "src/scripts/admin.js",
+              "src/scripts/customer-navbar.js"
             ]
           },
           "configurations": {
@@ -81,7 +82,8 @@
               "node_modules/moment/moment.js",
               "node_modules/chartist/dist/chartist.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
-              "src/scripts/admin.js"
+              "src/scripts/admin.js",
+              "src/scripts/customer-navbar.js"
             ],
             "styles": [
               "src/styles.css",

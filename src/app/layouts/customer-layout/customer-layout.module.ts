@@ -13,6 +13,7 @@ import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
    FiltersComponent,
    MedicineComponent,
    CustomerLocalkoiComponent,
-   CustomerHomeComponent
+   CustomerLocalKoiViewComponent
   ],
   providers: [],
 })
