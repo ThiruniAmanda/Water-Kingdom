@@ -50,5 +50,9 @@ export class TableComponent implements OnInit{
       });
 
     }
+
+    mark_availability(code:string){
+        this.fish_details_service.mark_availability_sold(code)
+    }
  
 }

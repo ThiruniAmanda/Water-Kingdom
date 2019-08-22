@@ -44,7 +44,11 @@ export class NavbarComponent implements OnInit{
               return this.listTitles[item].title;
           }
       }
-      return 'Dashboard';
+
+      if(titlee=='/settings')
+      return 'Settings';
+      else 
+      return 'Update'
     }
     sidebarToggle() {
         if (this.sidebarVisible === false) {

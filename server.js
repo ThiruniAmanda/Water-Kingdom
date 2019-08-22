@@ -52,6 +52,29 @@ app.use(cors())
 //upload fish details
 app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
 
+  var fish_count = function(db, callback) {
+    var collection = db.collection('fish_count');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  };
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+    fish_count(dbo, function(docs) {
+    console.log(docs);
+    var count=docs[0].count+1;  
+    dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
+      if (err) throw err;
+      console.log("Count updated");
+      db.close();
+    });
+  });
+});
+
 if(req.files[0]==null && req.files[1]==null){
  
     var name=req.body.name;
@@ -75,12 +98,12 @@ if(req.files[0]==null && req.files[1]==null){
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null};
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null,availability:true};
        dbo.collection("fish_details").insertOne(myobj, function(err, res) {
          if (err) throw err;
          console.log("1 document inserted");
        });
-       
+     
        var size_used=0;
        findDocuments(dbo, function(docs) {
          console.log(docs);
@@ -120,7 +143,7 @@ if(req.files[0]==null && req.files[1]==null){
  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size};
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size,availability:true};
     dbo.collection("fish_details").insertOne(myobj, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
@@ -164,7 +187,7 @@ if(req.files[0]==null && req.files[1]==null){
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:null};
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:null,availability:true};
        dbo.collection("fish_details").insertOne(myobj, function(err, res) {
          if (err) throw err;
          console.log("1 document inserted");
@@ -215,7 +238,7 @@ console.log(req.files[0].filename)
  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:req.files[1].filename,img_originalname:req.files[0].originalname,video_originalname:req.files[1].originalname,img_size:req.files[0].size,video_size:req.files[1].size};
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:req.files[1].filename,img_originalname:req.files[0].originalname,video_originalname:req.files[1].originalname,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
     dbo.collection("fish_details").insertOne(myobj, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
@@ -280,7 +303,7 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null};
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null,availability:true};
        dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
          if (err) throw err;
          console.log("1 document inserted");
@@ -326,7 +349,7 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
       if (err) throw err;
       var dbo = db.db("aquakingdom");
-      var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size};
+      var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size,availability:true};
       dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
         if (err) throw err;
         console.log("1 document inserted");
@@ -375,7 +398,7 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:img_path,video_path:null,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:req.files[1].size};
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:img_path,video_path:null,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
        dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
          if (err) throw err;
          console.log("1 document inserted");
@@ -446,7 +469,7 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:req.files[1].filename,img_originalname:req.files[0].originalname,video_originalname:req.files[0].originalname,img_size:req.files[0].size,video_size:req.files[1].size};
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:req.files[1].filename,img_originalname:req.files[0].originalname,video_originalname:req.files[0].originalname,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
     dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
@@ -646,6 +669,29 @@ app.get('/fetch_details',urlencodedParser,function(req,res){
 app.get('/delete_data/:id',urlencodedParser,function(req,res){
   console.log(req.params)
 
+  var fish_count = function(db, callback) {
+    var collection = db.collection('fish_count');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  };
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+    fish_count(dbo, function(docs) {
+    console.log(docs);
+    var count=docs[0].count-1;  
+    dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
+      if (err) throw err;
+      console.log("Count updated");
+      db.close();
+    });
+  });
+});
+
   var removeproducts = function(db, callback) {
     db.collection('fish_details').deleteOne({code:req.params.id},
        function(err, results) {
@@ -679,11 +725,13 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
   if(err) throw err;
   var dbo = db.db("aquakingdom");
   var size_updated;
+
  findDocuments(dbo, function(docs) {
   var path_to_delete;
   console.log(docs[0])
+
   size_updated=docs[0].img_size+docs[0].video_size;
-  if(docs[0].img_file!=null){
+  if(docs[0].img_file!=null && docs[0].video_file!=null){
   for(var i=0;i<2;i++){
     if(i==0)
       path_to_delete="src/storage/fish/images/"+docs[0].img_file;
@@ -695,6 +743,22 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
       console.log('deleted files')
     });
   }
+}
+
+else if(docs[0].img_file!=null){
+    path_to_delete="src/storage/fish/images/"+docs[0].img_file;
+    file_system.unlink(path_to_delete,(err)=>{
+      if(err) throw err
+      console.log('deleted files')
+    });
+}
+
+else if(docs[0].video_file!=null){
+  path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+  file_system.unlink(path_to_delete,(err)=>{
+    if(err) throw err
+    console.log('deleted files')
+  });
 }
 
  });
@@ -716,6 +780,33 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
 
  });   
 });
+});
+
+
+
+
+
+
+//load-fish-count
+app.get('/load_fish_count',urlencodedParser,function(req,res){
+  var fish_count = function(db, callback) {
+    var collection = db.collection('fish_count');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      // assert.equal(err, null);
+      callback(docs);
+    });
+  };
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+    fish_count(dbo, function(docs) {
+    console.log(docs);
+    res.json(docs)
+  });
+});
+
 });
 
 
@@ -828,13 +919,14 @@ app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
     updated[field]=false
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    dbo.collection("visible_of_fields").updateOne(update_key,updated,function(err, res) {
+    dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated},function(err, res) {
       if (err) throw err;
       console.log("Document updated");
       res.json({message:'Success'})
     });
     db.close();
 });
+
 });
 
 
@@ -909,6 +1001,7 @@ app.get('/user_profile_details',urlencodedParser,function(req,res){
 
 
 
+
 //load memory usage
 app.get('/memory_used',urlencodedParser,function(req,res){
   
@@ -948,6 +1041,8 @@ app.get('/memory_used',urlencodedParser,function(req,res){
 
 
 
+
+
 //fetch_local_koi_details
 app.get('/local_koi_details/:code',urlencodedParser,function(req,res){
   var code=req.params.code;
@@ -978,6 +1073,30 @@ app.get('/local_koi_details/:code',urlencodedParser,function(req,res){
 
 
 
+//mark-availability-fish_details
+app.get('/mark_availability_sold/:code',urlencodedParser,function(req,res){
+
+  var code=req.params.code;
+
+  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+  
+    if (err) throw err;
+    var dbo = db.db("aquakingdom");
+    dbo.collection("visible_of_fields").updateOne({code:code},{$set:{availability:false}},function(err, res1) {
+      if (err) throw err;
+      console.log("Document updated");
+      
+    });
+    db.close();
+});
+});
+
+
+
+
+
+
+
 //load-all-localKoi-details
 app.get('/all_localKoi_details',urlencodedParser,function(req,res){
   var code=req.params.code;
@@ -1000,6 +1119,8 @@ app.get('/all_localKoi_details',urlencodedParser,function(req,res){
 
   });
 });
+
+
 
 
 

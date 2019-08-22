@@ -20,10 +20,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CustomerFooterComponent } from './shared/customer-footer/customer-footer.component';
 import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/customer-local-koi-view.component'
-
-import { ItemDetailsService } from './services/item_details.service';
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 
 
 @NgModule({

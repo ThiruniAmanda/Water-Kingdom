@@ -24,7 +24,6 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
     FormsModule,
     NgbModule,
     HttpClientModule,
-    CustomerNavbarModule,
   ],
   declarations: [
    CustomerHomeComponent,
@@ -35,7 +34,7 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
    FiltersComponent,
    MedicineComponent,
    CustomerLocalkoiComponent,
-   CustomerLocalKoiViewComponent
+   CustomerLocalKoiViewComponent,
    FishdetailsComponent,
    CustomerAboutusComponent,
    CustomerContactComponent,
