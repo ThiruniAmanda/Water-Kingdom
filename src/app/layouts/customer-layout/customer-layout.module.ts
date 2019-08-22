@@ -12,9 +12,8 @@ import { FoodComponent } from 'app/pages/food/food.component';
 import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
+import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FishDetailsService } from "app/services/fish_details.service";
-import { UserProfileService } from 'app/services/user-profile.service';
 
 @NgModule({
   imports: [
@@ -22,7 +21,8 @@ import { UserProfileService } from 'app/services/user-profile.service';
     RouterModule.forChild(CustomerLayoutRoutes),
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomerNavbarModule,
   ],
   declarations: [
    CustomerHomeComponent,
@@ -33,10 +33,13 @@ import { UserProfileService } from 'app/services/user-profile.service';
    FiltersComponent,
    MedicineComponent,
    CustomerLocalkoiComponent,
+   FishdetailsComponent,
+   CustomerAboutusComponent,
+   CustomerContactComponent,
 
-  ]
+  
    CustomerHomeComponent
   ],
-  providers: [FishDetailsService,UserProfileService],
+  providers: [],
 })
 export class CustomerLayoutModule { }

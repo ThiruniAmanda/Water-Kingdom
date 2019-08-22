@@ -7,7 +7,7 @@ import { FoodComponent } from 'app/pages/food/food.component';
 import { FiltersComponent } from 'app/pages/filters/filters.component';
 import { MedicineComponent } from 'app/pages/medicine/medicine.component';
 import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-localkoi.component';
-
+import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
 
 
 export const CustomerLayoutRoutes: Routes = [
@@ -18,5 +18,7 @@ export const CustomerLayoutRoutes: Routes = [
     { path: 'food', component: FoodComponent },
     { path: 'filters', component: FiltersComponent },
     { path: 'medicine', component: MedicineComponent },
+    { path: 'localkoi', component: CustomerLocalkoiComponent },
+    { path: 'fishdetails', component: FishdetailsComponent },
     { path: 'localkoi', component: CustomerLocalkoiComponent }
 ];

@@ -1,20 +1,23 @@
 nav {
    
    margin-bottom: 0;
-   
-    a{
+}  
     
-        img{
-            margin-left: 100px;
-            margin-right: 10px; 
-            border-radius: 60%;
-            width: 70px;
-            height: auto; 
+    img{
+        margin-right: 10px; 
+        border-radius: 60%;
+        width: 70px;
+        height: auto; 
         }
+    
+    li{
+        margin-left: auto;
     }
-    ul{
-        margin-right: 100px;
-        margin-bottom: 10px;
-        margin-top: 10px; 
+    
+    .navbar-brand{
+        margin-left: 100px;
     }
-}
+    .navbar-nav{
+        margin-left: 50px;
+        margin-right: 80px; 
+    }
