@@ -34,6 +34,7 @@ export class TableComponent implements OnInit{
         this.fish_details_service.deleteItemData(id).subscribe((error)=>{
 
             this.item_details=this.fish_details_service.getItemData();
+            console.log(error)
         })
     }
 

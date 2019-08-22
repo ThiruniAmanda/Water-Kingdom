@@ -32,7 +32,7 @@
                   <td width="10%">{{item_details.price}}</td> 
                   <td width="10%" >{{item_details.code}}</td> 
                   <td width="10%">{{item_details.description}}</td> 
-                  <td width="5%"><a id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
+                  <td width="5%"><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
                   <td width="5%"><a  [routerLink]="[ '/update',item_details.code]" id="edit_item" name="edit_item" style="color:black" title="edit" style="color:white"><i class="material-icons">file_list</i></a></td>
                 </tr>
               </tbody>
