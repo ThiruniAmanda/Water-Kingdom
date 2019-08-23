@@ -8,5 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  ngOnInit() { }
+  isSignedIn:boolean=false;
+  ngOnInit() {
+    
+     console.log(localStorage.getItem('loggedIn'));
+    if(localStorage.getItem('loggedIn')=='true')  this.isSignedIn=true;
+
+   }
 }
