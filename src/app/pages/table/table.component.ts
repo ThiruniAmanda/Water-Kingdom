@@ -18,7 +18,6 @@ export class TableComponent implements OnInit{
     form: any;
     input_value:string=null;
     code:string;
-    htmlCode;any;
     constructor(private fish_details_service:FishDetailsService){}
 
     ngOnInit(){
@@ -52,7 +51,11 @@ export class TableComponent implements OnInit{
     }
 
     mark_availability(code:string){
-        this.fish_details_service.mark_availability_sold(code)
+        this.fish_details_service.mark_availability_sold(code).subscribe(()=>{
+            console.log('Done')
+            this.item_details=this.fish_details_service.getItemData();
+            console.log(this.item_details)
+        })
     }
  
 }

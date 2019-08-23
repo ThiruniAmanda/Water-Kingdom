@@ -18,9 +18,8 @@ import {CustomerFooterModule} from './shared/customer-footer/customer-footer.mod
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import {HttpClientModule} from '@angular/common/http';
-import { CustomerFooterComponent } from './shared/customer-footer/customer-footer.component';
-import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/customer-local-koi-view.component'
-import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
+import { LoginComponent } from './pages/login/login.component';
+
 
 
 @NgModule({
@@ -28,7 +27,6 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-  
   ],
   imports: [
     BrowserAnimationsModule,
@@ -44,8 +42,7 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     FixedPluginModule,
     ReactiveFormsModule,
     FormsModule,
-    CustomerFooterModule
-  
+    CustomerFooterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

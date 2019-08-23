@@ -5,6 +5,7 @@ import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layo
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { LoginComponent } from './pages/login/login.component';
 
 export const AppRoutes: Routes = [
   {

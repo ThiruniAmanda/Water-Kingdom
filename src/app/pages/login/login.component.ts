@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
     this.login_validations.checkCredentials(email,password).subscribe((response)=>{
       console.log(response)
       this.success=response;
+
       if(this.success.success){
+        this.login_validations.logIn();
         this._router.navigate(['dashboard']);
       }
 

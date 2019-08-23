@@ -17,6 +17,8 @@ export class UpdateDataComponent implements OnInit {
   data:any;
   sub: any;
   code:any;
+  isSelected:boolean;
+  isSelectedCat:boolean;
   constructor(private fish_details_service:FishDetailsService,private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -30,9 +32,25 @@ export class UpdateDataComponent implements OnInit {
     this.data=this.fish_details_service.getUpdateData(this.code)
     console.log(this.data)
 
+    if(this.data[0].category=='imported-koi'){
+      this.isSelectedCat=true;
+    }
+
+    else if(this.data[0].category=='local-koi'){
+      this.isSelectedCat=false
+    }
+
+    if(this.data[0].gender=='male'){
+      this.isSelected=true;
+    }
+
+    else if(this.data[0].gender=='female'){
+      this.isSelected=false;
+    }
+
+
       this.form=new FormGroup({
       name:new FormControl(this.data[0].name,[checkEmpty()]),
-      category:new FormControl(this.data[0].category,[checkEmpty()]),
       age:new FormControl(this.data[0].age,[checkEmpty()]),
       size:new FormControl(this.data[0].size,checkEmpty()),
       price:new FormControl(this.data[0].price,checkEmpty()),
@@ -45,7 +63,7 @@ export class UpdateDataComponent implements OnInit {
 
   callUpdates(){
     this.form.controls.name.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.name.updateValueAndValidity();});
-    this.form.controls.category.valueChanges.subscribe(x=>this.form.controls.category.updateValueAndValidity());
+    // this.form.controls.category.valueChanges.subscribe(x=>this.form.controls.category.updateValueAndValidity());
     this.form.controls.age.valueChanges.subscribe(x=>this.form.controls.age.updateValueAndValidity());
     this.form.controls.size.valueChanges.subscribe(x=>this.form.controls.size.updateValueAndValidity());
     this.form.controls.price.valueChanges.subscribe(x=>this.form.controls.price.updateValueAndValidity());

@@ -11,6 +11,7 @@ import { CustomerLocalkoiComponent } from 'app/pages/customer-localkoi/customer-
 import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
 
 import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.component';
+import { LoginComponent } from 'app/pages/login/login.component';
 
 
 export const CustomerLayoutRoutes: Routes = [
@@ -24,6 +25,6 @@ export const CustomerLayoutRoutes: Routes = [
     { path: 'localkoi', component: CustomerLocalkoiComponent },
     { path:'localkoi-view/:code', component:CustomerLocalKoiViewComponent},
     { path: 'fishdetails', component: FishdetailsComponent },
-    { path: 'localkoi', component: CustomerLocalkoiComponent }
-
+    { path: 'localkoi', component: CustomerLocalkoiComponent },
+    { path:'login'  ,component:LoginComponent}
 ];

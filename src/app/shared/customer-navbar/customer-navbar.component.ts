@@ -10,6 +10,8 @@ export class CustomerNavbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
+
 
 }
