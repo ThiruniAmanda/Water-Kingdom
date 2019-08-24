@@ -101,6 +101,7 @@ export class NavbarComponent implements OnInit{
 
       destroy_token(){
         this.login_validations.logOut();
+        
       }
 
 }

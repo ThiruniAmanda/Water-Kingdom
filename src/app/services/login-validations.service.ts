@@ -20,5 +20,7 @@ export class LoginValidationsService {
 
     logOut(){
         localStorage.removeItem('loggedIn');
+        localStorage.removeItem('session');
     }
+
 }

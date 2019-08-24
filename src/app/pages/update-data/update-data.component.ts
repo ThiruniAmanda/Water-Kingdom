@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FishDetailsService } from 'app/services/fish_details.service';
 import { checkEmpty } from 'app/shared/checkEmpty';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 declare function  disable_search_bar():any;
@@ -19,9 +19,15 @@ export class UpdateDataComponent implements OnInit {
   code:any;
   isSelected:boolean;
   isSelectedCat:boolean;
-  constructor(private fish_details_service:FishDetailsService,private route: ActivatedRoute) { }
+  constructor(private fish_details_service:FishDetailsService,private route: ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
+
+    console.log(localStorage.getItem('loggedIn'))
+    if(!localStorage.getItem('loggedIn')){
+      this.router.navigate(['home']);
+    }
+
     this.sub = this.route
       .params
       .subscribe(params =>{

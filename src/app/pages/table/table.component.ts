@@ -3,6 +3,7 @@ import { FishDetailsService } from "../../services/fish_details.service";
 import { SyncRequestClient } from 'ts-sync-request/dist'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { checkEmpty } from 'app/shared/checkEmpty';
+import { Router } from '@angular/router';
 declare function  enable_search_bar():any;
 @Component({
     selector: 'table-cmp',
@@ -18,9 +19,14 @@ export class TableComponent implements OnInit{
     form: any;
     input_value:string=null;
     code:string;
-    constructor(private fish_details_service:FishDetailsService){}
+    constructor(private fish_details_service:FishDetailsService,private router:Router){}
 
     ngOnInit(){
+
+        console.log(localStorage.getItem('loggedIn'))
+        if(!localStorage.getItem('loggedIn')){
+          this.router.navigate(['home']);
+        }
 
          this.item_details=this.fish_details_service.getItemData();
          console.log(this.item_details)

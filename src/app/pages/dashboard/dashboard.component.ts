@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { MemoryUsageService } from 'app/services/memory-usage.service';
 import { FishDetailsService } from 'app/services/fish_details.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,9 +19,15 @@ export class DashboardComponent implements OnInit{
   public chartColor;
   public chartEmail;
   public chartHours;
-  constructor(private memory_usage:MemoryUsageService,private fish_details:FishDetailsService){}
+  constructor(private memory_usage:MemoryUsageService,private fish_details:FishDetailsService,private router:Router){}
 
   update(){
+
+    console.log(localStorage.getItem('loggedIn'))
+    if(!localStorage.getItem('loggedIn')){
+      this.router.navigate(['home']);
+    }
+
     this.memory_usage.loadMemoryUsed().subscribe((data)=>{
       this.space_data=data;
       console.log(data)

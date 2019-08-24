@@ -9,6 +9,7 @@
             <div class="d-flex justify-content-center form_container">
                 <form>
                     <h6 *ngIf="error_login"><div class="alert alert-danger" role="alert" style="text-align: center">Error Login</div></h6>
+                    <h6 *ngIf="session_timeout"><div class="alert alert-warning" role="alert" style="text-align: center">Session Expired!</div></h6>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -23,8 +24,8 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                            <label class="custom-control-label" for="customControlInline">Remember me</label>
+                            <input type="checkbox" class="custom-control-input" id="remember_user">
+                            <label class="custom-control-label" for="remember_user">Remember me</label>
                         </div>
                     </div>
                 </form>

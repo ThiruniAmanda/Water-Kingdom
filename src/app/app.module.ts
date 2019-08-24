@@ -16,11 +16,10 @@ import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layo
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 import {CustomerFooterModule} from './shared/customer-footer/customer-footer.module'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { UserIdleModule } from 'angular-user-idle';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-
 
 
 @NgModule({
@@ -33,6 +32,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
+    UserIdleModule.forRoot({idle: 60, timeout: 30, ping: 20}),
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),
