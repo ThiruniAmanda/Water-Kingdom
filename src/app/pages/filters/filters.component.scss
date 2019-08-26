@@ -20,9 +20,10 @@ header {
   }
 
 .features {
-    margin: 4em auto;
-    padding: 1em;
-    position: relative;
+     //margin: 4em auto;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  position: relative;
    }
    .feature-title {
     color: #333;
@@ -32,37 +33,36 @@ header {
     text-transform: uppercase;
    }
    .features img {
+    // -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  // -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 16px;
+  padding-top: 16px;
+  height: 260px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+   }
+   
+   .box{
     -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    margin-bottom: 16px;
-    height: 220px;
+  
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    background-color: white;
+    margin-bottom: 3em;
+
+    p{
+      font: 1.2em sans-serif;
+      text-align: center;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      background-color: rgb(217, 221, 221);
+  }
    }
    p{
-       font: 1.2em sans-serif;
-       text-align: center;
+    font: 1.2em sans-serif;
+    text-align: center;
    }
-   .wave {
-    position: absolute;
-    width: 100%;
-    height: 30px;
-    
-  }
-  
-  .wave.-one {
-    opacity: .2;
-    background: black;
-    height: 20px;
-  }
-  
-  .wave.-two {
-    opacity: .3;
-    background-color: #98c9db;
-    height: 30px;
-  }
-  .box{
-    margin-bottom: 70px;
-  }

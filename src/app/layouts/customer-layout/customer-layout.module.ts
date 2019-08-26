@@ -25,6 +25,7 @@ import { LoginComponent } from 'app/pages/login/login.component';
     FormsModule,
     NgbModule,
     HttpClientModule,
+    HttpClientModule
   ],
   declarations: [
    CustomerHomeComponent,

@@ -20,6 +20,11 @@ import { UserIdleModule } from 'angular-user-idle';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { CustomerFooterComponent } from './shared/customer-footer/customer-footer.component';
+import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/customer-local-koi-view.component'
+import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
+
+
 
 
 @NgModule({

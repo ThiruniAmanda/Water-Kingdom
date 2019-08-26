@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FishDetailsService } from "../../services/fish_details.service";
-import { SyncRequestClient } from 'ts-sync-request/dist'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { checkEmpty } from 'app/shared/checkEmpty';
 import { Router } from '@angular/router';
