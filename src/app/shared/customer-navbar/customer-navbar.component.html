@@ -13,7 +13,7 @@
           <li class="nav-item mr-4">
             <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item dropdown ">
+          <li class="nav-item dropdown mr-4">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Koi </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="localkoi">Local Koi</a>
@@ -32,11 +32,17 @@
             </div>
             </div>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item mr-4">
             <a class="nav-link" href="aboutus">About Us</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-4">
             <a class="nav-link" href="contact">Contact</a>
+          </li>
+          <li class="nav-item mx-auto" *ngIf="!isLoggedIn">
+            <a class="btn  btn-outline-success my-2 my-sm-0" id="customer_login" style="color:white" href="login">Log-in</a>
+          </li>
+          <li class="nav-item mx-auto" *ngIf="isLoggedIn">
+            <a class="btn  btn-outline-success my-2 my-sm-0" style="color:white" href="home" (click)="destroy_token()">Log-Out</a>
           </li>
         </ul>
         

@@ -20,7 +20,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'typography',     component: TypographyComponent },
     { path: 'add-fish-details',    component: AddDetailsComponent },
     { path:'settings' , component:SettingsComponent},
-    { path:'update/:code' , component:UpdateDataComponent}
+    { path:'update/:code' , component:UpdateDataComponent ,}
     // { path: 'add-item-details',    component: AddItemDetailsComponent },
     //  { path: 'icons',          component: IconsComponent },
     // { path: 'maps',           component: MapsComponent },

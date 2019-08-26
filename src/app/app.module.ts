@@ -16,11 +16,12 @@ import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layo
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
 import {CustomerFooterModule} from './shared/customer-footer/customer-footer.module'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { UserIdleModule } from 'angular-user-idle';
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './pages/login/login.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { CustomerFooterComponent } from './shared/customer-footer/customer-footer.component';
 import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/customer-local-koi-view.component'
-
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
 
 
@@ -31,11 +32,12 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-  
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
+    UserIdleModule.forRoot({idle: 60, timeout: 30, ping: 20}),
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),
@@ -47,8 +49,7 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     FixedPluginModule,
     ReactiveFormsModule,
     FormsModule,
-    CustomerFooterModule
-  
+    CustomerFooterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

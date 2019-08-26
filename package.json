@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "5.0.0",
     "@ngui/map": "0.30.3",
     "@types/googlemaps": "3.36.5",
+    "angular-user-idle": "^2.1.4",
     "arrive": "2.4.1",
     "assert": "^2.0.0",
     "bcrypt": "^3.0.6",

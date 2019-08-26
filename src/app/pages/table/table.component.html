@@ -9,31 +9,34 @@
           <div *ngIf="(item_details | json) != '[]'">
             <table class="table table-dark">
               <thead>
-                <th width="10%">Image</th>
-                <th width="10%">Name</th>
-                <th width="10%">Category</th>
-                <th width="10%">Age</th>
-                <th width="10%">Size</th>
-                <th width="10%">Gender</th>
-                <th width="10%">Price</th>
-                <th width="10%">Code</th>
-                <th width="10%">Description</th>
-                <th width="5%"> </th>
-                <th width="5%"> </th>
+                <th >Image</th>
+                <th >Name</th>
+                <th >Category</th>
+                <th >Age</th>
+                <th >Size</th>
+                <th >Gender</th>
+                <th >Price</th>
+                <th >Code</th>
+                <th >Description</th>
+                <th > </th>
+                <th ></th>
+                <th > </th>
               </thead>
               <tbody>
                 <tr *ngFor="let item_details of item_details">
-                  <td width="10%"><img src="{{item_details.img_path}}" height="35px" width="35px" id="item_pic" ></td>
-                  <td width="10%">{{item_details.name}}</td>
-                  <td width="10%">{{item_details.category}}</td>
-                  <td width="10%">{{item_details.age}}</td>
-                  <td width="10%">{{item_details.size}}</td>
-                  <td width="10%">{{item_details.gender}}</td> 
-                  <td width="10%">{{item_details.price}}</td> 
-                  <td width="10%" >{{item_details.code}}</td> 
-                  <td width="10%">{{item_details.description}}</td> 
-                  <td width="5%"><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
-                  <td width="5%"><a  [routerLink]="[ '/update',item_details.code]" id="edit_item" name="edit_item" style="color:black" title="edit" style="color:white"><i class="material-icons">file_list</i></a></td>
+                  <td><img src="{{item_details.img_path}}" height="35px" width="35px" id="item_pic" ></td>
+                  <td>{{item_details.name}}</td>
+                  <td>{{item_details.category}}</td>
+                  <td>{{item_details.age}}</td>
+                  <td>{{item_details.size}}</td>
+                  <td>{{item_details.gender}}</td> 
+                  <td>{{item_details.price}}</td> 
+                  <td>{{item_details.code}}</td> 
+                  <td>{{item_details.description}}</td> 
+                  <td><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
+                  <td *ngIf="item_details.availability==true"><a [routerLink]="[ '/update',item_details.code]" id="edit_item" name="edit_item" style="color:black" title="edit" style="color:white"><i class="material-icons" style="width:24px!important">toc</i></a></td>
+                  <td *ngIf="item_details.availability==true"><button type="button"  class="btn btn-warning" (click)="mark_availability(item_details.code)">Sold</button></td>
+                  <td *ngIf="item_details.availability==false"><button type="button" class="btn btn-danger" disabled>Sold</button></td>
                 </tr>
               </tbody>
             </table>

@@ -5,6 +5,8 @@ import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layo
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { LoginComponent } from './pages/login/login.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 export const AppRoutes: Routes = [
   {
@@ -29,10 +31,10 @@ export const AppRoutes: Routes = [
       loadChildren: './layouts/customer-layout/customer-layout.module#CustomerLayoutModule'
   }]},
   {
-    path: '**',
-    redirectTo: 'home'
+    path:'**',
+    component:PageNotFoundComponent
   },
- 
+
 ]
 
 @NgModule({

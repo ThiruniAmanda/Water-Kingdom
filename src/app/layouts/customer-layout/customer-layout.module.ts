@@ -16,6 +16,7 @@ import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.componen
 import { HttpClientModule } from '@angular/common/http';
 
 import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
+import { LoginComponent } from 'app/pages/login/login.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
     RouterModule.forChild(CustomerLayoutRoutes),
     FormsModule,
     NgbModule,
+    HttpClientModule,
     HttpClientModule
   ],
   declarations: [
@@ -38,7 +40,8 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
    FishdetailsComponent,
    CustomerAboutusComponent,
    CustomerContactComponent,
-   CustomerHomeComponent
+   CustomerHomeComponent,
+   LoginComponent
   ],
   providers: [],
 })

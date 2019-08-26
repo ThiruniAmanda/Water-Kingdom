@@ -14,12 +14,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="category"><b>Category</b></label>
-                                <input type="text" class="form-control" id="category" name="category" placeholder="Koi" formControlName="category" value="{{data[0].category}}"
-                                 [ngClass]="{'is-invalid':form.get('category').invalid,'is-valid':form.get('category').valid}" >
-                                <div class='invalid-feedback'>
-                                   <div>Category is Required</div>
-                                </div>
+                                <label for="gender"><b>Category</b></label><br>
+                                <select id="gender" name="category">
+                                    <option value="local-koi" [selected]="!isSelectedCat">Local-Koi</option>
+                                    <option value="imported-koi" [selected]="isSelectedCat">Imported-Koi</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="age"><b>Age</b></label>
@@ -40,8 +39,8 @@
                             <div class="form-group">
                                 <label for="gender"><b>Gender</b></label><br>
                                 <select id="gender" name="gender">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="male" [selected]="isSelected" >Male</option>
+                                    <option value="female" [selected]="!isSelected">Female</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -70,8 +69,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*" value="abc">   
-                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*" value="abc">
+                                    <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*" value="">   
+                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*" value="" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,6 +89,8 @@
                                             <button class="btn1" id="del_video" ><i class="material-icons">delete_forever</i></button>
                                         </div>
                                     </div>
+                                    <input name="img_src" value="{{data[0].img_path}}" style="display: none">
+                                    <input name="video_src" value="{{data[0].video_path}}" style="display: none">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form3.submit()">Submit</button>
