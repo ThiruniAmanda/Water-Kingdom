@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalKoiDetailsService } from 'app/services/local-koi-details.service';
 
 @Component({
   selector: 'app-customer-localkoi',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerLocalkoiComponent implements OnInit {
 
-  constructor() { }
+  fish_details:any;
+  all_details:any;
+  constructor(private local_koi_details:LocalKoiDetailsService) { }
 
   ngOnInit() {
+
+    this.loadAll()
+
+  }
+
+  loadAll(){
+    this.fish_details=this.local_koi_details.loadAll();
+    console.log(this.fish_details)
   }
 
 }

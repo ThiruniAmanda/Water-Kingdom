@@ -16,7 +16,7 @@ export class AddDetailsComponent implements OnInit {
     disable_search_bar();
     this.form=new FormGroup({
       name:new FormControl('',Validators.required),
-      category:new FormControl('',Validators.required),
+      // category:new FormControl('',Validators.required),
       age:new FormControl('',Validators.required),
       size:new FormControl('',Validators.required),
       price:new FormControl('',Validators.required),

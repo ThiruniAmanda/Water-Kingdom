@@ -14,9 +14,15 @@ import { AppRoutes } from './app.routing';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerLayoutComponent } from './layouts/customer-layout/customer-layout.component';
 import { CustomerNavbarModule } from './shared/customer-navbar/customer-navbar.module';
+import {CustomerFooterModule} from './shared/customer-footer/customer-footer.module'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import {HttpClientModule} from '@angular/common/http';
+import { CustomerFooterComponent } from './shared/customer-footer/customer-footer.component';
+import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/customer-local-koi-view.component'
+
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
-import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -25,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
+  
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
     FixedPluginModule,
     ReactiveFormsModule,
     FormsModule,
-
+    CustomerFooterModule
   
   ],
   providers: [],
