@@ -20,9 +20,9 @@ header {
   }
 
   .features {
-    margin: 4em auto;
-    padding: 1em;
-    position: relative;
+    padding-top: 4em;
+  padding-bottom: 4em;
+  position: relative;
    }
 
    .features img {
@@ -36,24 +36,4 @@ header {
    .row{
        margin-bottom: 60px;
    }
-   .wave {
-    position: absolute;
-    width: 100%;
-    height: 30px;
-    
-  }
   
-  .wave.-one {
-    opacity: .2;
-    background: black;
-    height: 20px;
-  }
-  
-  .wave.-two {
-    opacity: .3;
-    background-color: #98c9db;
-    height: 30px;
-  }
-  .box{
-    margin-bottom: 70px;
-  }
