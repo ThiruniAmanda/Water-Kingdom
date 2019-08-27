@@ -39,7 +39,7 @@
             <a class="nav-link" href="contact">Contact</a>
           </li>
           <li class="nav-item mx-auto" *ngIf="!isLoggedIn">
-            <a class="btn  btn-outline-success my-2 my-sm-0" id="customer_login" style="color:white" href="login">Log-in</a>
+            <a class="btn  btn-outline-success my-2 my-sm-0" id="login" style="color:white" href="login">Log-in</a>
           </li>
           <li class="nav-item mx-auto" *ngIf="isLoggedIn">
             <a class="btn  btn-outline-success my-2 my-sm-0" style="color:white" href="home" (click)="destroy_token()">Log-Out</a>
