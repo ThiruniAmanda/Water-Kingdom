@@ -37,7 +37,7 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
-    UserIdleModule.forRoot({idle: 60, timeout: 30, ping: 20}),
+    UserIdleModule.forRoot({idle: 3600, timeout: 300, ping: 120}),
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),
