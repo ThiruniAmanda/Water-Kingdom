@@ -16,6 +16,7 @@ import { FishdetailsComponent } from 'app/pages/fishdetails/fishdetails.componen
 import { HttpClientModule } from '@angular/common/http';
 
 import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
+import { LoginComponent } from 'app/pages/login/login.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
     FormsModule,
     NgbModule,
     HttpClientModule,
-    CustomerNavbarModule,
+    HttpClientModule
   ],
   declarations: [
    CustomerHomeComponent,
@@ -35,11 +36,12 @@ import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view
    FiltersComponent,
    MedicineComponent,
    CustomerLocalkoiComponent,
-   CustomerLocalKoiViewComponent
+   CustomerLocalKoiViewComponent,
    FishdetailsComponent,
    CustomerAboutusComponent,
    CustomerContactComponent,
-   CustomerHomeComponent
+   CustomerHomeComponent,
+   LoginComponent
   ],
   providers: [],
 })

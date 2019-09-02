@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginComponent } from 'app/pages/login/login.component';
+import { LoginValidationsService } from 'app/services/login-validations.service';
 
 @Component({
   selector: 'customer-nav',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-navbar.component.scss']
 })
 export class CustomerNavbarComponent implements OnInit {
-
-  constructor() { }
+  
+  isLoggedIn:boolean=false
+  constructor(private login_validation:LoginValidationsService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('loggedIn')=='true') this.isLoggedIn=true;
+  }
+
+  destroy_token(){
+    this.login_validation.logOut();
   }
 
 }

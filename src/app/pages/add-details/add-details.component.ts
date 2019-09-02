@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginValidationsService } from 'app/services/login-validations.service';
+import { Router } from '@angular/router';
 declare function  disable_search_bar():any;
 @Component({
   selector: 'app-add-details',
@@ -10,9 +12,15 @@ export class AddDetailsComponent implements OnInit {
 
   form:FormGroup;
   
-  constructor() { }
+  constructor(private login_validation:LoginValidationsService,private router:Router) { }
 
   ngOnInit() {
+    
+    console.log(localStorage.getItem('loggedIn'))
+    if(!localStorage.getItem('loggedIn')){
+      this.router.navigate(['home']);
+    }
+
     disable_search_bar();
     this.form=new FormGroup({
       name:new FormControl('',Validators.required),

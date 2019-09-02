@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { comparePassword } from 'app/shared/confirm-equal-validator.directive';
 import { UserProfileService } from 'app/services/user-profile.service';
+import { Router } from '@angular/router';
 declare function  disable_search_bar():any;
 
 @Component({
@@ -16,10 +17,14 @@ export class UserComponent implements OnInit{
     form:any;
     error_message:any=false;
     profile_data:any;
-    constructor(private profile_image:UserProfileService){}
+    constructor(private profile_image:UserProfileService,private router:Router){}
 
     ngOnInit(){
-       
+
+        console.log(localStorage.getItem('loggedIn'))
+        if(!localStorage.getItem('loggedIn')){
+          this.router.navigate(['home']);
+        }
         this.form=new FormGroup({
             user_names:new FormControl('',Validators.required),
             emails:new FormControl('',[Validators.required,Validators.email]),
@@ -35,8 +40,7 @@ export class UserComponent implements OnInit{
             this.profile_data=data;
             console.log(data);
             console.log(this.profile_data.img_path)
-        })
-
+        });
     }
 }
 

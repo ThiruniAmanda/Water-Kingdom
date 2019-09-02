@@ -30,14 +30,6 @@
         </div>
       </form>
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link btn-magnify" href="/dashboard" title="dashboard">
-            <i class="nc-icon nc-layout-11"></i>
-            <p>
-              <span class="d-lg-none d-md-block">Stats</span>
-            </p>
-          </a>
-        </li>
 
         <!-- <li class="nav-item btn-rotate" ngbDropdown placement="bottom-left">
           <a class="nav-link" ngbDropdownToggle id="navbarDropdownMenuLink"  title="notifications">
@@ -56,7 +48,15 @@
           <a class="nav-link btn-rotate" href="/settings" title="settings">
             <i class="nc-icon nc-settings-gear-65"></i>
             <p>
-              <span class="d-lg-none d-md-block">Account</span>
+              <span class="d-lg-none d-md-block">Settings</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-magnify" href="/home" title="log-out" id="log_out" (click)="destroy_token()">
+            <i class="fa fa-power-off"></i>
+            <p>
+            <span class="d-lg-none d-md-block">Log-Out</span>
             </p>
           </a>
         </li>

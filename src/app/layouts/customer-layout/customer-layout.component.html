@@ -1,8 +1,9 @@
 
 <div class="content" style="background-color:white">
-    <customer-nav></customer-nav>
+   <div *ngIf="isLoad"><customer-nav></customer-nav></div> 
+<div class="content" style="background-color:#f6f6f6">
     <router-outlet></router-outlet>
 </div>
-    <app-customer-footer></app-customer-footer>
+   <div *ngIf="isLoad"><app-customer-footer></app-customer-footer></div>
 
 
