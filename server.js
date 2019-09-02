@@ -1195,7 +1195,7 @@ app.post('/login_credentials',urlencodedParser,function(req,res){
     if(err) throw err;
     var dbo=db.db("aquakingdom");
     admin_credentials(dbo,function(docs){
-      console.log(docs[0])
+      console.log(docs)
       if(docs[0]){
         console.log('ok')
         var admin_password=docs[0].password;
@@ -1296,7 +1296,6 @@ app.post('/password_reset',urlencodedParser,function(req,res){
     // });
 
 });
-
 
 console.log('Listening to 4600');
 server.listen(4600);
