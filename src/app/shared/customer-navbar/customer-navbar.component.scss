@@ -10,14 +10,23 @@ nav {
         height: auto; 
         }
     
-    li{
-        margin-left: auto;
-    }
+
     
-    .navbar-brand{
-        margin-left: 100px;
+    // .navbar-brand{
+    //     margin-left: 100px;
+    // }
+    // .navbar-nav{
+    //     margin-left: 50px;
+    //     margin-right: 80px; 
+    // }
+    button.navbar-toggler{
+        width: 44px;
+        height: 34px;
+        
     }
-    .navbar-nav{
-        margin-left: 50px;
-        margin-right: 80px; 
+    .navbar-toggler-icon{
+        display: block;
+        
+        border-radius: 1px;
+       
     }
