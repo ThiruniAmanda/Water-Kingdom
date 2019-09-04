@@ -1,19 +1,23 @@
 <header>
     <div class="description">
-        <h1>Local koi stock</h1>
+        <h1>Sri Lankan Koi Stock</h1>
     </div>    
 </header>
-<div class="container">
-    <div class="row card-group" style="margin-top:20px">
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="assets/img/img1.jpg" alt="Card image cap">
+<div class="container-fluid">
+    <div class="row card-group">
+        <div class="col-xl-3 col-lg-4  col-md-6 col-sm-12" *ngFor="let localkoi of fish_details" >
+            <div class="card" >
+                <img class="card-img-top" [src]="localkoi.img_path" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Name of the fish</h5>
-                    <p>Price</p>
-                    <p>Status:</p>
-                    <p>Gender</p>
-                    <a href="#" class="btn btn-primary" >View Details</a>
+                    <h5 class="card-title">{{localkoi.name}}</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="view_details/{{localkoi.code}}" class="btn btn-primary" >View Details</a>
+                            </div>
+                            <div class="col-6" style="text-align: center" >
+                            <p *ngIf="localkoi.availability==false" ><b style="color:rgb(199, 9, 9)">Out of Stock</b></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,7 +15,10 @@ require('events').EventEmitter.prototype._maxListeners = 100;
 const maxSize=50;
 
 const storage=multer.diskStorage({destination:function(req,file,cb){
-    if(file.mimetype=="image/png")
+  console.log('mime type=',file.mimetype);
+  var mime=file.mimetype.slice(0,5);
+  console.log(mime)
+    if(mime=="image")
     cb(null,'./src/storage/fish/images')
     else
     cb(null,'./src/storage/fish/videos')
@@ -218,6 +221,7 @@ if(req.files[0]==null && req.files[1]==null){
   }
   
 else{
+  console.log('final')
 console.log(req.files[0].filename)
  var name=req.body.name;
  var category=req.body.category;
@@ -1087,7 +1091,7 @@ app.get('/memory_used',urlencodedParser,function(req,res){
 
 
 //fetch_local_koi_details
-app.get('/local_koi_details/:code',urlencodedParser,function(req,res){
+app.get('/get_details/:code',urlencodedParser,function(req,res){
   var code=req.params.code;
   var koiDetails= function(db, callback) {
     var collection = db.collection('fish_details');
@@ -1147,7 +1151,30 @@ app.get('/all_localKoi_details',urlencodedParser,function(req,res){
 
   var koiDetails= function(db, callback) {
     var collection = db.collection('fish_details');
-    collection.find().toArray(function(err, docs) {
+    collection.find({category:'local-koi'}).toArray(function(err, docs) {
+      if(err) throw err;
+      callback(docs);
+    });
+  }
+
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+
+    koiDetails(dbo, function(docs) {
+      console.log(docs);
+      res.json(docs);
+    });
+
+  });
+});
+//load-all-importedKoi-details
+app.get('/all_importedKoi_details',urlencodedParser,function(req,res){
+  var code=req.params.code;
+
+  var koiDetails= function(db, callback) {
+    var collection = db.collection('fish_details');
+    collection.find({category:'imported-koi'}).toArray(function(err, docs) {
       if(err) throw err;
       callback(docs);
     });

@@ -48,4 +48,5 @@ export class FishDetailsService {
     loadFishCount(){
         return this.http.get(`${this._url}/load_fish_count`)
     }
+
 }

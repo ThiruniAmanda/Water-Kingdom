@@ -19,20 +19,20 @@ header {
     
   }
   
-  .features {
+  .container {
     padding-top: 4em;
     padding-bottom: 4em;
     position: relative;
    }
-   .image img {
-    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    //margin-bottom: 16px;
-    //height: 280px;
-    display: block;
+   .image {
     margin-left: auto;
     margin-right: auto;
+    align-items: center;
+    background-color: rgb(169, 232, 252);
+   }
+   .image img{
+       padding-left: 70px;
+       padding-right: 70px;
    }
    p{
        font: 1.2em sans-serif;
@@ -42,15 +42,15 @@ header {
        padding: 10px;
     
    }
+  
    tbody{
        font-size: 1.2em ;
    }
-   .image{
-       background-color: rgb(169, 232, 252);
-   }
+   
    tr{
        height: 60px;
    }
+   
    .embed-responsive{
        margin-bottom: 16px;
    }
