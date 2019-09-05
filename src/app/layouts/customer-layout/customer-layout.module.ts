@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CustomerLocalKoiViewComponent } from 'app/pages/customer-local-koi-view/customer-local-koi-view.component';
 import { LoginComponent } from 'app/pages/login/login.component';
+import { SafePipe } from 'app/services/safe_url.service';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { LoginComponent } from 'app/pages/login/login.component';
    CustomerAboutusComponent,
    CustomerContactComponent,
    CustomerHomeComponent,
-   LoginComponent
+   LoginComponent,
+   SafePipe
   ],
   providers: [],
 })

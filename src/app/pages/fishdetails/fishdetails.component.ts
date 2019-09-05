@@ -34,6 +34,7 @@ export class FishdetailsComponent implements OnInit {
     this.description=this.fish_details[0].description;
     this.youtube_link=this.fish_details[0].link;
     this.video=this.fish_details[0].video_path;
+    console.log(this.youtube_link);
   }
 
 }

@@ -1,7 +1,8 @@
 <header>
   
     <div class="description" *ngFor="let fish_details of fish_details">
-        <h1>{{fish_details.name}}</h1>
+        <h1 *ngIf="fish_details.category=='imported-koi'">Japanese {{fish_details.name}}</h1>
+        <h1 *ngIf="fish_details.category=='local-koi'">Sri Lankan {{fish_details.name}}</h1>
     </div>
     
 </header> 
@@ -12,47 +13,48 @@
         <table class="table table-striped ">
             <tbody *ngFor="let fish_details of fish_details">
                 <tr>
-                <td>Name</td>
-                <td style="text-align: right">{{fish_details.name}}</td>
+                <td> Code</td>
+                <td style="text-align: right">{{fish_details.code}} </td>
                 </tr>
                 <tr>
-                <td>Code</td>
-                <td style="text-align: right">{{fish_details.code}}</td>
+                <td> Size</td>
+                <td style="text-align: right">{{fish_details.size}} cm </td>
                 </tr>
                 <tr>
-                <td>Size</td>
-                <td style="text-align: right">{{fish_details.size}} cm</td>
+                <td> Age</td>
+                <td style="text-align: right">{{fish_details.age}} </td>
                 </tr>
                 <tr>
-                <td>Gender</td>
-                <td style="text-align: right">{{fish_details.gender}}</td>
+                <td> Gender</td>
+                <td style="text-align: right">{{fish_details.gender}} </td>
                 </tr>
                 <tr>
-                <td>Price</td>
-                <td style="text-align: right">Rs: {{fish_details.price}}</td>
+                <td> Price</td>
+                <td style="text-align: right">Rs: {{fish_details.price}} </td>
                 </tr>
                 <tr>
-                <td *ngIf="fish_details.availability==false"><b style="color:rgb(199, 9, 9)">Out of Stock</b></td>
-                <td *ngIf="fish_details.availability==true"><b style="color:rgb(4, 145, 58)">In Stock</b></td>
+                <td *ngIf="fish_details.availability==false"><b style="color:rgb(199, 9, 9)"> Sold</b></td>
+                <td *ngIf="fish_details.availability==true"><b style="color:rgb(4, 145, 58)"> In Stock</b></td>
                 </tr>
-                <tr><td><b>Description</b></td><td></td></tr>
-                <tr>
-                    <td>{{description}}</td>
-                </tr>
+                <tr><td><b> Description</b></td><td></td></tr>
+                
             </tbody>
+            <div style="padding-top: 15px; padding-left: 8px;">
+                <p style="font-size: 1.2em"> {{description}}</p>
+            </div>
             </table>
             
     </div>
     
     <div class="video-img col-lg-7 col-md-7 col-sm-12 ">
         
-        <!-- <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" [src]="youtube_link" allowfullscreen></iframe>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" [src]="youtube_link|safe" allowfullscreen></iframe>
         </div>
-        -->
-        <div class="embed-responsive embed-responsive-16by9">   
+       
+        <!-- <div class="embed-responsive embed-responsive-16by9">   
             <video controls [src]="video"></video>
-        </div>
+        </div> -->
         <div class="image"  *ngFor="let localkoi of fish_details">
             <a [href]="localkoi.img_path" class="d-block">
             <img [src]="localkoi.img_path" >
@@ -63,6 +65,3 @@
     </div>
     
 </div>
-<!-- <video width="320" height="240" controls>
-     <source src="movie.mp4" type="video/mp4">
-</video> -->
