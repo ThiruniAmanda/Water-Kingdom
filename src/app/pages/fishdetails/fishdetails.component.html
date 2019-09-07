@@ -1,7 +1,7 @@
 <header>
   
     <div class="description" *ngFor="let fish_details of fish_details">
-        <h1 *ngIf="fish_details.category=='imported-koi'">Japanese {{fish_details.name}}</h1>
+        <h1 *ngIf="fish_details.category=='imported-koi'">IMPORTED {{fish_details.name}}</h1>
         <h1 *ngIf="fish_details.category=='local-koi'">Sri Lankan {{fish_details.name}}</h1>
     </div>
     
@@ -13,37 +13,36 @@
         <table class="table table-striped ">
             <tbody *ngFor="let fish_details of fish_details">
                 <tr>
-                <td> Code</td>
-                <td style="text-align: right">{{fish_details.code}} </td>
+                <td style="padding-left: 12px"> Code</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.code}} </td>
                 </tr>
                 <tr>
-                <td> Size</td>
-                <td style="text-align: right">{{fish_details.size}} cm </td>
+                <td style="padding-left: 12px"> Size</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.size}} cm </td>
                 </tr>
                 <tr>
-                <td> Age</td>
-                <td style="text-align: right">{{fish_details.age}} </td>
+                <td style="padding-left: 12px"> Age</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.age}} </td>
                 </tr>
                 <tr>
-                <td> Gender</td>
-                <td style="text-align: right">{{fish_details.gender}} </td>
+                <td style="padding-left: 12px"> Gender</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.gender}} </td>
                 </tr>
                 <tr>
-                <td> Price</td>
-                <td style="text-align: right">Rs: {{fish_details.price}} </td>
+                <td style="padding-left: 12px"> Price</td>
+                <td style="text-align: right; padding-right: 12px">Rs:{{fish_details.price}} </td>
                 </tr>
                 <tr>
-                <td *ngIf="fish_details.availability==false"><b style="color:rgb(199, 9, 9)"> Sold</b></td>
-                <td *ngIf="fish_details.availability==true"><b style="color:rgb(4, 145, 58)"> In Stock</b></td>
+                <td style="padding-left: 12px" *ngIf="fish_details.availability==false"><b style="color:rgb(199, 9, 9)"> Sold</b></td>
+                <td style="padding-left: 12px" *ngIf="fish_details.availability==true"><b style="color:rgb(4, 145, 58)"> In Stock</b></td>
                 </tr>
-                <tr><td><b> Description</b></td><td></td></tr>
+                <tr><td style="padding-left: 12px"><b> Description</b></td><td></td></tr>
                 
             </tbody>
-            <div style="padding-top: 15px; padding-left: 8px;">
-                <p style="font-size: 1.2em"> {{description}}</p>
-            </div>
             </table>
-            
+            <hr>
+            <p style="font-size: 1.2em; padding-left: 12px; padding-right: 12px"> {{description}}</p>      
+            <hr>
     </div>
     
     <div class="video-img col-lg-7 col-md-7 col-sm-12 ">

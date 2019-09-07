@@ -1,26 +1,22 @@
 header {
-    position: relative;
-    height: 120px;
-    background-color: rgb(59, 69, 82);
-  }
-  .description {
-    left: 50%;
-    position: absolute;
-    top: 45%;
-    transform: translate(-50%, -55%);
-    text-align: center;
+  position: relative;
+  height: 130px;
+  background-color: rgb(59, 69, 82);
+}
+.description {
+  left: 50%;
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%, -55%);
+}
 
-    h1 {
-      color: white;
-      text-align: center;
-      margin: 0;
-      font-size: 2rem;
-      position: relative;
-      
-    }
-  }
+header h1 {
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-size: 2rem;
   
-  
+}
 
   .features {
     padding-top: 4em;
