@@ -29,7 +29,7 @@ export class AddDetailsComponent implements OnInit {
       age:new FormControl('',Validators.required),
       size:new FormControl('',Validators.required),
       price:new FormControl('',Validators.required),
-      code:new FormControl({value:this.fish_code,disabled:true},Validators.required),
+      code:new FormControl({value:this.addCode(),disabled:true},Validators.required),
     });
   }
 
