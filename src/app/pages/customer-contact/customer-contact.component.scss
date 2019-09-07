@@ -43,5 +43,13 @@ header {
 h6{
   text-align:  center;
 }
+
+.mapouter{position:relative;text-align:right;height:447px;width:600px;}
+.gmap_canvas {overflow:hidden;background:none!important;height:447px;width:600px;}
+
+.gmap_canvas{
+  width: 500px;
+  height: 500px;
+  border: 10px solid black;
+}
    
-  
