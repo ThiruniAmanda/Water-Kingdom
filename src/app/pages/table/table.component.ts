@@ -3,6 +3,7 @@ import { FishDetailsService } from "../../services/fish_details.service";
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { checkEmpty } from 'app/shared/checkEmpty';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 declare function  enable_search_bar():any;
 @Component({
     selector: 'table-cmp',

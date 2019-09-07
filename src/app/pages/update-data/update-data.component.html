@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="code"><b>Code</b></label>
-                                <input type="text" class="form-control" id="code" name="code" placeholder="1001B" formControlName="code" value="{{data[0].code}}"
+                                <input type="text" class="form-control" id="code" name="code" formControlName="code" disabled value="{{data[0].code}}"
                                 [ngClass]="{'is-invalid':form.get('code').invalid,'is-valid':form.get('code').valid}">
                                 <div class='invalid-feedback'>
                                    <div>Code is Required</div>
