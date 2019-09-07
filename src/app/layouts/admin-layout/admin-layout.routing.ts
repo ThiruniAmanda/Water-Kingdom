@@ -17,7 +17,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user',           component: UserComponent },
     { path: 'data',          component: TableComponent },
-    { path: 'typography',     component: TypographyComponent },
+    // { path: 'typography',     component: TypographyComponent },
     { path: 'add-fish-details',    component: AddDetailsComponent },
     { path:'settings' , component:SettingsComponent},
     { path:'update/:code' , component:UpdateDataComponent ,}

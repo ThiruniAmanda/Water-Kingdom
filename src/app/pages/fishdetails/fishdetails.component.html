@@ -1,59 +1,66 @@
 <header>
   
-    <div class="description">
-        <h1>Imported Koi Stock</h1>
+    <div class="description" *ngFor="let fish_details of fish_details">
+        <h1 *ngIf="fish_details.category=='imported-koi'">IMPORTED {{fish_details.name}}</h1>
+        <h1 *ngIf="fish_details.category=='local-koi'">Sri Lankan {{fish_details.name}}</h1>
     </div>
     
 </header> 
 
-<div class="container features">
+<div class="container ">
     <div class="row">
-    <div class="details col-lg-5 col-md-4 col-sm-12">
-        <table class="table table-dark table-striped">
-            <tbody>
-                <tr>
-                <td>Name</td>
-                <td style="text-align: right">name 1111</td>
+    <div class="details col-lg-5 col-md-5 col-sm-12">
+        <table class="table table-striped ">
+            <tbody *ngFor="let fish_details of fish_details">
+                <tr *ngIf="visibility_details[0].code==true">
+                <td style="padding-left: 12px"> Code</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.code}} </td>
+                </tr>
+                <tr *ngIf="visibility_details[0].size==true">
+                <td style="padding-left: 12px"> Size</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.size}} cm </td>
+                </tr>
+                <tr *ngIf="visibility_details[0].age==true">
+                <td style="padding-left: 12px"> Age</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.age}} </td>
+                </tr>
+                <tr *ngIf="visibility_details[0].gender==true">
+                <td style="padding-left: 12px"> Gender</td>
+                <td style="text-align: right; padding-right: 12px">{{fish_details.gender}} </td>
+                </tr>
+                <tr *ngIf="visibility_details[0].price==true">
+                <td style="padding-left: 12px"> Price</td>
+                <td style="text-align: right; padding-right: 12px">Rs:{{fish_details.price}} </td>
                 </tr>
                 <tr>
-                <td>Code</td>
-                <td style="text-align: right">code 111</td>
+                <td style="padding-left: 12px" *ngIf="fish_details.availability==false"><b style="color:rgb(199, 9, 9)"> Sold</b></td>
+                <td style="padding-left: 12px" *ngIf="fish_details.availability==true"><b style="color:rgb(4, 145, 58)"> In Stock</b></td>
                 </tr>
-                <tr>
-                <td>Size</td>
-                <td style="text-align: right">10cm</td>
-                </tr>
-                <tr>
-                <td>Gender</td>
-                <td style="text-align: right">Male</td>
-                </tr>
-                <tr>
-                <td>Price</td>
-                <td style="text-align: right">Rs 1,000</td>
-                </tr>
-                <tr>
-                <td>Sold</td>
+                <tr *ngIf="visibility_details[0].description==true"><td style="padding-left: 12px"><b> Description</b></td><td></td></tr>
                 
-                </tr>
             </tbody>
             </table>
-            <h6>Description</h6>
-            <p>this is a fjvjvkv nn.....njknjfvf.....</p>
+            <hr>
+            <p style="font-size: 1.2em; padding-left: 12px; padding-right: 12px" *ngIf="visibility_details[0].description==true"> {{description}}</p>      
+            <hr>
     </div>
     
-    <div class="video-img col-lg-7 col-md-8 col-sm-12 ">
+    <div class="video-img col-lg-7 col-md-7 col-sm-12 " *ngIf="visibility_details[0].link==true">
         
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/3t6T5U8cd04" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" [src]="youtube_link|safe" allowfullscreen></iframe>
         </div>
-        <div class="image">
-            <a href="assets/img/img2.jpg" class="d-block">
-            <img src="assets/img/img2.jpg" class="img-fluid">
+       
+        <!-- <div class="embed-responsive embed-responsive-16by9">   
+            <video controls [src]="video"></video>
+        </div> -->
+        <div class="image" *ngFor="let localkoi of fish_details">
+            <a [href]="localkoi.img_path" class="d-block" *ngIf="visibility_details[0].img_path==true">
+            <img [src]="localkoi.img_path">
             </a>
-        </div>
+    </div>   
     </div>
+
     </div>
+    
 </div>
-<!-- <video width="320" height="240" controls>
-     <source src="movie.mp4" type="video/mp4">
-</video> -->

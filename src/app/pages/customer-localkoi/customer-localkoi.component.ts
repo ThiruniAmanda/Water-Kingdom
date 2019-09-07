@@ -7,9 +7,10 @@ import { LocalKoiDetailsService } from 'app/services/local-koi-details.service';
   styleUrls: ['./customer-localkoi.component.scss']
 })
 export class CustomerLocalkoiComponent implements OnInit {
-
+  
   fish_details:any;
   all_details:any;
+  
   constructor(private local_koi_details:LocalKoiDetailsService) { }
 
   ngOnInit() {
