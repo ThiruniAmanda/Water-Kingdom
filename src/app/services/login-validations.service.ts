@@ -16,11 +16,17 @@ export class LoginValidationsService {
 
     logIn(){
         localStorage.setItem('loggedIn','true');
+        localStorage.setItem('session','ok');
     }
 
     logOut(){
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('session');
+    }
+
+    timeOut(){
+        localStorage.removeItem('loggedIn');
+        localStorage.setItem('session','timeout');
     }
 
 }

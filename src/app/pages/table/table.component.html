@@ -34,7 +34,7 @@
                   <td>{{item_details.code}}</td> 
                   <td>{{item_details.description}}</td> 
                   <td><a href="#" id="delete_item" name="delete_item" style="color: red" title="remove" (click)="deleteItem(item_details.code)"><i class="material-icons">delete_forever</i></a></td>
-                  <td *ngIf="item_details.availability==true"><a [routerLink]="[ '/update',item_details.code]" id="edit_item" name="edit_item" style="color:black" title="edit" style="color:white"><i class="material-icons" style="width:24px!important">toc</i></a></td>
+                  <td *ngIf="item_details.availability==true"><a href="/update/{{item_details.code}}" id="edit_item" name="edit_item" style="color:black" title="edit" style="color:white"><i class="material-icons" style="width:24px!important">toc</i></a></td>
                   <td *ngIf="item_details.availability==true"><button type="button"  class="btn btn-warning" (click)="mark_availability(item_details.code)">Sold</button></td>
                   <td *ngIf="item_details.availability==false"><button type="button" class="btn btn-danger" disabled>Sold</button></td>
                 </tr>

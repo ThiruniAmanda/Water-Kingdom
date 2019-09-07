@@ -17,6 +17,7 @@ export class AdminLayoutComponent implements OnInit {
   ngOnInit() {
     
     console.log(localStorage.getItem('loggedIn'));
+
     if(localStorage.getItem('loggedIn')=='true')  this.isSignedIn=true;
     
     this.userIdle.startWatching();
@@ -31,10 +32,10 @@ export class AdminLayoutComponent implements OnInit {
     
 
     this.userIdle.onTimeout().subscribe(() =>{
-      this.login_validations.logOut();
+      this.login_validations.timeOut();
       alert('Your Session has been Expired')
       this.router.navigate(['login']);
-      localStorage.setItem('session','timeout');
+      // localStorage.setItem('session','timeout');
 
     });
 

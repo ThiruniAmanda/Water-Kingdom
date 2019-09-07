@@ -15,13 +15,11 @@ require('events').EventEmitter.prototype._maxListeners = 100;
 const maxSize=50;
 
 const storage=multer.diskStorage({destination:function(req,file,cb){
-  console.log('mime type=',file.mimetype);
-  var mime=file.mimetype.slice(0,5);
-  console.log(mime)
-    if(mime=="image")
+
+    // if(file.mimetype=="image/png")
     cb(null,'./src/storage/fish/images')
-    else
-    cb(null,'./src/storage/fish/videos')
+    // else
+    // cb(null,'./src/storage/fish/videos')
    
   },
   filename:function(req,file,cb){
@@ -68,11 +66,20 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
     });
   };
 
+  var findDocuments = function(db, callback) {
+    var collection = db.collection('space_usage');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      callback(docs);
+    });
+  }
+
+
   mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
     if(err) throw err;
     var dbo = db.db("aquakingdom");
     fish_count(dbo, function(docs) {
-    console.log(docs);
+    console.log("count:"+docs[0].count);
     var count=docs[0].count+1;  
     dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
       if (err) throw err;
@@ -82,7 +89,7 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
   });
 });
 
-if(req.files[0]==null && req.files[1]==null){
+if(req.files[0]==null){
  
     var name=req.body.name;
     var category=req.body.category;
@@ -94,130 +101,124 @@ if(req.files[0]==null && req.files[1]==null){
     var code=req.body.code;
     var link=req.body.link;
     
-    var findDocuments = function(db, callback) {
-     var collection = db.collection('space_usage');
-     collection.find().toArray(function(err, docs) {
-       if(err) throw err;
-       callback(docs);
-     });
-   }
    
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null,availability:true};
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,link:link,img_file:null,img_originalname:null,img_size:null,availability:true};
        dbo.collection("fish_details").insertOne(myobj, function(err, res) {
          if (err) throw err;
          console.log("1 document inserted");
        });
      
-       var size_used=0;
-       findDocuments(dbo, function(docs) {
-         console.log(docs);
-         size_used+=docs[0].space;
-         console.log('size_used'+size_used)
+      //  var size_used=0;
+      //  findDocuments(dbo, function(docs) {
+      //    console.log(docs);
+      //    size_used+=docs[0].space;
+      //    console.log('size_used'+size_used)
        
-         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
-           if (err) throw err;
-           console.log("size updated");
-           db.close();
-         });
-       });
+      //    dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+      //      if (err) throw err;
+      //      console.log("size updated");
+      //      db.close();
+      //    });
+      //  });
+
      });
       res.redirect('/add-fish-details');
      }
    
 
- else if(req.files[0]==null){
- var name=req.body.name;
- var category=req.body.category;
- var size=req.body.size;
- var des=req.body.description;
- var age=req.body.age;
- var gender=req.body.gender;
- var price=req.body.price;
- var code=req.body.code;
- var link=req.body.link;
- var video_path="storage/fish/videos/"+req.files[1].filename;
- var findDocuments = function(db, callback) {
-  var collection = db.collection('space_usage');
-  collection.find().toArray(function(err, docs) {
-    if(err) throw err;
-    callback(docs);
-  });
-}
+//  else if(req.files[0]==null){
+//  var name=req.body.name;
+//  var category=req.body.category;
+//  var size=req.body.size;
+//  var des=req.body.description;
+//  var age=req.body.age;
+//  var gender=req.body.gender;
+//  var price=req.body.price;
+//  var code=req.body.code;
+//  var link=req.body.link;
+//  var video_path="storage/fish/videos/"+req.files[1].filename;
+//  var findDocuments = function(db, callback) {
+//   var collection = db.collection('space_usage');
+//   collection.find().toArray(function(err, docs) {
+//     if(err) throw err;
+//     callback(docs);
+//   });
+// }
 
- mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
-    if (err) throw err;
-    var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size,availability:true};
-    dbo.collection("fish_details").insertOne(myobj, function(err, res) {
-      if (err) throw err;
-      console.log("1 document inserted");
-    });
+//  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+//     if (err) throw err;
+//     var dbo = db.db("aquakingdom");
+//     var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size,availability:true};
+//     dbo.collection("fish_details").insertOne(myobj, function(err, res) {
+//       if (err) throw err;
+//       console.log("1 document inserted");
+//     });
     
-    var size_used=req.files[1].size
-    findDocuments(dbo, function(docs) {
-      console.log(docs);
-      size_used+=docs[0].space;
-      console.log('size_used'+size_used)
+//     var size_used=req.files[1].size
+//     findDocuments(dbo, function(docs) {
+//       console.log(docs);
+//       size_used+=docs[0].space;
+//       console.log('size_used'+size_used)
     
-      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
-        if (err) throw err;
-        console.log("size updated");
-        db.close();
-      });
-    });
-  });
-   res.redirect('/add-fish-details');
-  }
+//       dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+//         if (err) throw err;
+//         console.log("size updated");
+//         db.close();
+//       });
+//     });
+//   });
+//    res.redirect('/add-fish-details');
+//   }
 
-  else if(req.files[1]==null){
-    var name=req.body.name;
-    var category=req.body.category;
-    var size=req.body.size;
-    var des=req.body.description;
-    var age=req.body.age;
-    var gender=req.body.gender;
-    var price=req.body.price;
-    var code=req.body.code;
-    var link=req.body.link;
-    var image_path="storage/fish/images/"+req.files[0].filename;
-    var findDocuments = function(db, callback) {
-     var collection = db.collection('space_usage');
-     collection.find().toArray(function(err, docs) {
-       if(err) throw err;
-       callback(docs);
-     });
-   }
+//   else if(req.files[1]==null){
+//     var name=req.body.name;
+//     var category=req.body.category;
+//     var size=req.body.size;
+//     var des=req.body.description;
+//     var age=req.body.age;
+//     var gender=req.body.gender;
+//     var price=req.body.price;
+//     var code=req.body.code;
+//     var link=req.body.link;
+//     var image_path="storage/fish/images/"+req.files[0].filename;
+//     var findDocuments = function(db, callback) {
+//      var collection = db.collection('space_usage');
+//      collection.find().toArray(function(err, docs) {
+//        if(err) throw err;
+//        callback(docs);
+//      });
+//    }
    
-    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
-       if (err) throw err;
-       var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:null,availability:true};
-       dbo.collection("fish_details").insertOne(myobj, function(err, res) {
-         if (err) throw err;
-         console.log("1 document inserted");
-       });
+//     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+//        if (err) throw err;
+//        var dbo = db.db("aquakingdom");
+//        var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:null,availability:true};
+//        dbo.collection("fish_details").insertOne(myobj, function(err, res) {
+//          if (err) throw err;
+//          console.log("1 document inserted");
+//        });
        
-       var size_used=req.files[0].size
-       findDocuments(dbo, function(docs) {
-         console.log(docs);
-         size_used+=docs[0].space;
-         console.log('size_used'+size_used)
+//        var size_used=req.files[0].size
+//        findDocuments(dbo, function(docs) {
+//          console.log(docs);
+//          size_used+=docs[0].space;
+//          console.log('size_used'+size_used)
        
-         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
-           if (err) throw err;
-           console.log("size updated");
-           db.close();
-         });
-       });
-   });
-   res.redirect('/add-fish-details');
-  }
+//          dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+//            if (err) throw err;
+//            console.log("size updated");
+//            db.close();
+//          });
+//        });
+//    });
+//    res.redirect('/add-fish-details');
+//   }
 
-  else if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
-    res.send('Error 413->File is too large. Maximum size:40MB')
+else if((req.files[0].size>maxSize*1024*1024)){
+  res.send('Error 413->File is too large. Maximum size:40MB')
   }
   
 else{
@@ -233,27 +234,27 @@ console.log(req.files[0].filename)
  var code=req.body.code;
  var link=req.body.link;
  var image_path="storage/fish/images/"+req.files[0].filename;
- var video_path="storage/fish/videos/"+req.files[1].filename;
+//  var video_path="storage/fish/videos/"+req.files[1].filename;
  
- var findDocuments = function(db, callback) {
-  var collection = db.collection('space_usage');
-  collection.find().toArray(function(err, docs) {
-    if(err) throw err;
-    callback(docs);
-  });
-}
+//  var findDocuments = function(db, callback) {
+//   var collection = db.collection('space_usage');
+//   collection.find().toArray(function(err, docs) {
+//     if(err) throw err;
+//     callback(docs);
+//   });
+// }
 
  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:req.files[1].filename,img_originalname:req.files[0].originalname,video_originalname:req.files[1].originalname,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
+    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,link:link,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true};
     dbo.collection("fish_details").insertOne(myobj, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
     });
     
-    var size_used=req.files[0].size+req.files[1].size;
-    console.log(size_used+' '+'size1'+req.files[0].size+' '+'size2'+req.files[1].size)
+    var size_used=req.files[0].size;
+    console.log(size_used+' '+'size1'+req.files[0].size)
     findDocuments(dbo, function(docs) {
       console.log(docs);
       size_used+=docs[0].space;
@@ -282,7 +283,7 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
 
   var findDocuments = function(db, callback) {
     var collection = db.collection('fish_details');
-    collection.find({code:req.params.id}).toArray(function(err, docs) {
+    collection.find({code:req.body.codes}).toArray(function(err, docs) {
       if(err) throw err;
       // assert.equal(err, null);
       callback(docs);
@@ -298,8 +299,10 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
     });
   };
 
-  if(req.body.img_src!=null && req.body.video_src!=null){
-    console.log('not null')
+  console.log(req.body.img_src);
+
+  if(req.body.img_src!='del'){
+    console.log('not null '+req.body.img_src)
     var name=req.body.name;
     var category=req.body.category;
     var size=req.body.size;
@@ -309,20 +312,56 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
     var price=req.body.price;
     var code=req.body.code;
     var link=req.body.link;
+    var file_size=req.files[0].size;
+    var image_path="storage/fish/images/"+req.files[0].filename;
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,link:link,availability:true};
-       dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
-         if (err) throw err;
-         console.log("1 document inserted");
+       
+       findDocuments(dbo,function(docs){
+         var image=docs[0].img_path;
+
+         if(req.body.img_src!=image){
+           if(docs[0].image_path!=null){
+            path_to_delete="src/storage/fish/images/"+docs[0].img_file;        
+            file_system.unlink(path_to_delete,(err)=>{
+              if(err) throw err
+              console.log('deleted files')
+            });
+           }
+          var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,link:link,img_path:image_path,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true};
+          dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
+            if (err) throw err;
+            console.log("updated");
+          });
+
+          findStorage(dbo,function(doc){
+            dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-docs[0].size+file_size}}, function(err, res1) {
+              if (err) throw err;
+              console.log("size updated");
+              db.close();
+            });
+          });
+
+         }
+
+         else{
+          var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,link:link,availability:true};
+          dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+            if (err) throw err;
+            console.log("1 document inserted");
+            db.close();
+          });
+         }
        });
+
+
         });
     
      res.redirect('/data')
    }
 
-  else if(req.files[0]==null && req.files[1]==null){
+  else if(req.body.img_src=='del'){
     console.log('null')
     var name=req.body.name;
     var category=req.body.category;
@@ -336,10 +375,12 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:null,link:link,img_file:null,video_file:null,img_originalname:null,video_originalname:null,img_size:null,video_size:null,availability:true};
+       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,link:link,img_file:null,img_originalname:null,img_size:null,availability:true};
      
         findDocuments(dbo, function(docs) {
-           var total_size=docs[0].img_size+docs[0].video_size;
+          console.log(docs[0]);
+          path_to_delete="src/storage/fish/images/"+docs[0].img_file;
+          var total_size=docs[0].img_size;
 
            dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
             if (err) throw err;
@@ -347,223 +388,218 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
           });
 
         findStorage(dbo,function(doc){
-           console.log(doc[0].space+'space')
-           dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-total_size}}, function(err, res1) {
+           console.log(doc[0].space+'space');
+           dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-total_size,count:doc[0].count-1}}, function(err, res1) {
              if (err) throw err;
              console.log("size updated");
              db.close();
            });
          });
 
-         for(var i=0;i<2;i++){
-          if(i==0)
-            path_to_delete="src/storage/fish/images/"+docs[0].img_file;
-          else if(i==1)
-            path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+          // if(i==0)
+          // else if(i==1)
+          //   path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
         
           file_system.unlink(path_to_delete,(err)=>{
             if(err) throw err
             console.log('deleted files')
           });
-        }
 
         });
      });
      res.redirect('/data')
    }
 
-  else if(req.files[0]==null){
-   var name=req.body.name;
-   var category=req.body.category;
-   var size=req.body.size;
-   var des=req.body.description;
-   var age=req.body.age;
-   var gender=req.body.gender;
-   var price=req.body.price;
-   var code=req.body.code;
-   var link=req.body.link;
-   var video_path="storage/fish/videos/"+req.files[1].filename;
-   mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
-      if (err) throw err;
-      var dbo = db.db("aquakingdom");
-      var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size,availability:true};
-      dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-      });
+  // else if(req.files[0]==null){
+  //  var name=req.body.name;
+  //  var category=req.body.category;
+  //  var size=req.body.size;
+  //  var des=req.body.description;
+  //  var age=req.body.age;
+  //  var gender=req.body.gender;
+  //  var price=req.body.price;
+  //  var code=req.body.code;
+  //  var link=req.body.link;
+  //  var video_path="storage/fish/videos/"+req.files[1].filename;
+  //  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+  //     if (err) throw err;
+  //     var dbo = db.db("aquakingdom");
+  //     var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,video_path:video_path,link:link,img_file:null,video_file:req.files[1].filename,img_originalname:null,video_originalname:req.files[1].originalname,img_size:null,video_size:req.files[1].size,availability:true};
+  //     dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+  //       if (err) throw err;
+  //       console.log("1 document inserted");
+  //     });
   
-      var size_used=(req.files[1].size);
+  //     var size_used=(req.files[1].size);
   
-        findDocuments(dbo, function(docs) {
-        var path_to_delete;
-        findStorage(dbo,function(doc){
-          console.log(size_used)
-          console.log(doc[0].space+'space')
-          dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
-            if (err) throw err;
-            console.log("size updated");
-            db.close();
-          });
-        });
+  //       findDocuments(dbo, function(docs) {
+  //       var path_to_delete;
+  //       findStorage(dbo,function(doc){
+  //         console.log(size_used)
+  //         console.log(doc[0].space+'space')
+  //         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
+  //           if (err) throw err;
+  //           console.log("size updated");
+  //           db.close();
+  //         });
+  //       });
       
-      if(req.files[1].originalname==docs[0].video_file){
-        path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
-        file_system.unlink(path_to_delete,(err)=>{
-          if(err) throw err
-          console.log('deleted files')
-        });
-      }
+  //     if(req.files[1].originalname==docs[0].video_file){
+  //       path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+  //       file_system.unlink(path_to_delete,(err)=>{
+  //         if(err) throw err
+  //         console.log('deleted files')
+  //       });
+  //     }
 
-       });
-    });
+  //      });
+  //   });
 
-    res.redirect('/data')
+  //   res.redirect('/data')
 
-  }
+  // }
 
-  else if(req.files[1]==null){
-    var name=req.body.name;
-    var category=req.body.category;
-    var size=req.body.size;
-    var des=req.body.description;
-    var age=req.body.age;
-    var gender=req.body.gender;
-    var price=req.body.price;
-    var code=req.body.code;
-    var link=req.body.link;
-    var img_path="storage/fish/images/"+req.files[0].filename;
-    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
-       if (err) throw err;
-       var dbo = db.db("aquakingdom");
-       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:img_path,video_path:null,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
-       dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
-         if (err) throw err;
-         console.log("1 document inserted");
-       });
+  // else if(req.files[1]==null){
+  //   var name=req.body.name;
+  //   var category=req.body.category;
+  //   var size=req.body.size;
+  //   var des=req.body.description;
+  //   var age=req.body.age;
+  //   var gender=req.body.gender;
+  //   var price=req.body.price;
+  //   var code=req.body.code;
+  //   var link=req.body.link;
+  //   var img_path="storage/fish/images/"+req.files[0].filename;
+  //   mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+  //      if (err) throw err;
+  //      var dbo = db.db("aquakingdom");
+  //      var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:img_path,video_path:null,link:link,img_file:req.files[0].filename,video_file:null,img_originalname:req.files[0].originalname,video_originalname:null,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
+  //      dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+  //        if (err) throw err;
+  //        console.log("1 document inserted");
+  //      });
    
-       var size_used=(req.files[0].size);
+  //      var size_used=(req.files[0].size);
    
-         findDocuments(dbo, function(docs) {
-         var path_to_delete;
-         findStorage(dbo,function(doc){
-           console.log(size_used)
-           console.log(doc[0].space+'space')
-           dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
-             if (err) throw err;
-             console.log("size updated");
-             db.close();
-           });
-         });
+  //        findDocuments(dbo, function(docs) {
+  //        var path_to_delete;
+  //        findStorage(dbo,function(doc){
+  //          console.log(size_used)
+  //          console.log(doc[0].space+'space')
+  //          dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
+  //            if (err) throw err;
+  //            console.log("size updated");
+  //            db.close();
+  //          });
+  //        });
        
-       if(req.files[0].originalname==docs[0].img_file){
-         path_to_delete="src/storage/fish/images/"+docs[0].img_file;
-         file_system.unlink(path_to_delete,(err)=>{
-           if(err) throw err
-           console.log('deleted files')
-         });
-       }
+  //      if(req.files[0].originalname==docs[0].img_file){
+  //        path_to_delete="src/storage/fish/images/"+docs[0].img_file;
+  //        file_system.unlink(path_to_delete,(err)=>{
+  //          if(err) throw err
+  //          console.log('deleted files')
+  //        });
+  //      }
  
-        });
-     });
-     res.redirect('/data')
-   }
+  //       });
+  //    });
+  //    res.redirect('/data')
+  //  }
  
   else if((req.files[0].size>maxSize*1024*1024) || (req.files[1].size>maxSize*1024*1024)){
     res.send('Error 413->File is too large. Maximum size:40MB')
   }
 
-  else{
-    console.log('here')
-  //   var findDocuments = function(db, callback) {
-  //   var collection = db.collection('fish_details');
-  //   collection.find({code:req.params.id}).toArray(function(err, docs) {
-  //     if(err) throw err;
-  //     // assert.equal(err, null);
-  //     callback(docs);
-  //   });
-  // };
+//   else{
+//     console.log('here')
+//   //   var findDocuments = function(db, callback) {
+//   //   var collection = db.collection('fish_details');
+//   //   collection.find({code:req.params.id}).toArray(function(err, docs) {
+//   //     if(err) throw err;
+//   //     // assert.equal(err, null);
+//   //     callback(docs);
+//   //   });
+//   // };
   
-  //   var findStorage = function(db, callback) {
-  //   var collection = db.collection('space_usage');
-  //   collection.find({name:'Nilaksha Deemantha'}).toArray(function(err, doc) {
-  //     if(err) throw err;
-  //     // assert.equal(err, null);
-  //     callback(doc);
-  //   });
-  // };
+//   //   var findStorage = function(db, callback) {
+//   //   var collection = db.collection('space_usage');
+//   //   collection.find({name:'Nilaksha Deemantha'}).toArray(function(err, doc) {
+//   //     if(err) throw err;
+//   //     // assert.equal(err, null);
+//   //     callback(doc);
+//   //   });
+//   // };
 
- var name=req.body.name;
- var category=req.body.category;
- var size=req.body.size;
- var des=req.body.description;
- var age=req.body.age;
- var gender=req.body.gender;
- var price=req.body.price;
- var code=req.body.code;
- var link=req.body.link;
-// console.log(req.files[0])
- var image_path="storage/fish/images/"+req.files[0].filename;
- var video_path="storage/fish/videos/"+req.files[1].filename;
- mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
-    if (err) throw err;
-    var dbo = db.db("aquakingdom");
-    var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,video_path:video_path,link:link,img_file:req.files[0].filename,video_file:req.files[1].filename,img_originalname:req.files[0].originalname,video_originalname:req.files[0].originalname,img_size:req.files[0].size,video_size:req.files[1].size,availability:true};
-    dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
-      if (err) throw err;
-      console.log("1 document inserted");
-    });
+//  var name=req.body.name;
+//  var category=req.body.category;
+//  var size=req.body.size;
+//  var des=req.body.description;
+//  var age=req.body.age;
+//  var gender=req.body.gender;
+//  var price=req.body.price;
+//  var code=req.body.code;
+//  var link=req.body.link;
+// // console.log(req.files[0])
+//  var image_path="storage/fish/images/"+req.files[0].filename;
+// //  var video_path="storage/fish/videos/"+req.files[1].filename;
+//  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
+//     if (err) throw err;
+//     var dbo = db.db("aquakingdom");
+//     var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,link:link,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true};
+//     dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
+//       if (err) throw err;
+//       console.log("1 document inserted");
+//     });
 
-    var size_used=(req.files[0].size+req.files[1].size);
+//     var size_used=(req.files[0].size);
 
-      findDocuments(dbo, function(docs) {
-      var path_to_delete;
-      var size_updated=docs[0].img_size+docs[0].video_size;
+//       findDocuments(dbo, function(docs) {
+//       var path_to_delete;
+//       var size_updated=docs[0].img_size;
     
-      findStorage(dbo,function(doc){
-        console.log(size_used)
-        console.log(doc[0].space+'space')
-        console.log('original name'+req.files[0].originalname)
-        dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
-          if (err) throw err;
-          console.log("size updated");
-          db.close();
-        });
-      });
+//       findStorage(dbo,function(doc){
+//         console.log(size_used)
+//         console.log(doc[0].space+'space')
+//         console.log('original name'+req.files[0].originalname)
+//         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used-doc[0].space}}, function(err, res1) {
+//           if (err) throw err;
+//           console.log("size updated");
+//           db.close();
+//         });
+//       });
     
-    if(req.files[0].originalname==docs[0].img_file && req.files[1].originalname==docs[0].video_file ){
-      for(var i=0;i<2;i++){
-        if(i==0)
-          path_to_delete="src/storage/fish/images/"+docs[0].img_file;
-        else if(i==1)
-          path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+//     if(req.files[0].originalname==docs[0].img_file){
+//         path_to_delete="src/storage/fish/images/"+docs[0].img_file;
+
+//           // path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
       
-        file_system.unlink(path_to_delete,(err)=>{
-          if(err) throw err
-          console.log('deleted files')
-        });
-      }
-    }
+//         file_system.unlink(path_to_delete,(err)=>{
+//           if(err) throw err
+//           console.log('deleted files')
+//         });
 
-    else if(req.files[0].originalname==docs[0].img_file ){
-      path_to_delete="src/storage/fish/images/"+docs[0].img_file;
-      file_system.unlink(path_to_delete,(err)=>{
-        if(err) throw err
-        console.log('deleted files')
-      });
-    }
+//     }
 
-    else if(req.files[1].originalname==docs[0].video_file){
-      path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
-      file_system.unlink(path_to_delete,(err)=>{
-        if(err) throw err
-        console.log('deleted files')
-      });
-    }
+//     // else if(req.files[0].originalname==docs[0].img_file ){
+//     //   path_to_delete="src/storage/fish/images/"+docs[0].img_file;
+//     //   file_system.unlink(path_to_delete,(err)=>{
+//     //     if(err) throw err
+//     //     console.log('deleted files')
+//     //   });
+//     // }
 
-     });
-  });
- res.redirect('/data')
-}
+//     // else if(req.files[1].originalname==docs[0].video_file){
+//     //   path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+//     //   file_system.unlink(path_to_delete,(err)=>{
+//     //     if(err) throw err
+//     //     console.log('deleted files')
+//     //   });
+//     // }
+
+//      });
+//   });
+//  res.redirect('/data')
+// }
 
 });
 
@@ -601,17 +637,17 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
       if (err) throw err;
       console.log("Document updated");
     });
-    var size_used=0;
 
-    findDocuments(dbo, function(docs) {
-      size_used+=docs[0].space;
-      console.log(size_used)
-      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
-        if (err) throw err;
-        console.log("size updated");
-        db.close();
-      });
-    });
+    // findDocuments(dbo, function(docs) {
+    //   size_used+=docs[0].space;
+    //   console.log(size_used)
+    //   dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+    //     if (err) throw err;
+    //     console.log("size updated");
+    //     db.close();
+    //   });
+    // });
+
   });
  res.redirect('/user')
   }
@@ -631,6 +667,7 @@ app.post('/user_info',upload_admin.single('profile_img'),urlencodedParser,functi
   var about=req.body.about_me;
   var file=req.file;
   var img_path="storage/admin/"+file.filename;
+
   var findDocuments = function(db, callback) {
     var collection = db.collection('space_usage');
     collection.find({name:'Nilaksha Deemantha'}).toArray(function(err, docs) {
@@ -708,28 +745,14 @@ app.get('/fetch_details',urlencodedParser,function(req,res){
 app.get('/delete_data/:id',urlencodedParser,function(req,res){
   console.log(req.params)
 
-  var fish_count = function(db, callback) {
-    var collection = db.collection('fish_count');
-    collection.find().toArray(function(err, docs) {
-      if(err) throw err;
-      // assert.equal(err, null);
-      callback(docs);
-    });
-  };
-
-  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
-    if(err) throw err;
-    var dbo = db.db("aquakingdom");
-    fish_count(dbo, function(docs) {
-    console.log(docs);
-    var count=docs[0].count-1;  
-    dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
-      if (err) throw err;
-      console.log("Count updated");
-      db.close();
-    });
-  });
-});
+  // var fish_count = function(db, callback) {
+  //   var collection = db.collection('fish_count');
+  //   collection.find().toArray(function(err, docs) {
+  //     if(err) throw err;
+  //     // assert.equal(err, null);
+  //     callback(docs);
+  //   });
+  // };
 
   var removeproducts = function(db, callback) {
     db.collection('fish_details').deleteOne({code:req.params.id},
@@ -765,59 +788,59 @@ mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
   var dbo = db.db("aquakingdom");
   var size_updated;
 
+  findStorage(dbo, function(docs) {
+    console.log(docs);
+    var count=docs[0].count-1;  
+    
+    dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
+      if (err) throw err;
+      console.log("Count updated");
+    });
+  });
+
  findDocuments(dbo, function(docs) {
   var path_to_delete;
-  console.log(docs[0])
+  console.log(docs[0]);
+  size_updated=docs[0].img_size;
 
-  size_updated=docs[0].img_size+docs[0].video_size;
-
-  if(docs[0].img_file!=null && docs[0].video_file!=null){
-  for(var i=0;i<2;i++){
-    if(i==0)
+  if(docs[0].img_file!=null){
+    // if(i==0)
       path_to_delete="src/storage/fish/images/"+docs[0].img_file;
-    else if(i==1)
-      path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+    // else if(i==1)
+    //   path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
   
     file_system.unlink(path_to_delete,(err)=>{
       if(err) throw err
       console.log('deleted files')
     });
-  }
 }
 
-else if(docs[0].img_file!=null){
-    path_to_delete="src/storage/fish/images/"+docs[0].img_file;
-    file_system.unlink(path_to_delete,(err)=>{
-      if(err) throw err
-      console.log('deleted files')
-    });
-}
-
-else if(docs[0].video_file!=null){
-  path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
-  file_system.unlink(path_to_delete,(err)=>{
-    if(err) throw err
-    console.log('deleted files')
-  });
-}
-
- });
-
- findStorage(dbo,function(doc){
+findStorage(dbo,function(doc){
   console.log(size_updated)
   console.log(doc[0].space+'space');
-  dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_updated-doc[0].space}}, function(err, res1) {
+  dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-docs[0].img_size}}, function(err, res1) {
     if (err) throw err;
     console.log("size updated");
     db.close();
-    res.send({done:'done'})
+    res.send({done:'done'});
   });
   console.log('Hello')
 });
 
- removeproducts(dbo, function(results) {
-   console.log(results+'res')
+// else if(docs[0].video_file!=null){
+//   path_to_delete="src/storage/fish/videos/"+docs[0].video_file;
+//   file_system.unlink(path_to_delete,(err)=>{
+//     if(err) throw err
+//     console.log('deleted files')
+//   });
+// }
 
+ });
+
+
+ removeproducts(dbo, function(results) {
+   console.log(results+'res');
+   
  });   
 });
 });
@@ -832,7 +855,7 @@ else if(docs[0].video_file!=null){
 //load-fish-count
 app.get('/load_fish_count',urlencodedParser,function(req,res){
   var fish_count = function(db, callback) {
-    var collection = db.collection('fish_count');
+    var collection = db.collection('space_usage');
     collection.find().toArray(function(err, docs) {
       if(err) throw err;
       // assert.equal(err, null);
@@ -845,7 +868,7 @@ app.get('/load_fish_count',urlencodedParser,function(req,res){
     var dbo = db.db("aquakingdom");
     fish_count(dbo, function(docs) {
     console.log(docs);
-    res.json(docs)
+    res.json(docs);
   });
 });
 
@@ -936,14 +959,14 @@ app.get('/visibility_change_false/:field',urlencodedParser,function(req,res){
     var update_key={}
     update_key[field]=true;
     var updated={}
-    updated[field]=false
+    updated[field]=false;
     console.log(field)
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated}, function(err, res) {
+    dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated}, function(err, res1) {
       if (err) throw err;
       console.log("Document updated");
-      // res.json({message:'Success'})
+      res.json({message:'Success'})
     });
     db.close();
 });
@@ -960,12 +983,12 @@ app.get('/visibility_change_true/:field',urlencodedParser,function(req,res){
   mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
     var field=req.params.field;
     var update_key={}
-    update_key[field]=true;
+    update_key[field]=false;
     var updated={}
-    updated[field]=false
+    updated[field]=true;
     if (err) throw err;
     var dbo = db.db("aquakingdom");
-    dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated},function(err, res) {
+    dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated},function(err, res1) {
       if (err) throw err;
       console.log("Document updated");
       res.json({message:'Success'})

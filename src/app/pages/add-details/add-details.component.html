@@ -15,8 +15,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="gender"><b>Category</b></label><br>
-                                <select id="gender" name="category">
+                                <label for="category"><b>Category</b></label><br>
+                                <select id="category" name="category" onchange="getCode(this)">
                                     <option value="local-koi">Local-Koi</option>
                                     <option value="imported-koi">Imported-Koi</option>
                                 </select>
@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="age"><b>Age</b></label>
-                                <input type="number" class="form-control" id="age" name="age" placeholder="1" formControlName="age"
+                                <input type="text" class="form-control" id="age" name="age" placeholder="1 year" formControlName="age"
                                 [ngClass]="{'is-invalid':form.get('age').invalid && form.get('age').touched,'is-valid':form.get('age').touched && form.get('age').valid}">
                                 <div class='invalid-feedback'>
                                    <div>Age is Required</div>
@@ -48,6 +48,7 @@
                                 <select id="gender" name="gender">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
+                                    <option value="unknown">Unknown</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -60,10 +61,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="code"><b>Code</b></label>
-                                <input type="text" class="form-control" id="code" name="code" placeholder="1001B" formControlName="code"
-                                [ngClass]="{'is-invalid':form.get('code').touched && form.get('code').invalid,'is-valid':form.get('code').touched && form.get('code').valid}">
-                                <div class='invalid-feedback'>
-                                   <div>Code is Required</div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="code" disabled formControlName="code" [value]="fish_code"
+                                        [ngClass]="{'is-invalid':form.get('code').invalid,'is-valid':form.get('code').valid}">
+                                        <input style="display: none" name="code" value="{{fish_code}}">
+                                        <!-- <div class='invalid-feedback'>
+                                            <div>Code is Required</div>
+                                        </div> -->
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" id="get_code" (click)="addCode()" title="generate code"><i class="material-icons" style="color: red">refresh</i></a>
+                                    </div>
                                 </div>
                             </div> 
                             <div class="form-group">
@@ -77,7 +86,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*">   
-                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*">
+                                    <!-- <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*"> -->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,12 +99,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <!-- <div class="col">
                                         <div name="videoUploaded" id="videoUploaded">
                                             <video src="" id="myVideo" controls style="display: none"></video>
                                             <button class="btn1" id="del_video" style="display: none" ><i class="material-icons">delete_forever</i></button>
-                                        </div>
-                                    </div>
+                                        </div> 
+                                    </div> -->
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form1.submit()">Submit</button>
