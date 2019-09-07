@@ -22,40 +22,41 @@ $(document).on("click","#image_uploader",function(e){
     }
 
     $("#imgInp").change(function(){
+
         readURL(this);
     });
 });
 
 
-$(document).on("click","#video_uploader",function(e){
-    e.preventDefault();
-    $('#videoInp').click();
-    $('#videoUploaded').attr('class','container1');
-    function readURL(input) {
+// $(document).on("click","#video_uploader",function(e){
+//     e.preventDefault();
+//     $('#videoInp').click();
+//     $('#videoUploaded').attr('class','container1');
+//     function readURL(input) {
       
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-               // alert(e.target.result)
-                 $('#myVideo').removeAttr('style')
-                 $('#myVideo').attr('src',e.target.result);
-                 $('#myVideo').attr('width','100px');
-                 $('#myVideo').attr('height','200px');
-                 $('#del_video').removeAttr('style');
-            }
+//         if (input.files && input.files[0]) {
+//             var reader = new FileReader();
+//             reader.onload = function (e) {
+//                // alert(e.target.result)
+//                  $('#myVideo').removeAttr('style')
+//                  $('#myVideo').attr('src',e.target.result);
+//                  $('#myVideo').attr('width','100px');
+//                  $('#myVideo').attr('height','200px');
+//                  $('#del_video').removeAttr('style');
+//             }
             
-            reader.readAsDataURL(input.files[0]);
-        }
+//             reader.readAsDataURL(input.files[0]);
+//         }
 
-        else
-        alert("Upload a video")
-    }
+//         else
+//         alert("Upload a video")
+//     }
 
-    $("#videoInp").change(function(){
-        readURL(this);
-    });
+//     $("#videoInp").change(function(){
+//         readURL(this);
+//     });
 
-});
+// });
 
 // $(document).on("click","#item_image_uploader",function(e){
 //     e.preventDefault();
@@ -83,12 +84,51 @@ $(document).on("click","#video_uploader",function(e){
 // });
 
 $(document).on("click","#del",function(){
-    $('#imgInp').val("");
+
+    $('#imgInput').val("");
     $('#image').removeAttr('src')
     $('#del').attr('style','display:none');
     $('#container').removeAttr('class');
     $('#image').removeAttr('style');
+});
 
+$(document).on("click","#up_del",function(){
+
+    $('#imgInp1').val("");
+    $('#imgs_src').val("del");
+    $('#image1').removeAttr('src')
+    $('#up_del').attr('style','display:none');
+    $('#container1').removeAttr('class');
+    // $('#image').removeAttr('style');
+});
+
+$(document).on("click","#image_uploader1",function(e){
+    e.preventDefault();
+    $('#imgInp1').click();
+    $('#container1').attr('class','container1');
+    function readURL(input) {
+      
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                // alert(e.target.result)
+                $('#image1').attr('src',e.target.result);
+                //$('#image1').attr('style','width:60px;height:60px');
+                $('#up_del').removeAttr('style');
+                $('#imgs_src').val('not del');
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        else
+        alert("Upload an image")
+    }
+
+    $("#imgInp1").change(function(){
+        readURL(this);
+    });
 });
 
 $(document).on("click","#del_video",function(){
@@ -173,5 +213,6 @@ $(document).on('click','#delete_item',function(e){
 $(document).on('click','#update',function(e){
     e.preventDefault()
 })
+
 
 
