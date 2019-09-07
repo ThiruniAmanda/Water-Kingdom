@@ -5,6 +5,7 @@ import { checkEmpty } from 'app/shared/checkEmpty';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import {delteItem} from '../../../scripts/admin';
 declare function  disable_search_bar():any;
 @Component({
   selector: 'app-update-data',
@@ -17,6 +18,7 @@ export class UpdateDataComponent implements OnInit {
   data:any;
   sub: any;
   code:any;
+  isNull:any;
   isSelected:boolean;
   isSelectedCat:boolean;
   constructor(private fish_details_service:FishDetailsService,private route: ActivatedRoute,private router:Router) { }
@@ -36,7 +38,10 @@ export class UpdateDataComponent implements OnInit {
       });
 
     this.data=this.fish_details_service.getUpdateData(this.code)
-    console.log(this.data)
+    console.log(this.data);
+    if(this.data[0].img_path==null){
+      this.isNull=true;
+    }
 
     if(this.data[0].category=='imported-koi'){
       this.isSelectedCat=true;
@@ -44,6 +49,10 @@ export class UpdateDataComponent implements OnInit {
 
     else if(this.data[0].category=='local-koi'){
       this.isSelectedCat=false
+    }
+
+    else if(this.data[0].category=='unknown'){
+      this.isSelectedCat=false;
     }
 
     if(this.data[0].gender=='male'){
@@ -75,5 +84,15 @@ export class UpdateDataComponent implements OnInit {
     this.form.controls.price.valueChanges.subscribe(x=>this.form.controls.price.updateValueAndValidity());
     this.form.controls.code.valueChanges.subscribe(x=>this.form.controls.code.updateValueAndValidity());
 }
+
+removeNull(){
+  this.isNull=false;
+}
+
+updateIsNUll(){
+  this.isNull=true;
+}
+
+
 
 }

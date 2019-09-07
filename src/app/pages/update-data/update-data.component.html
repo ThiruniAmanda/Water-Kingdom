@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="age"><b>Age</b></label>
-                                <input type="number" class="form-control" id="age" name="age" placeholder="1" formControlName="age" value="{{data[0].age}}"
+                                <input type="text" class="form-control" id="age" name="age" placeholder="1 year" formControlName="age" value="{{data[0].age}}"
                                 [ngClass]="{'is-invalid':form.get('age').invalid ,'is-valid':form.get('age').valid}">
                                 <div class='invalid-feedback'>
                                    <div>Age is Required</div>
@@ -41,6 +41,7 @@
                                 <select id="gender" name="gender">
                                     <option value="male" [selected]="isSelected" >Male</option>
                                     <option value="female" [selected]="!isSelected">Female</option>
+                                    <option value="unknown" [selected]="!isSelected">Unknown</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -69,28 +70,29 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <a href="#" id="image_uploader" name="image_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp" name="imgInp" style="display:none" accept="image/*" value="">   
-                                    <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*" value="" >
+                                    <a href="#" id="image_uploader1" name="image_uploader" (click)="removeNull()"  class="btn btn-primary btn-circle" style="background-color: aqua"><img src="assets/img/images.png"  alt="Image" title="upload-image"></a> <input type="file" id="imgInp1" name="imgInp" style="display:none" accept="image/*" value="">   
+                                    <!-- <a href="#" id="video_uploader"  name="video_uploader"  class="btn btn-primary btn-circle" style="background-color: aqua;margin-left:40px"><img src="assets/img/video.png" title="upload_video" alt="upload-video"></a><input type="file" id="videoInp" name="videoInp" style="display: none" accept="video/*" value="" > -->
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
-                                        <div style="width:60px;height:60px;outline-color: black;outline-style:solid" name="imageUploaded" id="imageUploaded">
-                                            <div id="container" class="container1">
-                                                <img src="{{data[0].img_path}}" name="image" id="image" style="width:60px;height:60px">
-                                                <button class="btn1" id="del" ><i class="material-icons">delete_forever</i></button>
+                                        <div *ngIf="!isNull" style="width:60px;height:60px;outline-color: black;outline-style:solid" name="imageUploaded" id="imageUploaded1">
+                                            <div id="container1" class="container1">
+                                                <img src="{{data[0].img_path}}" name="image" id="image1" style="width:60px;height:60px">
+                                                <button class="btn1" id="up_del" (click)="updateIsNUll()"><i class="material-icons">delete_forever</i></button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <!-- <div class="col">
                                         <div name="videoUploaded" id="videoUploaded" class="container1" style="outline-color: black;outline-style:solid">
                                             <video src="{{data[0].video_path}}" id="myVideo" controls  height="200px" width="100px" ></video>
                                             <button class="btn1" id="del_video" ><i class="material-icons">delete_forever</i></button>
                                         </div>
-                                    </div>
-                                    <input name="img_src" value="{{data[0].img_path}}" style="display: none">
-                                    <input name="video_src" value="{{data[0].video_path}}" style="display: none">
+                                    </div> -->
+                                    <input name="img_src" [value]="image_path" id="imgs_src" style="display: none">
+                                    <input name="codes" id="codes" [value]="code" style="display: none">
+                                    <!-- <input name="video_src" value="{{data[0].video_path}}" style="display: none"> -->
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="form3.submit()">Submit</button>

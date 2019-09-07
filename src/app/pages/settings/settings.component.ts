@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { comparePassword } from 'app/shared/confirm-equal-validator.directive';
 import { FishDetailsService } from 'app/services/fish_details.service';
+import {visibility} from '../../../scripts/visibility';
 declare function  disable_search_bar():any;
 @Component({
   selector: 'app-settings',
@@ -16,6 +17,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     disable_search_bar();
+    visibility();
     this.fish_details_service.loadVisibility().subscribe((data)=>{
       this.visibility=data;
       console.log(this.visibility[0].name)
@@ -29,7 +31,6 @@ export class SettingsComponent implements OnInit {
   }
 
   changeView(field:string){
-    alert(field)
     this.fish_details_service.changeVisibilityFalse(field).subscribe((data)=>{
       console.log(data)
       this.fish_details_service.loadVisibility().subscribe((data)=>{

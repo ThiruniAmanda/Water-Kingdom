@@ -12,7 +12,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
     { path: '/add-fish-details',   title: 'Add Fish Details',       icon:'nc-simple-add',    class: '' },
     { path: '/user',          title: 'User Profile',      icon:'nc-single-02',  class: '' },
-    { path: '/data',         title: 'Items and Fish List',   icon:'nc-tile-56',    class: '' },
+    { path: '/data',         title: 'Fish List',   icon:'nc-tile-56',    class: '' },
 ];
 
 @Component({

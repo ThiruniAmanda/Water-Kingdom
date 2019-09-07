@@ -235,6 +235,7 @@ export class DashboardComponent implements OnInit{
     getCount(){
       this.fish_details.loadFishCount().subscribe((data)=>{
         this.fish_count=data;
+        console.log(this.fish_details[0].count);
       })
     }
 }
