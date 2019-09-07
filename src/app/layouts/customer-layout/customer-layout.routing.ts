@@ -24,7 +24,7 @@ export const CustomerLayoutRoutes: Routes = [
     { path: 'medicine', component: MedicineComponent },
     { path: 'localkoi', component: CustomerLocalkoiComponent },
     { path:'localkoi-view/:code', component:CustomerLocalKoiViewComponent},
-    { path: 'fishdetails', component: FishdetailsComponent },
+    { path: 'view_details/:code', component: FishdetailsComponent },
     { path: 'localkoi', component: CustomerLocalkoiComponent },
     { path:'login'  ,component:LoginComponent}
 ];

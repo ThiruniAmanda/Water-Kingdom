@@ -1,96 +1,29 @@
-<!-- <header>
-  
-    <div class="description">
-        <h1>Imported Koi Stock</h1>
-    </div>
-    
-</header> 
-
-<div class="container features">
-    <div class="row">
-    <div class="gallery col-xl-3 col-lg-4 col-md-6 col-sm-12">
-        <a href="fishdetails" class="d-block ">
-        <img alt="" src="assets/img/img2.jpg" class="img-fluid">
-        </a>
-        
-    </div>
-
-    <div class="gallery col-xl-3 col-lg-4 col-md-6 col-sm-12">
-         <a href="assets/img/img17.jpg" class="d-block">
-        <img src="assets/img/img17.jpg" class="img-fluid">
-        </a>
-        
-    </div>
-
-    <div class="gallery col-xl-3 col-lg-4 col-md-6 col-sm-12">
-        <a href="assets/img/img18.jpg" class="d-block">
-        <img src="assets/img/img18.jpg" class="img-fluid">
-        </a>
-       
-    </div>
-    <div class="gallery col-xl-3 col-lg-4 col-md-6 col-sm-12">
-        <a href="assets/img/img4.jpg" class="d-block">
-        <img src="assets/img/img4.jpg" class="img-fluid">
-        </a>
-        
-        </div>
-    </div>
-    
-</div> -->
 <header>
     <div class="description">
-        <h1>Imported koi stock</h1>
+        <h1>IMPORTED KOI STOCK</h1>
     </div>    
 </header>
 <div class="container-fluid">
     <div class="row card-group">
-        <div class="col-xl-3 col-lg-4  col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-4  col-md-6 col-sm-12" *ngFor="let importedkoi of fish_details" >
+            
             <div class="card">
-                <a href="assets/img/img1.jpg">
-                <img class="card-img-top" src="assets/img/img1.jpg" alt="Card image cap">
+                <a href="view_details/{{importedkoi.code}}">
+                <img class="card-img-top" [src]="importedkoi.img_path" alt="Card image cap">
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">Name of the fish</h5>
-                    
-                    <a href="fishdetails" class="btn btn-primary" >View Details</a>
+                <div class="card-body" >
+                    <h6 class="card-title">{{importedkoi.name}}</h6>
+                <div class="row">
+                    <div class="col-6">
+                    <a href="view_details/{{importedkoi.code}}" class="btn btn-primary" >View Details</a>
+                    </div>
+                    <div class="col-6" style="text-align: center" >
+                    <p *ngIf="importedkoi.availability==false" ><b style="color:rgb(199, 9, 9)">SOLD OUT</b></p>
+                    </div>
+                </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-lg-4  col-md-6 col-sm-12">
-            <div class="card" >
-                <img class="card-img-top" src="assets/img/img1.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Name of the fish</h5>
-                    <!-- <p>Price</p>
-                    <p>Status</p>
-                    <p>Gender</p> -->
-                    <a href="#" class="btn btn-primary" >View Details</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4  col-md-6 col-sm-12">
-            <div class="card">
-                <img class="card-img-top" src="assets/img/img1.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Name of the fish</h5>
-                    <!-- <p>Price</p>
-                    <p>Status</p>
-                    <p>Gender</p> -->
-                    <a href="#" class="btn btn-primary" >View Details</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <img class="card-img-top" src="assets/img/img1.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Name of the fish</h5>
-                    <!-- <p>Price</p>
-                    <p>Status</p>
-                    <p>Gender</p> -->
-                    <a href="#" class="btn btn-primary" >View Details</a>
-                </div>
-            </div>
+        
         </div>
     </div>
-</div>    
+</div>   

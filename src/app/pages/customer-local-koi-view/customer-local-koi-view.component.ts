@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalKoiDetailsService } from 'app/services/local-koi-details.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer-local-koi-view',
@@ -9,9 +10,8 @@ import { LocalKoiDetailsService } from 'app/services/local-koi-details.service';
 export class CustomerLocalKoiViewComponent implements OnInit {
   fish_details: any;
   code:any;
-  route: any;
   sub: any;
-  constructor(private local_koi_details:LocalKoiDetailsService) { }
+  constructor(private local_koi_details:LocalKoiDetailsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.sub = this.route
