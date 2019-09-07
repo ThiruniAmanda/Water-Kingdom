@@ -212,6 +212,14 @@ $(document).on('click','#delete_item',function(e){
 
 $(document).on('click','#update',function(e){
     e.preventDefault()
+});
+
+function getCode(value){
+    $('#get_code')[0].click();
+}
+
+$(document).on('click','#get_code',function(e){
+    e.preventDefault();
 })
 
 

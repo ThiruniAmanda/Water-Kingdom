@@ -256,11 +256,10 @@ console.log(req.files[0].filename)
     findDocuments(dbo, function(docs) {
       console.log(docs);
       size_used+=docs[0].space;
-      var fish_count=docs[0].count+1;
       console.log('size_used'+size_used)
       console.log('original path'+req.files[0].originalname)
 
-      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used,count:fish_count}}, function(err, res) {
+      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
         if (err) throw err;
         console.log("size updated");
         db.close();
@@ -838,8 +837,8 @@ findStorage(dbo,function(doc){
 
 
  removeproducts(dbo, function(results) {
-   console.log(results+'res')
-
+   console.log(results+'res');
+   
  });   
 });
 });

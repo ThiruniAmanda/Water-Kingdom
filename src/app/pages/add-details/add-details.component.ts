@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginValidationsService } from 'app/services/login-validations.service';
 import { Router } from '@angular/router';
+import randomString from 'randomstring';
 declare function  disable_search_bar():any;
 @Component({
   selector: 'app-add-details',
@@ -11,7 +12,7 @@ declare function  disable_search_bar():any;
 export class AddDetailsComponent implements OnInit {
 
   form:FormGroup;
-  
+  fish_code:string='LK_9C9';
   constructor(private login_validation:LoginValidationsService,private router:Router) { }
 
   ngOnInit() {
@@ -28,9 +29,38 @@ export class AddDetailsComponent implements OnInit {
       age:new FormControl('',Validators.required),
       size:new FormControl('',Validators.required),
       price:new FormControl('',Validators.required),
-      code:new FormControl('',Validators.required),
-    })
+      code:new FormControl({value:this.fish_code,disabled:true},Validators.required),
+    });
+  }
+
+  generateCode(category:string){
+
+    if(category=='local-koi'){
+      const code=randomString.generate({
+        charset:'hex',
+        capitalization:'uppercase',
+        length:3
+      });
+      return 'LK_'+code;
+    }
+
+    else if(category=='imported-koi'){
+      const code=randomString.generate({
+        charset:'hex',
+        capitalization:'uppercase',
+        length:3
+      });
+      return 'IM_'+code
+    }
 
   }
+
+  addCode(){
+      let category=(<HTMLInputElement>document.getElementById('category')).value;
+      let code=this.generateCode(category);
+      // (<HTMLInputElement>document.getElementById('code')).value=code;
+      this.fish_code=code;
+      return code;
+    }
 
 }
