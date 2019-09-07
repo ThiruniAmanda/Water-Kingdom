@@ -74,21 +74,6 @@ app.post('/fish_det',upload.any(),urlencodedParser,function(req,res,next){
     });
   }
 
-
-  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
-    if(err) throw err;
-    var dbo = db.db("aquakingdom");
-    fish_count(dbo, function(docs) {
-    console.log("count:"+docs[0].count);
-    var count=docs[0].count+1;  
-    dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
-      if (err) throw err;
-      console.log("Count updated");
-      db.close();
-    });
-  });
-});
-
 if(req.files[0]==null){
  
     var name=req.body.name;
@@ -110,6 +95,15 @@ if(req.files[0]==null){
          if (err) throw err;
          console.log("1 document inserted");
        });
+       fish_count(dbo, function(docs) {
+        console.log("count-updating:"+docs[0].count);
+        var count=docs[0].count+1;  
+        dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
+          if (err) throw err;
+          console.log("Count updated");
+          db.close();
+        });
+      });
      
       //  var size_used=0;
       //  findDocuments(dbo, function(docs) {
@@ -258,10 +252,11 @@ console.log(req.files[0].filename)
     findDocuments(dbo, function(docs) {
       console.log(docs);
       size_used+=docs[0].space;
+      var count=docs[0].count+1;
       console.log('size_used'+size_used)
       console.log('original path'+req.files[0].originalname)
 
-      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res) {
+      dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used,count:count}}, function(err, res) {
         if (err) throw err;
         console.log("size updated");
         db.close();
@@ -1215,6 +1210,27 @@ app.get('/all_importedKoi_details',urlencodedParser,function(req,res){
   });
 });
 
+
+
+
+//load-fish-visiblity-customer
+app.get('/load_visibility_fish',urlencodedParser,function(req,res){
+
+  var visibility= function(db, callback) {
+    var collection = db.collection('visible_of_fields');
+    collection.find().toArray(function(err, docs) {
+      if(err) throw err;
+      callback(docs);
+    });
+  };
+  mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
+    if(err) throw err;
+    var dbo = db.db("aquakingdom");
+    visibility(dbo,function(docs){
+      res.json(docs);
+    })
+  });
+  });
 
 
 

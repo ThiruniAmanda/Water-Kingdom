@@ -13,6 +13,7 @@ export class FishdetailsComponent implements OnInit {
   fish_details:any;
   description:any;
   youtube_link:any;
+  visibility_details:any;
   video:any;
   constructor(private local_koi_details:LocalKoiDetailsService,private route:ActivatedRoute) { }
 
@@ -25,6 +26,7 @@ export class FishdetailsComponent implements OnInit {
     });
 
   this.loadFishDetails(this.code);
+  this.loadVisibility();
 
   }
 
@@ -35,6 +37,11 @@ export class FishdetailsComponent implements OnInit {
     this.youtube_link=this.fish_details[0].link;
     this.video=this.fish_details[0].video_path;
     console.log(this.youtube_link);
+  }
+
+  loadVisibility(){
+    this.visibility_details=this.local_koi_details.laodVisibility();
+    console.log(this.visibility_details)
   }
 
 }
