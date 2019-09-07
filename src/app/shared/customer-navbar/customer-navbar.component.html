@@ -1,50 +1,79 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="height:90px ">
-<div class="container-fluid">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
   <a class="navbar-brand" href="#">
-    <img src="assets/img/waterkingdom.png" alt="water-kingdom" sizes="96x90">The Water Kingdom
+    <img src="assets/img/waterkingdom.png" alt="water-kingdom" sizes="96x90"><b>The Water Kingdom</b>
   </a>
   
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="margin-left: 0"></span>
+      <button class="navbar-toggler" type="button" style="height:35px;margin-right:10px" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="margin-left:-8px;margin-top:0px"></span>
       </button>
       
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item mr-4">
+            <a class="nav-link" href="home"><b>Home</b><span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item dropdown mx-auto">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Koi </a>
+          <li class="nav-item dropdown mr-4">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Our Koi</b> </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="localkoi">Sri Lankan Koi</a>
-              <a class="dropdown-item" href="importedkoi">Imported Koi</a>
+              <a class="dropdown-item" href="localkoi"><b style="color:black">Sri Lankan Koi</b></a>
+              <a class="dropdown-item" href="importedkoi"><b style="color:black">Imported Koi</b></a>
             </div>
           </li>
-          <li class="nav-item dropdown mx-auto">
+          <li class="nav-item dropdown mr-4">
             <div class="dropdown">
             <a class="nav-link dropdown-toggle" role="button" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Products
+              <b>Products</b>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="food">Food</a>
-              <a class="dropdown-item" href="filters">Filters</a>
-              <a class="dropdown-item" href="medicine">Medicine</a>
+              <a class="dropdown-item" href="food"><b style="color:black">Food</b></a>
+              <a class="dropdown-item" href="filters"><b style="color:black">Filters</b></a>
+              <a class="dropdown-item" href="medicine"><b style="color:black">Medicine</b></a>
             </div>
             </div>
           </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="aboutus">About Us</a>
+          <li class="nav-item mr-4">
+            <a class="nav-link" href="aboutus"><b>About Us</b></a>
           </li>
-          <li class="nav-item mx-auto">
-            <a class="nav-link" href="contact">Contact</a>
+          <li class="nav-item mr-4">
+            <a class="nav-link" href="contact"><b>Contact</b></a>
           </li>
-          <!-- <li class="nav-item mx-auto" *ngIf="!isLoggedIn">
-            <a class="btn  btn-outline-success my-2 my-sm-0" id="login" style="color:white" href="login">Log-in</a>
-          </li>
-          <li class="nav-item mx-auto" *ngIf="isLoggedIn">
-            <a class="btn  btn-outline-success my-2 my-sm-0" style="color:white" href="home" (click)="destroy_token()">Log-Out</a>
-          </li> -->
         </ul>
       </div>   
-      </div>
     </nav>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav> -->
