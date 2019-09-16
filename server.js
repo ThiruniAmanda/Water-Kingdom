@@ -1044,6 +1044,13 @@ try{
   });
   
   
+
+
+
+  //image-uploader
+  app.post('/image_uploader',urlencodedParser,function(req,res){
+    res.send('success')
+  })
   
   
   
