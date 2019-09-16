@@ -42,6 +42,7 @@ $(document).on("click","#image_uploader",function(e){
             pro_val.style.width=(Math.floor((e.loaded/e.total)*100))+'%';
         }
 
+
         xhr.upload.onloadend=function(e){
             // upd.classList.remove('visible');
            
