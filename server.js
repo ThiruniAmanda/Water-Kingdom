@@ -850,23 +850,34 @@ try{
   
   //load-fish-count
   app.get('/load_fish_count',urlencodedParser,function(req,res){
-    var fish_count = function(db, callback) {
-      var collection = db.collection('space_usage');
-      collection.find().toArray(function(err, docs) {
-        if(err) res.send('Error loading documents');
-        // assert.equal(err, null);
-        callback(docs);
-      });
-    };
+  //   var fish_count = function(db, callback) {
+  //     var collection = db.collection('space_usage');
+  //     collection.find().toArray(function(err, docs) {
+  //       if(err) res.send('Error loading documents');
+  //       // assert.equal(err, null);
+  //       callback(docs);
+  //     });
+  //   };
   
-    mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
-      if(err) res.send('Databse loading error');
-      var dbo = db.db("aquakingdom");
-      fish_count(dbo, function(docs) {
-      console.log(docs);
-      res.json(docs);
+  //   mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true }, function(err, db){
+  //     if(err) res.send('Databse loading error');
+  //     var dbo = db.db("aquakingdom");
+  //     fish_count(dbo, function(docs) {
+  //     console.log(docs);
+  //     res.json(docs);
+  //   });
+  // });
+
+  mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+    if (err) res.send('Databse loading error');
+    var dbo = db.db("aquakingdom");
+    dbo.collection("fish_details").count({},function(err, res1) {
+       if(err) res.send("Error counting");
+       else res.send({count:res1});
     });
-  });
+    db.close();
+});
+
   
   });
   
@@ -992,6 +1003,44 @@ try{
       db.close();
   });
   
+  });
+
+
+
+
+
+
+
+  //get-localkoi-fish-count
+  app.get('/get_localkoi_count',urlencodedParser,function(req,res){
+    mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+      if (err) res.send('Databse loading error');
+      var dbo = db.db("aquakingdom");
+      dbo.collection("fish_details").count({category:'local-koi'},function(err, res1) {
+         if(err) res.send("Error counting");
+         else res.send({count:res1});
+      });
+      db.close();
+  });
+
+  });
+
+
+
+
+
+
+  //get-imported-koi-count
+  app.get('/get_importedkoi_count',urlencodedParser,function(req,res){
+    mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
+      if (err) res.send('Databse loading error');
+      var dbo = db.db("aquakingdom");
+      dbo.collection("fish_details").count({category:'imported-koi'},function(err, res1) {
+         if(err) res.send("Error counting");
+         else res.send({count:res1});
+      });
+      db.close();
+  });
   });
   
   
