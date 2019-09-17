@@ -2,6 +2,7 @@ $(document).on("click","#image_uploader",function(e){
     e.preventDefault();
     $('#imgInp').click();
     $('#container').attr('class','container1');
+    let pro_val=document.getElementById('pro_val');
     function readURL(input) {
       
         if (input.files && input.files[0]) {
@@ -23,8 +24,71 @@ $(document).on("click","#image_uploader",function(e){
 
     $("#imgInp").change(function(){
 
+        let xhr=new XMLHttpRequest();
+        var params="success";
+
+        // var formData = new FormData();
+        // formData.append("imgInp", document.getElementById("imgInp").files[0]);
+        xhr.upload.onloadstart=function(e){
+            console.log('started');
+            $('.progress').removeAttr('style');
+            // upd.classList.add('visible');
+            pro_val.innerHTML='0%';
+            console.log(e.lengthComputable)
+        }
+
+        xhr.upload.onprogress=function(e){
+            pro_val.innerHTML=(Math.floor((e.loaded/e.total)*100))+'%';
+            console.log(pro_val.innerHTML)
+            pro_val.style.width=(Math.floor((e.loaded/e.total)*100))+'%';
+        }
+
+
+        xhr.upload.onloadend=function(e){
+            // upd.classList.remove('visible');
+           
+        }
+
+        xhr.upload.onerror=function(e){
+            document.getElementById('message').innerHTML="Error Uplaoding";
+            $('.progress').attr('style','display:none');
+        }
+               
+        xhr.open("POST", "http://localhost:4600/image_uploader", true);
+        xhr.send(params);
         readURL(this);
+
     });
+
+    // fi.addEventListener('change',function(){
+    //     let xhr=new XMLHttpRequest();
+    //     var formData = new FormData();
+    //     formData.append("imgInp", document.getElementById("imgInp").files[0]);
+    //     xhr.upload.onloadstart=function(e){
+    //         console.log('started')
+    //         upd.classList.add('visible');
+    //         upd.value=0;
+    //         upd.max=e.total;
+    //         msg.textContent='uploading'
+    //     }
+
+    //     xhr.upload.onprogress=function(e){
+    //         console.log('ko')
+    //         upd.value=e.loaded;
+    //         upd.max=e.total;
+    //     }
+
+    //     xhr.upload.onloadend=function(e){
+    //         console.log('ko')
+    //         upd.classList.remove('visible');
+    //         msg.textContent='finish';
+    //         readURL(this);
+    //     }
+    //     xhr.open("POST", "/add-fish-details", true);
+    //     xhr.send(formData);
+    // })
+
+    
 });
 
 
@@ -90,6 +154,7 @@ $(document).on("click","#del",function(){
     $('#del').attr('style','display:none');
     $('#container').removeAttr('class');
     $('#image').removeAttr('style');
+    $('.progress').attr('style','display:none');
 });
 
 $(document).on("click","#up_del",function(){
@@ -106,6 +171,7 @@ $(document).on("click","#image_uploader1",function(e){
     e.preventDefault();
     $('#imgInp1').click();
     $('#container1').attr('class','container1');
+    let pro_val=document.getElementById('up_pro_val');
     function readURL(input) {
       
         if (input.files && input.files[0]) {
@@ -127,6 +193,35 @@ $(document).on("click","#image_uploader1",function(e){
     }
 
     $("#imgInp1").change(function(){
+        let xhr=new XMLHttpRequest();
+        var params="success";
+        xhr.upload.onloadstart=function(e){
+            console.log('started');
+            $('#up_progress').removeAttr('style');
+            // upd.classList.add('visible');
+            pro_val.innerHTML='0%';
+            console.log(e.lengthComputable)
+        }
+
+        xhr.upload.onprogress=function(e){
+            pro_val.innerHTML=(Math.floor((e.loaded/e.total)*100))+'%';
+            console.log(pro_val.innerHTML)
+            pro_val.style.width=(Math.floor((e.loaded/e.total)*100))+'%';
+        }
+
+
+        xhr.upload.onloadend=function(e){
+            // upd.classList.remove('visible');
+           
+        }
+
+        xhr.upload.onerror=function(e){
+            document.getElementById('up_message').innerHTML="Error Uplaoding";
+            $('#up_progress').attr('style','display:none');
+        }
+               
+        xhr.open("POST", "http://localhost:4600/image_uploader", true);
+        xhr.send(params);
         readURL(this);
     });
 });
