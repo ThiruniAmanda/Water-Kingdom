@@ -3,7 +3,7 @@ import { LoginValidationsService } from 'app/services/login-validations.service'
 import { error } from '@angular/compiler/src/util';
 import { Router } from '@angular/router';
 import { RemembermeService } from 'app/services/remember_me.service';
-
+declare function redirect_to_dashboard():any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -50,7 +50,8 @@ export class LoginComponent implements OnInit {
 
       if(this.success.success){
         this.login_validations.logIn();
-        this._router.navigateByUrl('/dashboard');
+        redirect_to_dashboard();
+       // this._router.navigateByUrl('/dashboard');
       }
 
       else{
