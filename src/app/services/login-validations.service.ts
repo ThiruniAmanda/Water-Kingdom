@@ -10,6 +10,7 @@ export class LoginValidationsService {
     constructor(private http: HttpClient) { }
 
     checkCredentials(email:string,password:string){
+        console.log(password)
       //  const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
         return this.http.post(`${this._url}/login_credentials`,[email,password]);
     }
@@ -17,7 +18,7 @@ export class LoginValidationsService {
     logIn(){
         localStorage.setItem('loggedIn','true');
         localStorage.setItem('session','ok');
-    }
+    }6666
 
     logOut(){
         localStorage.removeItem('loggedIn');

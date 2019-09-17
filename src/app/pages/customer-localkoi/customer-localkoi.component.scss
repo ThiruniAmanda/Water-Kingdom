@@ -23,7 +23,10 @@ header {
   .card{
     margin-top: 20px;
     margin-bottom: 20px;
-    background:rgba(212, 245, 250, 0.877);
+    // margin-left: 10px;
+    // margin-right: 10px;
+    border-radius: 0;
+    background:rgba(191, 239, 247, 0.877);
   }
   .container-fluid{
     padding: 30px;

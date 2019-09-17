@@ -8,9 +8,9 @@
         <div class="col-xl-3 col-lg-4  col-md-6 col-sm-12" *ngFor="let localkoi of fish_details" >
             <div class="card" >
                 <a href="view_details/{{localkoi.code}}">
-                <img class="card-img-top" [src]="localkoi.img_path" alt="Card image cap">
+                <img class="card-img-top" [src]="localkoi.img_path" alt="Card image cap" style="padding-left: 46px;padding-right: 46px">
                 </a>
-                <div class="card-body">
+                <div class="card-body" style="background-color:white">
                     <h6 class="card-title">{{localkoi.name}}</h6>
                     <div class="row">
                         <div class="col-6">

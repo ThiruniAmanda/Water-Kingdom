@@ -299,16 +299,18 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
   if(req.body.img_src!='del'){
     console.log('not null '+req.body.img_src)
     var name=req.body.name;
+   console.log(name)
     var category=req.body.category;
     var size=req.body.size;
     var des=req.body.description;
     var age=req.body.age;
     var gender=req.body.gender;
     var price=req.body.price;
-    var code=req.body.code;
+    var code=req.body.codes;
     var link=req.body.link;
     var file_size=req.files[0].size;
     var image_path="storage/fish/images/"+req.files[0].filename;
+    console.log(image_path)
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
        if (err) throw err;
        var dbo = db.db("aquakingdom");
@@ -324,7 +326,9 @@ app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,n
               console.log('deleted files')
             });
            }
-          var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,link:link,img_path:image_path,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true};
+           console.log('Image Path:'+image_path);
+           console.log('Code'+code);
+          var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,link:link,img_path:image_path,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true};
           dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
             if (err) throw err;
             console.log("updated");
