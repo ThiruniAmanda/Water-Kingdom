@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $ : any;
 
 @Component({
   selector: 'app-food',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoodComponent implements OnInit {
 
+  
+
   constructor() { }
 
   ngOnInit() {
+    $('a').click(function() {
+      $('#myModal img').attr('src', $(this).attr('data-img-url')); 
+  });
+
   }
 
 }

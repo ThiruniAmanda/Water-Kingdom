@@ -54,11 +54,30 @@
         <!-- <div class="embed-responsive embed-responsive-16by9">   
             <video controls [src]="video"></video>
         </div> -->
-        <div class="image" *ngFor="let localkoi of fish_details">
+        <!-- <div class="image" *ngFor="let localkoi of fish_details">
             <a [href]="localkoi.img_path" class="d-block" *ngIf="visibility_details[0].img_path==true">
             <img [src]="localkoi.img_path">
             </a>
-    </div>   
+        </div>    -->
+        <div class="image" *ngFor="let localkoi of fish_details">
+            <a href="#myModal" data-toggle="modal"  *ngIf="visibility_details[0].img_path==true">
+                <img [src]="localkoi.img_path"> 
+            </a>
+            <div class="modal fade" id="myModal" >
+                <div class="modal-dialog  modal-xl" >
+                    <div class="modal-content" style="background-color: transparent"> 
+                        <div class="modal-header"> 
+                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                        </div>
+                      
+                        <div class="modal-body">
+                            <img [src]="localkoi.img_path" style="margin: 0; padding: 0" >
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
     </div>
 
     </div>

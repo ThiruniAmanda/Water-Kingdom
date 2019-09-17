@@ -30,6 +30,7 @@
               "src/scripts/admin.js",
               "src/scripts/customer-navbar.js",
               "src/scripts/log_out.js"
+              
             ]
           },
           "configurations": {
