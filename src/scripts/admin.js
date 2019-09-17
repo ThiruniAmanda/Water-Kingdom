@@ -294,11 +294,11 @@ $(document).on('click','#nav-search',function(e){
 });
 
 function enable_search_bar(){
-    $('#nav-search-item').removeAttr('disabled');
+    $('#nav_form').removeAttr('style');
 }
 
 function disable_search_bar(){
-    $('#nav-search-item').attr('disabled','disabled');
+    $('#nav_form').attr('style','display:none');
 }
 
 $(document).on('click','#delete_item',function(e){
@@ -315,7 +315,13 @@ function getCode(value){
 
 $(document).on('click','#get_code',function(e){
     e.preventDefault();
-})
+});
+
+function redirect_to_dashboard(){
+    
+    $('#redirect_to')[0].click();
+}
+
 
 
 

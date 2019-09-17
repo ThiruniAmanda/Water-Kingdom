@@ -20,7 +20,7 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="password" id="password" class="form-control input_pass"  placeholder="password">
+                        <input type="password" name="password" id="password" class="form-control input_pass"  placeholder="password" (keyup.enter)="isAdmin()">
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+<a href="dashboard" id="redirect_to" style="display: none"></a> 
