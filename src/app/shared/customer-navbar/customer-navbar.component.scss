@@ -30,3 +30,28 @@ img{
     //     border-radius: 1px;
        
     // }
+    
+    .topnav .items {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      // text-decoration: none;
+      font-size: 17px;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .topnav .items:hover {
+      border-bottom: 3px solid red;
+    }
+    
+    .topnav a.active {
+      border-bottom: 3px solid red;
+    }
+
+   //  .topnav {
+   //    overflow: hidden;
+   //    background-color: black;
+   //    color: white
+   //  }

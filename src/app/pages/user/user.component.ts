@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { comparePassword } from 'app/shared/confirm-equal-validator.directive';
 import { UserProfileService } from 'app/services/user-profile.service';
@@ -12,7 +12,7 @@ declare function  disable_search_bar():any;
     styleUrls: ['./user.component.scss']
 })
 
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit,ErrorHandler{
 
     form:any;
     error_message:any=false;
@@ -41,6 +41,11 @@ export class UserComponent implements OnInit{
             console.log(data);
             console.log(this.profile_data.img_path)
         });
+    }
+
+    handleError(error){
+       console.error('An error occurred:', error.message);  
+      
     }
 }
 
