@@ -38,7 +38,7 @@ import { DeletedFishDetailsComponent } from './pages/deleted-fish-details/delete
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
-    UserIdleModule.forRoot({idle: 3600, timeout: 300, ping: 120}),
+    UserIdleModule.forRoot({idle:3600, timeout: 300, ping: 120}),
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),

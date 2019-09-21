@@ -276,7 +276,7 @@ try{
   
   //update-fish-details
   app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,next){
-  
+   console.log(req.body.codes)
     var findDocuments = function(db, callback) {
       var collection = db.collection('fish_details');
       collection.find({code:req.body.codes}).toArray(function(err, docs) {
@@ -300,16 +300,16 @@ try{
     if(req.body.img_src!='del'){
       console.log('not null '+req.body.img_src)
       var name=req.body.name;
-      var category=req.body.category;
+      var category=req.body.cat;
       var size=req.body.size;
       var des=req.body.description;
       var age=req.body.age;
       var gender=req.body.gender;
       var price=req.body.price;
-      var code=req.body.code;
+      var code=req.body.codes;
       var link=req.body.link;
-      var file_size=req.files[0].size;
-      var image_path="storage/fish/images/"+req.files[0].filename;
+      console.log(des);
+     
       mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
          if (err) throw err;
          var dbo = db.db("aquakingdom");
@@ -325,20 +325,32 @@ try{
                 console.log('deleted files')
               });
              }
-            var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,link:link,img_path:image_path,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true,status:'active'};
+             console.log('code:'+code);
+             if(req.files[0]){
+              var file_size=req.files[0].size;
+              var image_path="storage/fish/images/"+req.files[0].filename;
+              var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,link:link,img_path:image_path,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true,status:'active'};
+              dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
+                if (err) res.send('Error updating');
+                console.log("updated");
+              });
+              findStorage(dbo,function(doc){
+                dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-docs[0].size+file_size}}, function(err, res1) {
+                  if (err) res.send('Error updating');
+                  console.log("size updated");
+                  db.close();
+                });
+              });
+             }
+             else{
+
+            var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,link:link,availability:true,status:'active'};
             dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
               if (err) res.send('Error updating');
               console.log("updated");
             });
-  
-            findStorage(dbo,function(doc){
-              dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-docs[0].size+file_size}}, function(err, res1) {
-                if (err) res.send('Error updating');
-                console.log("size updated");
-                db.close();
-              });
-            });
-  
+          }
+
            }
   
            else{

@@ -227,7 +227,7 @@ export class DashboardComponent implements OnInit{
 
       this.memory_usage.loadMemoryUsed().subscribe((data)=>{
         this.space_data=data;
-        console.log(data)
+        console.log(this.space_data)
       });  
       
       this.getCount();
