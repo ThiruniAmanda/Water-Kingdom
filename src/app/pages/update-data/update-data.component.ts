@@ -21,6 +21,7 @@ export class UpdateDataComponent implements OnInit {
   isNull:any;
   isSelected:boolean;
   isSelectedCat:boolean;
+  cat_val:any;
   constructor(private fish_details_service:FishDetailsService,private route: ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
@@ -39,12 +40,15 @@ export class UpdateDataComponent implements OnInit {
 
     this.data=this.fish_details_service.getUpdateData(this.code)
     console.log(this.data);
+    this.cat_val=this.data[0].category
+    console.log(this.cat_val+':cat')
     if(this.data[0].img_path==null){
       this.isNull=true;
     }
 
     if(this.data[0].category=='imported-koi'){
       this.isSelectedCat=true;
+     
     }
 
     else if(this.data[0].category=='local-koi'){
@@ -66,10 +70,13 @@ export class UpdateDataComponent implements OnInit {
 
       this.form=new FormGroup({
       name:new FormControl(this.data[0].name,[checkEmpty()]),
+      category:new FormControl(this.data[0].category,[]),
       age:new FormControl(this.data[0].age,[checkEmpty()]),
       size:new FormControl(this.data[0].size,checkEmpty()),
       price:new FormControl(this.data[0].price,checkEmpty()),
       code:new FormControl(this.data[0].code,checkEmpty()),
+      description:new FormControl(this.data[0].description,[]),
+      link:new FormControl(this.data[0].link,[]),
     });
 
     this.callUpdates();
@@ -79,11 +86,20 @@ export class UpdateDataComponent implements OnInit {
   callUpdates(){
     this.form.controls.name.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.name.updateValueAndValidity();});
     // this.form.controls.category.valueChanges.subscribe(x=>this.form.controls.category.updateValueAndValidity());
-    this.form.controls.age.valueChanges.subscribe(x=>this.form.controls.age.updateValueAndValidity());
-    this.form.controls.size.valueChanges.subscribe(x=>this.form.controls.size.updateValueAndValidity());
-    this.form.controls.price.valueChanges.subscribe(x=>this.form.controls.price.updateValueAndValidity());
-    this.form.controls.code.valueChanges.subscribe(x=>this.form.controls.code.updateValueAndValidity());
+    this.form.controls.age.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.age.updateValueAndValidity();});
+    this.form.controls.size.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.size.updateValueAndValidity();});
+    this.form.controls.price.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.price.updateValueAndValidity();});
+   // this.form.controls.code.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.code.updateValueAndValidity();});
+    this.form.controls.description.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.description.updateValueAndValidity();});
+    // this.form.controls.age.valueChanges.subscribe(x=>this.form.controls.age.updateValueAndValidity());
+    // this.form.controls.size.valueChanges.subscribe(x=>this.form.controls.size.updateValueAndValidity());
+    // this.form.controls.price.valueChanges.subscribe(x=>this.form.controls.price.updateValueAndValidity());
+    // this.form.controls.code.valueChanges.subscribe(x=>this.form.controls.code.updateValueAndValidity());
+    this.form.controls.link.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.link.updateValueAndValidity();});
+   // this.form.controls.description.valueChanges.subscribe(x=>this.form.controls.description.updateValueAndValidity());
+  
 }
+
 
 removeNull(){
   this.isNull=false;

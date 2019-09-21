@@ -34,22 +34,22 @@ img{
     // }
     
     .topnav .items {
-      float: left;
+      //float: left;
       display: block;
       color: white;
-      text-align: center;
-      padding: 14px 16px;
-      // text-decoration: none;
-      font-size: 17px;
-      border-bottom: 3px solid transparent;
+      text-align: left;
+      //padding: 14px 16px;
+      text-decoration: none;
+      font-size: 1.1em;
+      border-bottom: 2px solid transparent;
     }
     
     .topnav .items:hover {
-      border-bottom: 3px solid red;
+      border-bottom: 2px solid red;
     }
     
     .topnav a.active {
-      border-bottom: 3px solid red;
+      border-bottom: 2px solid red;
     }
 
    //  .topnav {

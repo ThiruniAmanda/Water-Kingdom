@@ -21,6 +21,7 @@ import { ConfirmEqualValidatorDirective } from 'app/shared/confirm-equal-validat
 import { TableModule } from 'app/pages/table/table.module';
 import { SettingsComponent } from 'app/pages/settings/settings.component';
 import { UpdateDataComponent } from 'app/pages/update-data/update-data.component';
+import { DeletedFishDetailsComponent } from 'app/pages/deleted-fish-details/deleted-fish-details.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { UpdateDataComponent } from 'app/pages/update-data/update-data.component
     // MapsComponent,
     NotificationsComponent,
     SettingsComponent,
-    UpdateDataComponent
+    UpdateDataComponent,
+    DeletedFishDetailsComponent
    
   ]
 })

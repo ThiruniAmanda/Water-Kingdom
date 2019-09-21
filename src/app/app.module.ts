@@ -23,6 +23,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { CustomerFooterComponent } from './shared/customer-footer/customer-footer.component';
 import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/customer-local-koi-view.component'
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
+import { DeletedFishDetailsComponent } from './pages/deleted-fish-details/deleted-fish-details.component';
 
 
 
@@ -32,12 +33,12 @@ import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navba
     AppComponent,
     AdminLayoutComponent,
     CustomerLayoutComponent,
-    PageNotFoundComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
-    UserIdleModule.forRoot({idle: 3600, timeout: 300, ping: 120}),
+    UserIdleModule.forRoot({idle:3600, timeout: 300, ping: 120}),
     RouterModule.forRoot(AppRoutes,{
       useHash: false
     }),

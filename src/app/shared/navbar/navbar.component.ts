@@ -49,6 +49,8 @@ export class NavbarComponent implements OnInit{
 
       if(titlee=='/settings')
       return 'Settings';
+      else if(titlee=="/deleted_records")
+      return 'Deleted Items'
       else 
       return 'Update'
     }

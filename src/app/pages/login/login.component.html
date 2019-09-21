@@ -20,7 +20,7 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="password" id="password" class="form-control input_pass"  placeholder="password">
+                        <input type="password" name="password" id="password" class="form-control input_pass"  placeholder="password" (keyup.enter)="isAdmin()">
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
@@ -33,11 +33,12 @@
             <div class="d-flex justify-content-center mt-3 login_container">
                 <button type="button" name="button" class="btn login_btn" (click)="isAdmin()">Login</button>
             </div>
-            <div class="mt-4">
+            <!-- <div class="mt-4">
                 <div class="d-flex justify-content-center links">
                     <a href="#">Forgot your password?</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
+<a href="dashboard" id="redirect_to" style="display: none"></a> 

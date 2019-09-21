@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 import { MemoryUsageService } from 'app/services/memory-usage.service';
 import { FishDetailsService } from 'app/services/fish_details.service';
 import { Router } from '@angular/router';
-
+declare function  disable_search_bar():any;
 
 @Component({
     selector: 'dashboard-cmp',
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit{
   }
 
     ngOnInit(){
-    
+      disable_search_bar();
       // this.chartColor = "#FFFFFF";
 
       // this.canvas = document.getElementById("chartHours");
@@ -227,7 +227,7 @@ export class DashboardComponent implements OnInit{
 
       this.memory_usage.loadMemoryUsed().subscribe((data)=>{
         this.space_data=data;
-        console.log(data)
+        console.log(this.space_data)
       });  
       
       this.getCount();
