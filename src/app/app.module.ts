@@ -25,6 +25,10 @@ import { CustomerLocalKoiViewComponent } from './pages/customer-local-koi-view/c
 import { CustomerNavbarComponent } from './shared/customer-navbar/customer-navbar.component';
 import { DeletedFishDetailsComponent } from './pages/deleted-fish-details/deleted-fish-details.component';
 import{TestingComponent} from './testing/testing.component';
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
+import { IconsComponent } from './pages/icons/icons.component';
+import { MapsComponent } from './pages/maps/maps.component';
+import { AddItemDetailsComponent } from './pages/add-item-details/add-item-details.component';
 
 
 
@@ -35,6 +39,10 @@ import{TestingComponent} from './testing/testing.component';
     CustomerLayoutComponent,
     PageNotFoundComponent,
     TestingComponent,
+    ConfirmEqualValidatorDirective,
+    IconsComponent,
+    MapsComponent,
+    AddItemDetailsComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -22,6 +22,7 @@ export class UpdateDataComponent implements OnInit {
   isSelected:boolean;
   isSelectedCat:boolean;
   cat_val:any;
+  image_path:any;
   constructor(private fish_details_service:FishDetailsService,private route: ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
