@@ -30,11 +30,12 @@ import { DeletedFishDetailsComponent } from 'app/pages/deleted-fish-details/dele
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
+    TableModule,
   ],
   declarations: [
     DashboardComponent,
     UserComponent,
-    TableComponent,
+    //TableComponent,
     UpgradeComponent,
     TypographyComponent,
     // AddItemDetailsComponent,
