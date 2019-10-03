@@ -19,7 +19,9 @@ export class UpdateDataComponent implements OnInit {
   sub: any;
   code:any;
   isNull:any;
-  isSelected:boolean;
+  isMale:boolean=true;
+  isFemale:boolean=false;
+  isUnknown:boolean=false;
   isSelectedCat:boolean;
   cat_val:any;
   image_path:any;
@@ -56,17 +58,25 @@ export class UpdateDataComponent implements OnInit {
       this.isSelectedCat=false
     }
 
-    else if(this.data[0].category=='unknown'){
-      this.isSelectedCat=false;
+    if(this.data[0].gender=='Unknown'){
+      this.isUnknown=true;
+      this.isMale=false;
+      this.isFemale=false;
     }
 
-    if(this.data[0].gender=='male'){
-      this.isSelected=true;
+    if(this.data[0].gender=='Male'){
+      this.isMale=true;
+      this.isFemale=false;
+      this.isUnknown=false;
     }
 
-    else if(this.data[0].gender=='female'){
-      this.isSelected=false;
+    else if(this.data[0].gender=='Female'){
+      this.isFemale=true;
+      this.isMale=false;
+      this.isUnknown=false;
     }
+
+
 
 
       this.form=new FormGroup({
