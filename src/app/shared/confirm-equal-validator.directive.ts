@@ -8,7 +8,7 @@ export function comparePassword(controlNameToCompare:string):ValidatorFn{
             return null;
         }
 
-        console.log(c.value)
+        //console.log(c.value)
 
         const controlToCompare=c.root.get(controlNameToCompare);
         if(controlToCompare){

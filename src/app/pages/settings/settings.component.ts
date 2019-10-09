@@ -20,7 +20,7 @@ export class SettingsComponent implements OnInit {
     visibility();
     this.fish_details_service.loadVisibility().subscribe((data)=>{
       this.visibility=data;
-      console.log(this.visibility[0].name)
+      //console.log(this.visibility[0].name)
     });
 
     this.form=new FormGroup({
@@ -32,10 +32,10 @@ export class SettingsComponent implements OnInit {
 
   changeView(field:string){
     this.fish_details_service.changeVisibilityFalse(field).subscribe((data)=>{
-      console.log(data)
+      //console.log(data)
       this.fish_details_service.loadVisibility().subscribe((data)=>{
         this.visibility=data;
-        console.log(this.visibility[0].name)
+        //console.log(this.visibility[0].name)
       });
     });
 
@@ -43,10 +43,10 @@ export class SettingsComponent implements OnInit {
 
   changeViewTrue(field:string){
     this.fish_details_service.changeVisibilityTrue(field).subscribe((data)=>{
-      console.log(data)
+      //console.log(data)
       this.fish_details_service.loadVisibility().subscribe((data)=>{
         this.visibility=data;
-        console.log(this.visibility[0].name)
+        //console.log(this.visibility[0].name)
       });
     });
   }

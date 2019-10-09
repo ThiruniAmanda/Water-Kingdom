@@ -34,7 +34,7 @@ try{
   },
   filename:function(req,file,cb){
      cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));
-     console.log("REQ"+req.files);
+    // console.log("REQ"+req.files);
   }
   });
   
@@ -94,14 +94,14 @@ try{
          var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:null,link:link,img_file:null,img_originalname:null,img_size:null,availability:true};
          dbo.collection("fish_details").insertOne(myobj, function(err, res) {
            if (err) res.send('Error loading documents');
-           console.log("1 document inserted");
+           //console.log("1 document inserted");
          });
          findDocuments(dbo, function(docs) {
-          console.log("count-updating:"+docs[0].count);
+          //console.log("count-updating:"+docs[0].count);
           var count=docs[0].count+1;  
           dbo.collection("space_usage").updateOne({},{$set:{count:count}}, function(err, res) {
             if (err) res.send('Error uploading');
-            console.log("Count updated");
+           // console.log("Count updated");
             db.close();
           });
         });
@@ -217,8 +217,8 @@ try{
     }
     
   else{
-  console.log('final')
-  console.log(req.files[0].filename)
+ // console.log('final')
+  //console.log(req.files[0].filename)
    var name=req.body.name;
    var category=req.body.category;
    var size=req.body.size;
@@ -245,21 +245,21 @@ try{
       var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,img_path:image_path,link:link,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true,status:'active'};
       dbo.collection("fish_details").insertOne(myobj, function(err, res1) {
         if (err) res.send('Error inserting data');
-        console.log("1 document inserted");
+        //console.log("1 document inserted");
       });
       
       var size_used=req.files[0].size;
-      console.log(size_used+' '+'size1'+req.files[0].size)
+      //console.log(size_used+' '+'size1'+req.files[0].size)
       findDocuments(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         size_used+=docs[0].space;
         var count=docs[0].count+1;
-        console.log('size_used'+size_used)
-        console.log('original path'+req.files[0].originalname)
+        //console.log('size_used'+size_used)
+        //console.log('original path'+req.files[0].originalname)
   
         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used,count:count}}, function(err, res1) {
           if (err) res.send('Error updating data');
-          console.log("size updated");
+          //console.log("size updated");
           db.close();
         });
       });
@@ -276,7 +276,7 @@ try{
   
   //update-fish-details
   app.post('/update_fish_details',upload.any(),urlencodedParser,function(req,res,next){
-   console.log(req.body.codes)
+   //console.log(req.body.codes)
     var findDocuments = function(db, callback) {
       var collection = db.collection('fish_details');
       collection.find({code:req.body.codes}).toArray(function(err, docs) {
@@ -295,10 +295,10 @@ try{
       });
     };
   
-    console.log(req.body.img_src);
+    //console.log(req.body.img_src);
   
     if(req.body.img_src!='del'){
-      console.log('not null '+req.body.img_src)
+     // console.log('not null '+req.body.img_src)
       var name=req.body.name;
       var category=req.body.cat;
       var size=req.body.size;
@@ -308,7 +308,7 @@ try{
       var price=req.body.price;
       var code=req.body.codes;
       var link=req.body.link;
-      console.log(des);
+     // console.log(des);
      
       mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err,db){
          if (err) throw err;
@@ -322,22 +322,22 @@ try{
               path_to_delete="src/storage/fish/images/"+docs[0].img_file;        
               file_system.unlink(path_to_delete,(err)=>{
                 if(err) res.send('Error deleting');
-                console.log('deleted files')
+                //console.log('deleted files')
               });
              }
-             console.log('code:'+code);
+             //console.log('code:'+code);
              if(req.files[0]){
               var file_size=req.files[0].size;
               var image_path="storage/fish/images/"+req.files[0].filename;
               var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,link:link,img_path:image_path,img_file:req.files[0].filename,img_originalname:req.files[0].originalname,img_size:req.files[0].size,availability:true,status:'active'};
               dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
                 if (err) res.send('Error updating');
-                console.log("updated");
+               // console.log("updated");
               });
               findStorage(dbo,function(doc){
                 dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-docs[0].size+file_size}}, function(err, res1) {
                   if (err) res.send('Error updating');
-                  console.log("size updated");
+                  //console.log("size updated");
                   db.close();
                 });
               });
@@ -347,7 +347,7 @@ try{
             var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,link:link,availability:true,status:'active'};
             dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
               if (err) res.send('Error updating');
-              console.log("updated");
+              //console.log("updated");
             });
           }
 
@@ -357,7 +357,7 @@ try{
             var myobj = { name:name,category:category,size:size,description:des,age:age,gender:gender,price:price,code:code,link:link,availability:true,status:'active'};
             dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res) {
               if (err) res.send('Error updating');
-              console.log("1 document inserted");
+              //console.log("1 document inserted");
               db.close();
             });
            }
@@ -370,7 +370,7 @@ try{
      }
   
     else if(req.body.img_src=='del'){
-      console.log('null')
+      //console.log('null')
       var name=req.body.name;
       var category=req.body.category;
       var size=req.body.size;
@@ -392,14 +392,14 @@ try{
   
              dbo.collection("fish_details").updateOne({code:code},{$set:myobj}, function(err, res1) {
               if (err) res.send('Error updating');
-              console.log("1 document inserted");
+              //console.log("1 document inserted");
             });
   
           findStorage(dbo,function(doc){
-             console.log(doc[0].space+'space');
+             //console.log(doc[0].space+'space');
              dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:doc[0].space-total_size}}, function(err, res1) {
                if (err) res.send('Error updating');
-               console.log("size updated");
+              // console.log("size updated");
                db.close();
              });
            });
@@ -410,7 +410,7 @@ try{
           
             file_system.unlink(path_to_delete,(err)=>{
               if(err) res.send('Error deleting')
-              console.log('deleted files')
+              //console.log('deleted files')
             });
   
           });
@@ -643,7 +643,7 @@ try{
       var dbo = db.db("aquakingdom");
       dbo.collection("user_details").updatetOne({first_name:'Nilaksha'},{$set:data_obj}, function(err, res1) {
         if (err) res.send('Error updating');
-        console.log("Document updated");
+        //console.log("Document updated");
       });
   
       // findDocuments(dbo, function(docs) {
@@ -683,7 +683,7 @@ try{
         callback(docs);
       });
     };
-    console.log(img_path)
+    //console.log(img_path)
     var data_obj={user_name:user_name,email:email,first_name:f_name,last_name:l_name,address:address,city:city,country:country,about:about,image_path:img_path,file_name:file.filename,file_originalname:file.originalname,img_size:file.size};
    
     mongodb.mongo.connect(mongodb.url,{useNewUrlParser:true},function(err,db){
@@ -691,16 +691,16 @@ try{
       var dbo = db.db("aquakingdom");
       dbo.collection("user_details").updatetOne({first_name:'Nilaksha'},{$set:data_obj}, function(err, res1) {
         if (err) res.send('Error updating');
-        console.log("Document updated");
+        //console.log("Document updated");
       });
       var size_used=file.size;
   
       findDocuments(dbo, function(docs) {
         size_used+=docs[0].space;
-        console.log(size_used)
+        //console.log(size_used)
         dbo.collection("space_usage").updateOne({name:'Nilaksha Deemantha'},{$set:{space:size_used}}, function(err, res1) {
           if (err) res.send('Error updating');
-          console.log("size updated");
+          //console.log("size updated");
           db.close();
         });
       });
@@ -731,10 +731,10 @@ try{
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
       if(err) res.send('Database loading error');
       // assert.equal(null, err);
-      console.log("Connected correctly to server");
+      //console.log("Connected correctly to server");
       var dbo = db.db("aquakingdom");
       findDocuments(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         res.json(docs);
         db.close();
       });
@@ -760,10 +760,10 @@ try{
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
       if(err) res.send('Database loading error');
       // assert.equal(null, err);
-      console.log("Connected correctly to server");
+      //console.log("Connected correctly to server");
       var dbo = db.db("aquakingdom");
       findDocuments(dbo, function(docs) {
-        console.log(docs);
+       // console.log(docs);
         res.json(docs);
         db.close();
       });
@@ -780,7 +780,7 @@ try{
   
   //delete data
   app.get('/delete_data/:id',urlencodedParser,function(req,res){
-    console.log(req.params)
+    //console.log(req.params)
   
     // var fish_count = function(db, callback) {
     //   var collection = db.collection('fish_count');
@@ -951,11 +951,11 @@ try{
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
       if(err) res.send('Database loading error');
       // assert.equal(null, err);
-      console.log("Connected correctly to server");
+      //console.log("Connected correctly to server");
       var dbo = db.db("aquakingdom");
       findDocuments(dbo, function(docs) {
-        console.log('searched data /n');
-        console.log(docs);
+        //console.log('searched data /n');
+        //console.log(docs);
         res.json(docs);
         db.close();
       });
@@ -986,11 +986,11 @@ try{
     mongodb.mongo.connect(mongodb.url,{ useNewUrlParser: true },function(err, db) {
       if(err) res.send('Databse loading error')
       // assert.equal(null, err);
-      console.log("Connected correctly to server");
+      //console.log("Connected correctly to server");
       var dbo = db.db("aquakingdom");
       findDocuments(dbo, function(docs) {
-        console.log('searched data /n');
-        console.log(docs);
+       // console.log('searched data /n');
+        //console.log(docs);
         res.json(docs);
         db.close();
       });
@@ -1015,12 +1015,12 @@ try{
       update_key[field]=true;
       var updated={}
       updated[field]=false;
-      console.log(field)
+      //console.log(field)
       if (err) res.send('Databse loading error');
       var dbo = db.db("aquakingdom");
       dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated}, function(err, res1) {
         if (err) res.send('Error loading documents');
-        console.log("Document updated");
+        //console.log("Document updated");
         res.json({message:'Success'})
       });
       db.close();
@@ -1045,7 +1045,7 @@ try{
       var dbo = db.db("aquakingdom");
       dbo.collection("visible_of_fields").updateOne(update_key,{$set:updated},function(err, res1) {
         if (err) res.send('Error updating');
-        console.log("Document updated");
+        //console.log("Document updated");
         res.json({message:'Success'})
       });
       db.close();
@@ -1119,7 +1119,7 @@ try{
       if(err) res.send('Database loading error');
       var dbo = db.db("aquakingdom");
       findDocuments(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         res.json(docs);
         db.close();
       });
@@ -1151,13 +1151,13 @@ try{
       var dbo = db.db("aquakingdom");
   
       findUserDetails(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         user_image_path=docs[0].image_path;
         user_bio=docs[0].about;
         user_name=docs[0].first_name+' '+docs[0].last_name;
         db.close();
         var json_obj={img_path:user_image_path,about:user_bio,name:user_name};
-        console.log(json_obj)
+        //console.log(json_obj)
         res.json(json_obj);
       });
   
@@ -1188,7 +1188,7 @@ try{
       var dbo = db.db("aquakingdom");
   
       memoryUsage(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         var _byte=docs[0].space
         var _mb=docs[0].space/(1024*1024)
         _mb=_mb.toFixed(2)
@@ -1197,7 +1197,7 @@ try{
         var _gb=docs[0].space/(1024*1024*1024)
         _gb=_gb.toFixed(2)
         var space={mb:_mb,gb:_gb,kb:_kb,byte:_byte}
-        console.log(space)
+        //console.log(space)
         res.json(space)
         db.close();
       });
@@ -1229,7 +1229,7 @@ try{
       var dbo = db.db("aquakingdom");
   
       koiDetails(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         res.json(docs);
       });
   
@@ -1254,7 +1254,7 @@ try{
       var dbo = db.db("aquakingdom");
       dbo.collection("fish_details").updateOne({code:code},{$set:{availability:false}},function(err, res1) {
         if (err) res.send('Error loading documents');
-        console.log("Document updated");
+        //console.log("Document updated");
         db.close();
         res.json({success:'Success'})
       });
@@ -1285,7 +1285,7 @@ try{
       var dbo = db.db("aquakingdom");
   
       koiDetails(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         res.json(docs);
       });
   
@@ -1308,7 +1308,7 @@ try{
       var dbo = db.db("aquakingdom");
   
       koiDetails(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         res.json(docs);
       });
   
@@ -1350,10 +1350,10 @@ try{
   //check-user-login
   app.post('/login_credentials',urlencodedParser,function(req,res){
    
-    console.log('rec')
+    //console.log('rec')
     var email=req.body[0];
     var password=req.body[1];
-    console.log(req.body[0])
+    //console.log(req.body[0])
     var admin_credentials= function(db, callback) {
       var collection = db.collection('user_details');
       collection.find({email:email}).toArray(function(err, docs) {
@@ -1366,14 +1366,14 @@ try{
       if(err) res.send('Database loading error');
       var dbo=db.db("aquakingdom");
       admin_credentials(dbo,function(docs){
-        console.log(docs)
+        //console.log(docs)
         if(docs[0]){
-          console.log('ok')
+         // console.log('ok')
           var admin_password=docs[0].password;
-          console.log(password)
-          console.log(admin_password)
+          //console.log(password)
+          //console.log(admin_password)
           bcrypt.compare(password,admin_password,function(err,res1) {
-            console.log(res1)
+            //console.log(res1)
             if(err) res.send('Credentials matching error');
             if(res1){
               res.json({success:true})
@@ -1385,7 +1385,7 @@ try{
         }
   
         else if(!docs[0]){
-          console.log('Error Login')
+          //console.log('Error Login')
           res.json({success:false});
   
         }
@@ -1400,7 +1400,7 @@ try{
   
   //reset passwords
   app.post('/password_reset',urlencodedParser,function(req,res){
-    console.log("received")
+    //console.log("received")
     var password=req.body.new_password;
     var admin_password= function(db, callback) {
       var collection = db.collection('user_details');
@@ -1414,13 +1414,13 @@ try{
       if (err) res.send('Databse loading error');
       var dbo = db.db("aquakingdom");
       admin_password(dbo, function(docs) {
-        console.log(docs);
+        //console.log(docs);
         bcrypt.hash(password, saltRounds, function(err, hash) {
                 if (err) res.send('Password cannot be encrypted');
                 var dbo = db.db("aquakingdom");
                 dbo.collection("user_details").updateOne({"user_name":"Nilaksha Deemantha"},{$set:{'password':hash}},function(err, res1) {
                   if (err) res.send('Error updating');
-                  console.log("Document Updated");
+                  //console.log("Document Updated");
                 });
                 db.close();
   
@@ -1460,9 +1460,9 @@ try{
   
   });
   
-  console.log('Listening to 4600');
+  //console.log('Listening to 4600');
   server.listen(4600);
   
 }catch(err){
-  console.log(err);
+  //console.log(err);
 }

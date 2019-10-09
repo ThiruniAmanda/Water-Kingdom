@@ -21,7 +21,7 @@ export class CustomerLocalkoiComponent implements OnInit {
 
   loadAll(){
     this.fish_details=this.local_koi_details.loadAll();
-    console.log(this.fish_details)
+    //console.log(this.fish_details)
   }
 
 }

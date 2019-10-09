@@ -29,7 +29,7 @@ export class UpdateDataComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(localStorage.getItem('loggedIn'))
+    //console.log(localStorage.getItem('loggedIn'))
     if(!localStorage.getItem('loggedIn')){
       this.router.navigate(['home']);
     }
@@ -37,14 +37,14 @@ export class UpdateDataComponent implements OnInit {
     this.sub = this.route
       .params
       .subscribe(params =>{
-        console.log(params['code'])
+        //console.log(params['code'])
         this.code=params['code']
       });
 
     this.data=this.fish_details_service.getUpdateData(this.code)
-    console.log(this.data);
+    //console.log(this.data);
     this.cat_val=this.data[0].category
-    console.log(this.cat_val+':cat')
+    //console.log(this.cat_val+':cat')
     if(this.data[0].img_path==null){
       this.isNull=true;
     }
@@ -95,18 +95,18 @@ export class UpdateDataComponent implements OnInit {
   }
 
   callUpdates(){
-    this.form.controls.name.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.name.updateValueAndValidity();});
+    this.form.controls.name.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{this.form.controls.name.updateValueAndValidity();});
     // this.form.controls.category.valueChanges.subscribe(x=>this.form.controls.category.updateValueAndValidity());
-    this.form.controls.age.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.age.updateValueAndValidity();});
-    this.form.controls.size.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.size.updateValueAndValidity();});
-    this.form.controls.price.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.price.updateValueAndValidity();});
+    this.form.controls.age.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{this.form.controls.age.updateValueAndValidity();});
+    this.form.controls.size.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{this.form.controls.size.updateValueAndValidity();});
+    this.form.controls.price.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{this.form.controls.price.updateValueAndValidity();});
    // this.form.controls.code.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.code.updateValueAndValidity();});
-    this.form.controls.description.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.description.updateValueAndValidity();});
+    this.form.controls.description.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{this.form.controls.description.updateValueAndValidity();});
     // this.form.controls.age.valueChanges.subscribe(x=>this.form.controls.age.updateValueAndValidity());
     // this.form.controls.size.valueChanges.subscribe(x=>this.form.controls.size.updateValueAndValidity());
     // this.form.controls.price.valueChanges.subscribe(x=>this.form.controls.price.updateValueAndValidity());
     // this.form.controls.code.valueChanges.subscribe(x=>this.form.controls.code.updateValueAndValidity());
-    this.form.controls.link.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{console.log(x);this.form.controls.link.updateValueAndValidity();});
+    this.form.controls.link.valueChanges.pipe(distinctUntilChanged()).subscribe(x=>{this.form.controls.link.updateValueAndValidity();});
    // this.form.controls.description.valueChanges.subscribe(x=>this.form.controls.description.updateValueAndValidity());
   
 }

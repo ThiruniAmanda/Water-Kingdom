@@ -23,23 +23,23 @@ export class TableComponent implements OnInit{
 
     ngOnInit(){
 
-        console.log(localStorage.getItem('loggedIn'))
+        //console.log(localStorage.getItem('loggedIn'))
         if(!localStorage.getItem('loggedIn')){
           this.router.navigate(['home']);
         }
 
          this.item_details=this.fish_details_service.getItemData();
-         console.log(this.item_details)
+         //console.log(this.item_details)
           enable_search_bar();
     }
 
     deleteItem(id:string){
-        console.log(id+"id");
+        //console.log(id+"id");
         // alert(id)
         this.fish_details_service.deleteItemData(id).subscribe((error)=>{
 
             this.item_details=this.fish_details_service.getItemData();
-            console.log(error)
+            //console.log(error)
         })
     }
 
@@ -51,16 +51,16 @@ export class TableComponent implements OnInit{
           this.item_details=data
           this.input_value=null;
           enable_search_bar();
-          console.log(this.item_details)
+          //console.log(this.item_details)
       });
 
     }
 
     mark_availability(code:string){
         this.fish_details_service.mark_availability_sold(code).subscribe(()=>{
-            console.log('Done')
+            //console.log('Done')
             this.item_details=this.fish_details_service.getItemData();
-            console.log(this.item_details)
+            //console.log(this.item_details)
         })
     }
  

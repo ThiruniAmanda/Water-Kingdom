@@ -30,16 +30,16 @@ $(document).on("click","#image_uploader",function(e){
         // var formData = new FormData();
         // formData.append("imgInp", document.getElementById("imgInp").files[0]);
         xhr.upload.onloadstart=function(e){
-            console.log('started');
+            //console.log('started');
             $('.progress').removeAttr('style');
             // upd.classList.add('visible');
             pro_val.innerHTML='0%';
-            console.log(e.lengthComputable)
+            //console.log(e.lengthComputable)
         }
 
         xhr.upload.onprogress=function(e){
             pro_val.innerHTML=(Math.floor((e.loaded/e.total)*100))+'%';
-            console.log(pro_val.innerHTML)
+            //console.log(pro_val.innerHTML)
             pro_val.style.width=(Math.floor((e.loaded/e.total)*100))+'%';
         }
 
@@ -196,16 +196,16 @@ $(document).on("click","#image_uploader1",function(e){
         let xhr=new XMLHttpRequest();
         var params="success";
         xhr.upload.onloadstart=function(e){
-            console.log('started');
+            //console.log('started');
             $('#up_progress').removeAttr('style');
             // upd.classList.add('visible');
             pro_val.innerHTML='0%';
-            console.log(e.lengthComputable)
+            //console.log(e.lengthComputable)
         }
 
         xhr.upload.onprogress=function(e){
             pro_val.innerHTML=(Math.floor((e.loaded/e.total)*100))+'%';
-            console.log(pro_val.innerHTML)
+            //console.log(pro_val.innerHTML)
             pro_val.style.width=(Math.floor((e.loaded/e.total)*100))+'%';
         }
 

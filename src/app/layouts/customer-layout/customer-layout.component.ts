@@ -26,7 +26,7 @@ export class CustomerLayoutComponent implements OnInit {
         titlee = titlee.slice( 1 );
     }
 
-    console.log(titlee)
+    //console.log(titlee)
 
     if(titlee=='/login')
       this.isLoad=false

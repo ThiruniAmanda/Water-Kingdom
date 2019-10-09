@@ -23,14 +23,14 @@ export class DashboardComponent implements OnInit{
 
   update(){
 
-    console.log(localStorage.getItem('loggedIn'))
+    //console.log(localStorage.getItem('loggedIn'))
     if(!localStorage.getItem('loggedIn')){
       this.router.navigate(['home']);
     }
 
     this.memory_usage.loadMemoryUsed().subscribe((data)=>{
       this.space_data=data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -227,7 +227,7 @@ export class DashboardComponent implements OnInit{
 
       this.memory_usage.loadMemoryUsed().subscribe((data)=>{
         this.space_data=data;
-        console.log(this.space_data)
+        //console.log(this.space_data)
       });  
       
       this.getCount();
@@ -236,7 +236,7 @@ export class DashboardComponent implements OnInit{
     getCount(){
       this.fish_details.loadFishCount().subscribe((data)=>{
         this.fish_count=data;
-        console.log(this.fish_count.count);
+       // console.log(this.fish_count.count);
       })
     }
 }

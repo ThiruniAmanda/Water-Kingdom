@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       this.session_timeout=true;
     }
 
-    console.log(localStorage.getItem('remember_me'))
+    //console.log(localStorage.getItem('remember_me'))
   }
 
   isAdmin(){
@@ -42,10 +42,10 @@ export class LoginComponent implements OnInit {
       this.remember_me_serivice.removeRememberToken();
     }
 
-    console.log(email)
+    //console.log(email)
     
     this.login_validations.checkCredentials(email,password).subscribe((response)=>{
-      console.log(response)
+      //console.log(response)
       this.success=response;
 
       if(this.success.success){

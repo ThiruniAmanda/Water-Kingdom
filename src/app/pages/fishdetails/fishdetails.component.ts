@@ -21,7 +21,7 @@ export class FishdetailsComponent implements OnInit {
     this.sub = this.route
     .params
     .subscribe(params =>{
-      console.log(params['code'])
+      //console.log(params['code'])
       this.code=params['code']
     });
 
@@ -32,16 +32,16 @@ export class FishdetailsComponent implements OnInit {
 
   loadFishDetails(code:string){
     this.fish_details=this.local_koi_details.getFishData(code);
-    console.log(this.fish_details[0].description);
+    //console.log(this.fish_details[0].description);
     this.description=this.fish_details[0].description;
     this.youtube_link=this.fish_details[0].link;
     this.video=this.fish_details[0].video_path;
-    console.log(this.youtube_link);
+    //console.log(this.youtube_link);
   }
 
   loadVisibility(){
     this.visibility_details=this.local_koi_details.laodVisibility();
-    console.log(this.visibility_details)
+    //console.log(this.visibility_details)
   }
 
 }

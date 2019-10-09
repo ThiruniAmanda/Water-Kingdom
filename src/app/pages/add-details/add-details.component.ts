@@ -20,7 +20,7 @@ export class AddDetailsComponent implements OnInit {
 
   ngOnInit() {
     
-    console.log(localStorage.getItem('loggedIn'))
+    //console.log(localStorage.getItem('loggedIn'))
     if(!localStorage.getItem('loggedIn')){
       this.router.navigate(['home']);
     }
@@ -54,7 +54,7 @@ export class AddDetailsComponent implements OnInit {
         else if(this.fish_count.count>=1000 && this.fish_count.count<10000){
           this.code='LK_'+(this.fish_count.count+1);
         }
-        console.log(this.fish_count.count+':count');
+        //console.log(this.fish_count.count+':count');
 
       // const code=randomString.generate({
       //   charset:'hex',
@@ -67,7 +67,7 @@ export class AddDetailsComponent implements OnInit {
     else if(category=='imported-koi'){
 
       this.fish_count=this._get_fish_count.getImportedKoiFishCount();
-        console.log(this.fish_count)
+        //console.log(this.fish_count)
         if(this.fish_count.count>=0 && this.fish_count.count<10){
           this.code='IM_000'+(this.fish_count.count+1)
         }
@@ -80,7 +80,7 @@ export class AddDetailsComponent implements OnInit {
         else if(this.fish_count.count>=1000 && this.fish_count.count<10000){
           this.code='IM_'+(this.fish_count.count+1)
         }
-        console.log(this.fish_count.count);
+        //console.log(this.fish_count.count);
 
     
 
@@ -100,7 +100,7 @@ export class AddDetailsComponent implements OnInit {
       let category=(<HTMLInputElement>document.getElementById('category')).value;
       let code=this.generateCode(category);
       // (<HTMLInputElement>document.getElementById('code')).value=code;
-      console.log(code);
+      //console.log(code);
       this.fish_code=code;
       return code;
     }

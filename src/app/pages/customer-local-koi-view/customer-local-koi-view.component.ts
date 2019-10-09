@@ -17,7 +17,7 @@ export class CustomerLocalKoiViewComponent implements OnInit {
     this.sub = this.route
       .params
       .subscribe(params =>{
-        console.log(params['code'])
+        //console.log(params['code'])
         this.code=params['code']
       });
 

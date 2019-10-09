@@ -21,7 +21,7 @@ export class UserComponent implements OnInit,ErrorHandler{
 
     ngOnInit(){
 
-        console.log(localStorage.getItem('loggedIn'))
+        //console.log(localStorage.getItem('loggedIn'))
         if(!localStorage.getItem('loggedIn')){
           this.router.navigate(['home']);
         }
@@ -38,13 +38,13 @@ export class UserComponent implements OnInit,ErrorHandler{
         
         this.profile_image.loadUserProfileData().subscribe((data)=>{
             this.profile_data=data;
-            console.log(data);
-            console.log(this.profile_data.img_path)
+            //console.log(data);
+            //console.log(this.profile_data.img_path)
         });
     }
 
     handleError(error){
-       console.error('An error occurred:', error.message);  
+       //console.error('An error occurred:', error.message);  
       
     }
 }

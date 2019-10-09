@@ -16,14 +16,14 @@ export class AdminLayoutComponent implements OnInit {
 
   ngOnInit() {
     
-    console.log(localStorage.getItem('loggedIn'));
+    //console.log(localStorage.getItem('loggedIn'));
 
     if(localStorage.getItem('loggedIn')=='true')  this.isSignedIn=true;
     
     this.userIdle.startWatching();
     
     this.userIdle.onTimerStart().subscribe(count =>{
-      console.log(count);
+      //console.log(count);
       var eventList= ['click', 'mouseover','keydown','DOMMouseScroll','mousewheel','mousedown','touchstart','touchmove','scroll','keyup'];
         for(let event of eventList) {
         document.getElementById('wrapper_admin').addEventListener(event, () =>this.userIdle.resetTimer());
